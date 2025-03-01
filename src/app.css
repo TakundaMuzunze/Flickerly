@@ -23,6 +23,7 @@ body {
 }
 
 @theme {
+	--color-body-colour: #1f2b3e;
 	--color-main-btn: #1f3a5f;
 	/* --color-btn-text: #fffffe; */
 	/* --color-heading-text: #fffffe; */
