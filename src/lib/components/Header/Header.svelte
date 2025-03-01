@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { links } from '../../stores/navlinks.stores.svelte';
 	import MobileMenu from '../MobileNav/MobileMenu.svelte';
+	import SearchBar from '../SearchBar/SearchBar.svelte';
 
 	let isMenuOpen = $state(false);
 
@@ -13,23 +14,29 @@
 	}
 </script>
 
-<header class="z-50 flex w-full p-5 text-white md:p-10">
-	<div class="flex w-full flex-row items-center justify-between">
+<header
+	class="z-50 flex w-full items-center justify-between p-5 text-white md:justify-normal md:p-10"
+>
+	<div class="w-1/4 flex-shrink-0">
 		<a href="/" class="text-xl font-bold">Cinescope</a>
+	</div>
 
-		<nav class="hidden md:block">
-			<ul class="flex gap-6">
-				{#each links.navLinks as link}
-					<li>
-						<a href={link.href} class="text-lg transition-opacity hover:opacity-75">
-							{link.label}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
+	<nav class="mx-auto hidden w-1/4 md:block">
+		<ul class="flex justify-center gap-6">
+			{#each links.navLinks as link}
+				<li>
+					<a href={link.href} class="text-lg transition-opacity hover:opacity-75">
+						{link.label}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</nav>
 
-		<!-- Hamburger Button -->
+	<div class="ml-auto flex items-center gap-4">
+		<SearchBar />
+
+		<!-- Hamburger Button for Mobile -->
 		<button
 			onclick={toggleMenu}
 			aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
