@@ -3,7 +3,9 @@
 	import Header from './Header.svelte';
 
 	const { Story } = defineMeta({
-		component: Header
+		component: Header,
+		title: 'Components/Header',
+		tags: ['autodocs']
 	});
 </script>
 
