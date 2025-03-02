@@ -19,7 +19,7 @@ html,
 body {
 	overflow-x: hidden;
 	background-color: #1f2b3e;
-	font-family: 'Inter', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 @theme {
@@ -44,7 +44,7 @@ body {
       */
 }
 
-/* @font-face {
-	font-family: 'Inter';
-	src: url('/fonts/Inter-VariableFont_opsz,wght.ttf');
-} */
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/Roboto-VariableFont_wdth,wght.ttf');
+}
