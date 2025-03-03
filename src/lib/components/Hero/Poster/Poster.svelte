@@ -4,11 +4,15 @@
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
 	{#if selectedMovie}
-		<img
+		<div>
+			<h1 class="text-3xl font-semibold">Your Next Favorite Movie is One Click Away 🎥</h1>
+		</div>
+
+		<!-- <img
 			class="h-64 self-center md:self-start"
 			src={`https://image.tmdb.org/t/p/w400${selectedMovie.poster_path}`}
 			alt={selectedMovie.title}
-		/>
+		/> -->
 
 		<div class="flex w-full flex-col gap-2 py-4">
 			<h2 class="text-xl">{selectedMovie.title}</h2>
