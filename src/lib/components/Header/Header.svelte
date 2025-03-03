@@ -14,11 +14,9 @@
 	}
 </script>
 
-<header
-	class="z-50 flex w-full items-center justify-between p-5 text-white md:justify-normal md:p-10"
->
+<header class="z-50 flex w-full items-center justify-between p-5 text-white md:justify-normal">
 	<div class="w-1/4 flex-shrink-0">
-		<a href="/" class="text-xl font-bold">Cinescope</a>
+		<a href="/" class="text-xl font-semibold">Cinescope</a>
 	</div>
 
 	<nav class="mx-auto hidden w-1/4 md:block">
