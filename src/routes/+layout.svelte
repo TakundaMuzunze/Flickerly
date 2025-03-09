@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { setGenres } from '$lib/utils/genres';
 	import '../app.css';
-	let { children } = $props();
+
+	export let data;
+	const { genres } = data;
+
+	setGenres(genres);
 </script>
 
-{@render children()}
+<slot />
