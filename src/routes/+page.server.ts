@@ -1,8 +1,9 @@
 import { fetchMovies, fetchProviders } from '$lib/server/fetchMovies/+server';
+import { fetchTrending } from '$lib/server/trendingMovies/+server';
 
 export async function load() {
-	const movies = await fetchMovies();
-	// Fetch watch providers for each movie
+	const [movies, trendingMovies] = await Promise.all([fetchMovies(), fetchTrending()]);
+
 	const moviesWithProviders = await Promise.all(
 		movies.map(async (movie) => {
 			const providers = await fetchProviders(movie.id);
@@ -10,5 +11,5 @@ export async function load() {
 		})
 	);
 
-	return { movies: moviesWithProviders };
+	return { movies: moviesWithProviders, trendingMovies };
 }
