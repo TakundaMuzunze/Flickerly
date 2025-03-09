@@ -1,7 +1,9 @@
 export const links = $state({
 	navLinks: [
 		{ label: 'Home', href: '/' },
-		{ label: 'About', href: '/about' },
+		{ label: 'Movies', href: '/movies' },
+		{ label: 'Trending', href: '/trending' },
+		{ label: 'Genre', href: '/genre' },
 		{ label: 'FAQs', href: '/faqs' }
 	]
 });

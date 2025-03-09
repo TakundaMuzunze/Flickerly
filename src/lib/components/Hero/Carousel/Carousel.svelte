@@ -11,7 +11,7 @@
 	let activeIndex = 0; // Track the active slide
 
 	const options: EmblaOptionsType = {
-		align: 'center',
+		align: 'start',
 		slidesToScroll: 1,
 		containScroll: 'trimSnaps',
 		dragFree: false,
