@@ -12,7 +12,6 @@ export async function fetchMovies() {
 
 		const data = await response.json();
 
-		console.log('data: ', data);
 		return data.results;
 	} catch (error) {
 		console.error('Error! Failed to fetch movies. ', error);
@@ -32,7 +31,6 @@ export async function fetchProviders(movieId: number) {
 
 		const data = await response.json();
 
-		console.log('providers: ', data.results);
 		return data.results;
 	} catch (error) {
 		console.error('Error! Failed to fetch streaming providers. ', error);
