@@ -3,6 +3,7 @@
 
 	export let movie: any;
 	export let showGenre: boolean = false;
+	export let releaseDate: boolean = false;
 
 	const genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
 </script>
@@ -33,8 +34,16 @@
 
 	{#if showGenre}
 		<div class="mt-3">
-			<p class="font-semibold text-white lg:text-lg">{movie.title}</p>
-			<p class="text-sm text-gray-400">{genres}</p>
+			<div
+				class="flex flex-col items-start justify-start gap-2 md:flex-row md:items-center md:justify-between"
+			>
+				<p class="font-semibold text-white lg:text-lg">{movie.title}</p>
+
+				{#if releaseDate}
+					<p class="text-sm text-gray-400">({movie.release_date})</p>
+				{/if}
+			</div>
+			<p class="mt-2 text-sm text-gray-400">{genres}</p>
 		</div>
 	{/if}
 </div>
