@@ -1,12 +1,14 @@
 import { fetchMovies, fetchProviders } from '$lib/server/fetchMovies/+server';
 import { fetchTopRated } from '$lib/server/topRated/+server';
 import { fetchTrending } from '$lib/server/trendingMovies/+server';
+import { fetchUpcoming } from '$lib/server/upcomingMovies/+sever';
 
 export async function load() {
-	const [movies, trendingMovies, topRatedMovies] = await Promise.all([
+	const [movies, trendingMovies, topRatedMovies, upcomingMovies] = await Promise.all([
 		fetchMovies(),
 		fetchTrending(),
-		fetchTopRated()
+		fetchTopRated(),
+		fetchUpcoming()
 	]);
 
 	// console.log('Top Rated Movies:', topRatedMovies);
@@ -21,6 +23,7 @@ export async function load() {
 	return {
 		movies: moviesWithProviders,
 		trendingMovies,
-		topRatedMovies
+		topRatedMovies,
+		upcomingMovies
 	};
 }
