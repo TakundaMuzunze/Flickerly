@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getGenreName } from '$lib/utils/genres';
+	import { onMount } from 'svelte';
 
 	export let movie: any;
 	export let showGenre: boolean = false;
@@ -8,12 +9,11 @@
 	const genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
 </script>
 
-<div class="relative w-full cursor-pointer rounded-lg">
-	<!-- Image Wrapper -->
+<div class="relative w-full max-w-[314px] cursor-pointer rounded-lg">
 	<div class="relative">
 		<img
-			class="w-full rounded-xl"
-			src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+			class="movie aspect-[2/3] rounded-xl"
+			src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
 			alt={movie.title}
 		/>
 

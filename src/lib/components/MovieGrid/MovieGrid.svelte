@@ -6,8 +6,12 @@
 	export let releaseDate: boolean = false;
 </script>
 
-<div class="grid grid-cols-2 items-center justify-center gap-8 md:grid-cols-4">
+<div
+	class="flex gap-4 overflow-x-auto scroll-smooth whitespace-nowrap md:grid md:grid-cols-4 md:gap-8"
+>
 	{#each movies as movie}
-		<MovieCard {movie} showGenre={true} {releaseDate} />
+		<div class="shrink-0">
+			<MovieCard {movie} showGenre={true} {releaseDate} />
+		</div>
 	{/each}
 </div>

@@ -13,7 +13,7 @@
 		</div>
 
 		<a
-			href="/trending"
+			href="/upcoming"
 			class="hover:text-accent text-lg font-semibold text-white transition-all duration-300"
 		>
 			View All →
