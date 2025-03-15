@@ -8,7 +8,7 @@
 	<div in:fly|global={{ y: 50, duration: 650 }} class="flex w-full items-center justify-between">
 		<div class="flex flex-col gap-2">
 			<h2 class="relative text-2xl font-semibold text-white">
-				Trending Now <span class="animate-pulse">🔥</span>
+				Trending Now 🔥
 			</h2>
 		</div>
 

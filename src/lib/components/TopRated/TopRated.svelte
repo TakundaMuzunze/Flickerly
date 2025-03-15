@@ -10,7 +10,7 @@
 		<div class="flex flex-col gap-2">
 			<!-- <p class="text-xl font-semibold text-white">Latest</p> -->
 			<h2 class="relative text-2xl font-semibold text-white">
-				Top Rated <span class="animate-pulse">🏆</span>
+				Top Rated 🏆
 			</h2>
 		</div>
 
