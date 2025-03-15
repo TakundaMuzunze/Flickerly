@@ -58,10 +58,10 @@
 </script>
 
 <div class="flex w-full justify-center">
-	<div class="flex w-full max-w-4xl items-center justify-center lg:justify-evenly">
+	<div class="flex w-full max-w-6xl md:max-w-4xl items-center justify-center lg:justify-evenly">
 		<button
 			onclick={goToPrevious}
-			class="mr-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
+			class=" mr-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
 			aria-label="Previous slide"
 		>
 			←
@@ -69,18 +69,18 @@
 
 		<div class="relative w-full">
 			<div bind:this={emblaNode} class="embla overflow-hidden">
-				<div class="embla__container flex gap-4">
+				<div class="embla__container flex gap-2 md:gap-4 w-full">
 					{#each movies as movie, i}
 						<div
 							role="button"
 							tabindex="0"
-							class="embla__slide max-w-[150px] cursor-pointer transition-transform lg:min-w-[240px]"
+							class="embla__slide cursor-pointer transition-transform"
 							class:selected={i === activeIndex}
 							onclick={() => handleMovieSelect(movie, i)}
 							onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleMovieSelect(movie, i)}
 						>
 							<img
-								class="h-44 w-full rounded-md shadow-lg lg:h-80"
+								class="w-full rounded-md shadow-lg aspect-[2/3]"
 								src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 								alt={movie.title || 'Movie poster'}
 							/>
@@ -92,7 +92,7 @@
 
 		<button
 			onclick={goToNextSlide}
-			class="ml-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
+			class=" ml-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
 			aria-label="Next slide"
 		>
 			→
@@ -100,8 +100,9 @@
 	</div>
 </div>
 
+
 <style>
-	.embla {
+.embla {
 		position: relative;
 		max-width: 100%;
 	}
@@ -111,9 +112,16 @@
 	}
 
 	.embla__slide {
-		flex: 0 0 auto;
+		flex: 0 0 80%; /* Makes slides take 80% of the screen on mobile */
+		max-width: 280px; /* Prevents them from getting too large on wider screens */
 		position: relative;
 		box-sizing: border-box;
+	}
+
+	@media (min-width: 768px) {
+		.embla__slide {
+			flex: 0 0 240px; /* Standard size for larger screens */
+		}
 	}
 
 	.selected {
@@ -121,3 +129,4 @@
 		border-radius: 6px;
 	}
 </style>
+
