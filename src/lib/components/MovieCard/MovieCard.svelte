@@ -9,7 +9,7 @@
 	const genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
 </script>
 
-<div class="relative w-full max-w-[314px] cursor-pointer rounded-lg">
+<div class="relative w-full max-w-[314px] cursor-pointer rounded-lg max-sm:w-[250px]">
 	<div class="relative">
 		<img
 			class="movie aspect-[2/3] rounded-xl"
@@ -33,8 +33,8 @@
 	</div>
 
 	{#if showGenre}
-		<div class="mt-3">
-			<div class="flex flex-col items-start justify-center gap-2">
+		<div class="mt-3 w-full">
+			<div class="flex flex-col items-start justify-center gap-2 text-wrap">
 				<p class="font-semibold text-white lg:text-lg">{movie.title}</p>
 				<p class=" text-sm text-gray-400">{genres}</p>
 			</div>
