@@ -17,7 +17,7 @@
 <div class="flex w-full flex-col items-start justify-start gap-4">
 	{#if selectedMovie}
 		<div>
-			<h1 class="text-3xl font-semibold">{headingText}🎥</h1>
+			<h1 class="text-3xl font-semibold">{headingText}</h1>
 		</div>
 
 		<div class="flex w-full flex-col gap-2 py-4">
