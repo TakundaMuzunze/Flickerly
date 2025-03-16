@@ -5,16 +5,14 @@
 
 	export let movies: any[];
 
-	// Ensure there's at least one movie
 	let selectedMovie = movies.length ? movies[0] : null;
 
-	// Update store
 	movieStore.movies = movies;
 	movieStore.selectedMovie = selectedMovie;
 </script>
 
 <section
-	class="relative flex min-h-screen w-full items-center justify-center bg-cover bg-center md:px-8 py-5 text-white"
+	class="relative flex min-h-screen w-full items-center justify-center bg-cover bg-center py-5 text-white md:px-8"
 	style="background-image: {selectedMovie
 		? `url(https://image.tmdb.org/t/p/original${selectedMovie.backdrop_path})`
 		: 'none'}"
@@ -25,13 +23,13 @@
 	<div
 		class="relative z-10 flex w-full max-w-7xl flex-col items-center justify-center gap-5 md:flex-row lg:gap-10"
 	>
-		<div class="flex h-full md:w-[35%] max-md:px-10 min-w-[250px] items-start justify-center">
+		<div class="flex h-full min-w-[250px] items-start justify-center max-md:px-10 md:w-[35%]">
 			<div class="h-full">
 				<Poster {selectedMovie} />
 			</div>
 		</div>
 
-		<div class="md:w-[55%] max-md:w-full">
+		<div class="max-md:w-full md:w-[55%]">
 			<Carousel {movies} bind:selectedMovie />
 		</div>
 	</div>
