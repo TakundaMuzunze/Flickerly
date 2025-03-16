@@ -57,7 +57,7 @@
 	});
 </script>
 
-<div class="flex w-full justify-center">
+<div class="flex w-full justify-center py-5">
 	<div class="flex w-full max-w-6xl md:max-w-4xl items-center justify-center lg:justify-evenly">
 		<button
 			onclick={goToPrevious}
@@ -68,7 +68,7 @@
 		</button>
 
 		<div class="relative w-full">
-			<div bind:this={emblaNode} class="embla overflow-hidden">
+			<div bind:this={emblaNode} class="embla overflow-hidden py-5">
 				<div class="embla__container flex gap-2 md:gap-4 w-full">
 					{#each movies as movie, i}
 						<div
@@ -80,7 +80,7 @@
 							onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleMovieSelect(movie, i)}
 						>
 							<img
-								class="w-full rounded-md shadow-lg aspect-[2/3]"
+								class="w-full rounded-md shadow-lg"
 								src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 								alt={movie.title || 'Movie poster'}
 							/>
@@ -116,6 +116,7 @@
 		max-width: 280px; /* Prevents them from getting too large on wider screens */
 		position: relative;
 		box-sizing: border-box;
+		opacity: 0.5;
 	}
 
 	@media (min-width: 768px) {
@@ -125,8 +126,11 @@
 	}
 
 	.selected {
-		border: 2px solid white;
-		border-radius: 6px;
+		opacity: 1;
+		/* border: 2px solid #3d5a80;
+		border-radius: 6px; */
+		transform: translateY(-15px);
+		transition: transform 0.2s ease, box-shadow 0.2s ease; 
 	}
 </style>
 
