@@ -28,7 +28,7 @@
 			{#if isMobile}
 				<a 
 					href={`/movie/${selectedMovie.id}`} 
-					class="text-accent font-semibold underline"
+					class="text-accent font-semibold underline underline-offset-8 cursor-pointer"
 				>
 					View Full Details
 				</a>

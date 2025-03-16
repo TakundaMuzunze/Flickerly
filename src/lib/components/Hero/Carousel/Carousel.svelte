@@ -8,7 +8,7 @@
 
 	let emblaNode: HTMLElement;
 	let emblaApi: EmblaCarouselType | null = null;
-	let activeIndex = 0; // Track the active slide
+	let activeIndex = 0;
 
 	const options: EmblaOptionsType = {
 		align: 'start',
@@ -58,7 +58,7 @@
 </script>
 
 <div class="flex w-full justify-center py-5">
-	<div class="flex w-full max-w-6xl md:max-w-4xl items-center justify-center lg:justify-evenly">
+	<div class="flex w-full max-w-6xl items-center justify-center md:max-w-4xl lg:justify-evenly">
 		<button
 			onclick={goToPrevious}
 			class=" mr-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
@@ -69,7 +69,7 @@
 
 		<div class="relative w-full">
 			<div bind:this={emblaNode} class="embla overflow-hidden py-5">
-				<div class="embla__container flex gap-2 md:gap-4 w-full">
+				<div class="embla__container flex w-full gap-2 md:gap-4">
 					{#each movies as movie, i}
 						<div
 							role="button"
@@ -100,9 +100,8 @@
 	</div>
 </div>
 
-
 <style>
-.embla {
+	.embla {
 		position: relative;
 		max-width: 100%;
 	}
@@ -130,7 +129,8 @@
 		/* border: 2px solid #3d5a80;
 		border-radius: 6px; */
 		transform: translateY(-15px);
-		transition: transform 0.2s ease, box-shadow 0.2s ease; 
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 	}
 </style>
-
