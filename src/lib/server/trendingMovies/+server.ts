@@ -1,4 +1,5 @@
 import { TMDB_KEY } from '$env/static/private';
+import { processMovieData } from '$lib/utils/setMovies';
 
 export async function fetchTrending() {
 	const response = await fetch(
@@ -12,7 +13,7 @@ export async function fetchTrending() {
 
 		const data = await response.json();
 
-		return data.results.slice(0, 4);
+		return processMovieData(data.results.slice(0, 4));
 	} catch (error) {
 		console.error('Error! Failed to fetch trending movies. ', error);
 		return [];

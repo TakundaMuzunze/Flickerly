@@ -1,4 +1,5 @@
 import { TMDB_KEY } from '$env/static/private';
+import { processMovieData } from '$lib/utils/setMovies';
 
 export async function fetchTopRated() {
 	try {
@@ -12,7 +13,7 @@ export async function fetchTopRated() {
 
 		const data = await response.json();
 
-		return data.results.slice(0, 4);
+		return processMovieData(data.results.slice(0, 4));
 	} catch (error) {
 		console.error('Error - Failed to fetch latets movies: ', error);
 		return [];

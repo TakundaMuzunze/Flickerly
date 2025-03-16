@@ -1,4 +1,5 @@
 import { TMDB_KEY } from '$env/static/private';
+import { processMovieData } from '$lib/utils/setMovies';
 
 export async function fetchMovies() {
 	const response = await fetch(
@@ -12,7 +13,7 @@ export async function fetchMovies() {
 
 		const data = await response.json();
 
-		return data.results;
+		return processMovieData(data.results);
 	} catch (error) {
 		console.error('Error! Failed to fetch movies. ', error);
 		return [];

@@ -1,4 +1,5 @@
 import { TMDB_KEY } from '$env/static/private';
+import { processMovieData } from '$lib/utils/setMovies';
 
 export async function fetchUpcoming() {
 	try {
@@ -16,7 +17,7 @@ export async function fetchUpcoming() {
 			movie.release_date?.startsWith(currentYear.toString())
 		);
 
-		return filteredMovies.slice(0, 4);
+		return processMovieData(filteredMovies.slice(0, 4));
 	} catch (error) {
 		console.error('Error - Failed to retrieve upcoming releases', error);
 		return [];
