@@ -1,34 +1,43 @@
 <script lang="ts">
+	import { heroTitles } from '$lib/types/timeRanges';
+
 	export let selectedMovie;
 	let isMobile = false;
+	let headingText: string = '';
 
 	// Check screen width
-	if (typeof window !== "undefined") {
-		isMobile = window.innerWidth < 768; // Adjust breakpoint if needed
+	if (typeof window !== 'undefined') {
+		isMobile = window.innerWidth < 1024;
+		const hour = new Date().getHours();
+		const current = heroTitles.find((range) => hour >= range.start && hour <= range.end);
+		headingText = current?.heading ?? 'Discover Your Next Favorite Movie 🎥';
 	}
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
 	{#if selectedMovie}
 		<div>
-			<h1 class="text-3xl font-semibold">Your Next Favorite Movie is One Click Away 🎥</h1>
+			<h1 class="text-3xl font-semibold">{headingText}🎥</h1>
 		</div>
 
 		<div class="flex w-full flex-col gap-2 py-4">
 			<h2 class="text-xl">{selectedMovie.title}</h2>
-			<p class="font-normal">⭐ {selectedMovie.vote_average.toFixed(1)} /10</p>
+
+			{#if selectedMovie.vote_average.toFixed(1) <= 0}
+				<p class="font-normal text-gray-400 italic">Be the first to review</p>
+			{:else}
+				<p class="font-normal">⭐ {selectedMovie.vote_average.toFixed(1)} /10</p>
+			{/if}
 
 			<!-- Shorten text for mobile -->
 			<p class="text-base font-normal">
-				{isMobile 
-					? `${selectedMovie.overview.slice(0, 100)}...` 
-					: selectedMovie.overview}
+				{isMobile ? `${selectedMovie.overview.slice(0, 100)}...` : selectedMovie.overview}
 			</p>
 
 			{#if isMobile}
-				<a 
-					href={`/movie/${selectedMovie.id}`} 
-					class="text-accent font-semibold underline underline-offset-8 cursor-pointer"
+				<a
+					href={`/movie/${selectedMovie.id}`}
+					class="text-accent mb-2 cursor-pointer font-semibold underline underline-offset-8"
 				>
 					View Full Details
 				</a>
