@@ -6,6 +6,8 @@
 	if (typeof window !== 'undefined') {
 		isMobile = window.innerWidth < 1440;
 	}
+
+	const googleWatchLink = `https://www.google.com/search?q=where+to+watch+${encodeURIComponent(selectedMovie.title)}+UK`;
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
@@ -58,7 +60,15 @@
 				</ul>
 			</div>
 		{:else}
-			<p class="text-base text-white">Not available for streaming in the UK</p>
+			<p class="text-base text-white italic">No streaming options found in the UK.</p>
+			<a
+				href={googleWatchLink}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="bg-main-btn hover:bg-main-btn/80 w-fit rounded-2xl px-3 py-1 text-sm text-white transition"
+			>
+				🔍 Find where to watch
+			</a>
 		{/if}
 	</div>
 </div>
