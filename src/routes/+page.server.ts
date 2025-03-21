@@ -1,7 +1,8 @@
-import { fetchMovies, fetchProviders } from '$lib/server/fetchMovies/+server';
+import { fetchMovies } from '$lib/server/fetchMovies/+server';
 import { fetchTopRated } from '$lib/server/topRated/+server';
 import { fetchTrending } from '$lib/server/trendingMovies/+server';
 import { fetchUpcoming } from '$lib/server/upcomingMovies/+sever';
+import { fetchProviders } from '$lib/utils/providers';
 
 export async function load() {
 	const [movies, trendingMovies, topRatedMovies, upcomingMovies] = await Promise.all([
