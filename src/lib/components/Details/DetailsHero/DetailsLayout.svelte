@@ -21,9 +21,14 @@
 </section>
 
 <section class="flex w-full items-center justify-center py-5 text-white md:px-8">
-	<!-- ✅ Same inner structure -->
 	<div class="flex w-full max-w-5xl flex-col items-start gap-10 p-5 lg:flex-row lg:items-stretch">
 		<slot name="trailer" />
 		<slot name="overview" />
+	</div>
+</section>
+
+<section class="flex w-full items-center justify-center py-5 text-white md:px-8">
+	<div class="flex w-full max-w-5xl flex-col items-start p-5">
+		<slot name="cast" />
 	</div>
 </section>
