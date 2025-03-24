@@ -4,9 +4,9 @@
 
 	const { Story } = defineMeta({
 		component: MovieDetails,
-		title: 'Components/Details',
+		title: 'Components/Details/Description',
 		tags: ['autodocs']
 	});
 </script>
 
-<Story name="Details" />
+<Story name="Movie Desc" />
