@@ -3,6 +3,7 @@ import { TMDB_KEY } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { fetchProviders } from '$lib/utils/providers';
+import { fetchCast } from '$lib/server/movieCast/+server';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
@@ -26,10 +27,11 @@ export const load: PageServerLoad = async ({ params }) => {
 	const movie = await movieResponse.json();
 	const trailerData = await trailerResponse.json();
 	const providers = await fetchProviders(movie.id);
+	const cast = await fetchCast(movie.id);
 
 	const trailer =
 		trailerData.results.find((video) => video.type === 'Trailer' && video.site === 'YouTube') ??
 		null;
 
-	return { movie, trailer, providers };
+	return { movie, trailer, providers, cast };
 };
