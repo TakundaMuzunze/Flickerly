@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CastCard from '$lib/components/Details/Cast/CastCard.svelte';
+	import CastGrid from '$lib/components/Details/Cast/CastGrid.svelte';
 	import DetailsLayout from '$lib/components/Details/DetailsHero/DetailsLayout.svelte';
 	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
 	import MovieMeta from '$lib/components/Details/MovieMeta/MovieMeta.svelte';
@@ -7,8 +9,8 @@
 
 	export let data;
 
-	// const selectedMovie = data.movie;
 	const trailer = data.trailer;
+	const cast = data.cast;
 
 	const selectedMovie = { ...data.movie, providers: data.providers };
 </script>
@@ -28,5 +30,9 @@
 
 	<div slot="overview">
 		<MovieMeta {selectedMovie} />
+	</div>
+
+	<div slot="cast">
+		<CastGrid {cast} />
 	</div>
 </DetailsLayout>
