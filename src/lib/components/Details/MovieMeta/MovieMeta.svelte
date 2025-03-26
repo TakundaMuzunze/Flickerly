@@ -2,13 +2,13 @@
 	export let selectedMovie;
 </script>
 
-<div class="flex flex-1 flex-col gap-5">
+<div class="flex h-full w-full flex-col gap-5">
 	<h2 class="text-2xl font-bold tracking-wide">Film Details:</h2>
 
 	<section
-		class="bg-secondary/40 flex w-full flex-col gap-4 rounded-lg border border-white/10 p-5 shadow-md backdrop-blur-md"
+		class="bg-secondary/40 flex h-full w-full flex-col gap-4 rounded-lg border border-white/10 p-5 shadow-md backdrop-blur-md"
 	>
-		<div class="grid grid-cols-2 grid-rows-3 gap-x-6 gap-y-4 text-sm text-white">
+		<div class="grid grid-cols-2 grid-rows-3 gap-x-6 gap-y-5 text-sm text-white">
 			<div class="flex flex-col gap-0.5">
 				<p class="text-sm text-gray-400">⏱️ Duration:</p>
 				<p>{selectedMovie.runtime} min</p>
