@@ -20,15 +20,19 @@
 	</div>
 </section>
 
-<section class="flex w-full items-center justify-center py-5 text-white md:px-8">
-	<div class="flex w-full max-w-5xl flex-col items-start gap-10 p-5 lg:flex-row lg:items-stretch">
-		<slot name="trailer" />
-		<slot name="overview" />
+<section class="mx-auto flex max-w-7xl items-start justify-center p-10 text-white">
+	<div class="grid w-full grid-cols-1 gap-10 lg:grid-cols-2">
+		<div class="w-full">
+			<slot name="trailer" />
+		</div>
+		<div class="h-full w-full">
+			<slot name="overview" />
+		</div>
 	</div>
 </section>
 
-<section class="flex w-full items-center justify-center py-5 text-white md:px-8">
-	<div class="flex w-full max-w-5xl flex-col items-start p-5">
+<section class="mx-auto flex max-w-7xl flex-col items-start justify-start gap-10 p-10">
+	<div class="flex w-full flex-col gap-5">
 		<slot name="cast" />
 	</div>
 </section>

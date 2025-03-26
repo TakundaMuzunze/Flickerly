@@ -10,7 +10,7 @@
 </script>
 
 <a href={`/movies/${movie.id}`}>
-	<div class="relative w-full max-w-[314px] cursor-pointer rounded-lg max-sm:w-[250px]">
+	<div class="relative w-full max-w-48 cursor-pointer rounded-lg md:max-w-3xs">
 		<div class="relative">
 			<img
 				class="movie aspect-[2/3] rounded-xl"
