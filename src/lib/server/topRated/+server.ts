@@ -13,7 +13,7 @@ export async function fetchTopRated() {
 
 		const data = await response.json();
 
-		return processMovieData(data.results.slice(0, 4));
+		return processMovieData(data.results.slice(0, 6));
 	} catch (error) {
 		console.error('Error - Failed to fetch latets movies: ', error);
 		return [];
