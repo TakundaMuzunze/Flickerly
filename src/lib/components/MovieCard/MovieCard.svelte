@@ -10,17 +10,17 @@
 </script>
 
 <a href={`/movies/${movie.id}`}>
-	<div class="relative w-full max-w-48 cursor-pointer rounded-lg md:max-w-3xs">
+	<div class="relative w-full max-w-48 cursor-pointer rounded-lg md:max-w-54">
 		<div class="relative">
 			<img
-				class="movie aspect-[2/3] rounded-xl"
+				class="movie aspect-[2/3] w-full rounded-lg"
 				src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
 				alt={movie.title}
 			/>
 
-			<div class="bg-accent absolute top-0 right-0 rounded-lg px-3 py-2 text-white">
+			<!-- <div class="bg-accent absolute top-0 right-0 rounded-lg px-3 py-2 text-white">
 				<p>⭐ {movie.vote_average.toFixed(1)}</p>
-			</div>
+			</div> -->
 
 			<div
 				class="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-black/80 opacity-0 duration-300 hover:opacity-100"
@@ -33,16 +33,16 @@
 			</div>
 		</div>
 
-		{#if showGenre}
+		<!-- {#if showGenre}
 			<div class="mt-3 w-full">
 				<div class="flex flex-col items-start justify-center gap-2 text-wrap">
-					<p class="font-semibold text-white lg:text-lg">{movie.title}</p>
+					<p class="font-semibold text-white">{movie.title}</p>
 					<p class=" text-sm text-gray-400">{genres}</p>
 				</div>
 				{#if releaseDate}
 					<p class="mt-2 text-sm text-gray-400 italic">({movie.release_date})</p>
 				{/if}
 			</div>
-		{/if}
+		{/if} -->
 	</div>
 </a>

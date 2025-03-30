@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap lg:grid lg:grid-cols-4"
+	class="flex w-full gap-3 overflow-x-auto scroll-smooth whitespace-nowrap lg:grid lg:grid-cols-6"
 >
 	{#each movies as movie}
 		<div class="shrink-0">

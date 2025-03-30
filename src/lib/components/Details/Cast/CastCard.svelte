@@ -2,7 +2,7 @@
 	export let actor;
 </script>
 
-<div class="flex max-w-48 flex-col items-start md:max-w-3xs">
+<div class="flex max-w-48 flex-col items-start md:max-w-54">
 	<img
 		src={actor.profile_path
 			? `https://image.tmdb.org/t/p/w342/${actor.profile_path}`
