@@ -3,15 +3,17 @@
 
 	export let selectedMovie;
 	export let trailer;
+
+	const genreNames = selectedMovie?.genres?.map((g) => g.name) ?? [];
 </script>
 
-<div class="flex w-full flex-row items-center gap-2">
-	<Trailer {trailer} />
-	<span>|</span>
+{#if selectedMovie}
+	<div class="flex w-full flex-row items-center gap-2">
+		<Trailer {trailer} />
+		<span>|</span>
 
-	{#each [selectedMovie?.original_language?.toUpperCase() ?? '', `${selectedMovie?.runtime ?? 'N/A'} min`, selectedMovie?.genres
-			?.map((g) => g.name)
-			.join(', ') ?? ''] as item, i}
-		<p>{item}{i < 2 ? ' | ' : ''}</p>
-	{/each}
-</div>
+		{#each [selectedMovie?.original_language?.toUpperCase() ?? '', `${selectedMovie?.runtime ?? 'N/A'} min`, genreNames.join(', ') || 'N/A'] as item, i}
+			<p>{item}{i < 2 ? ' | ' : ''}</p>
+		{/each}
+	</div>
+{/if}

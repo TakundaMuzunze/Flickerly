@@ -4,13 +4,19 @@
 	export let selectedMovie;
 	export let trailer;
 
-	let isMobile = false;
-
-	if (typeof window !== 'undefined') {
-		isMobile = window.innerWidth < 1440;
-	}
+	let isModalOpen = false;
 
 	const googleWatchLink = `https://www.google.com/search?q=where+to+watch+${encodeURIComponent(selectedMovie.title)}+UK`;
+
+	function closeModal() {
+		isModalOpen = false;
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape') {
+			closeModal();
+		}
+	}
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
@@ -25,18 +31,17 @@
 			<p class="font-normal">⭐ {selectedMovie.vote_average.toFixed(1)} /10</p>
 		{/if}
 
-		<p class="text-base font-normal">
-			{isMobile ? `${selectedMovie.overview.slice(0, 100)}...` : selectedMovie.overview}
-		</p>
-
-		{#if isMobile}
-			<a
-				href={`/movie/${selectedMovie.id}`}
-				class="text-accent mb-2 cursor-pointer font-semibold underline underline-offset-8"
+		<div class="flex flex-col gap-2">
+			<p class="text-base font-normal">
+				{selectedMovie.overview.slice(0, 150)}...
+			</p>
+			<button
+				class="text-accent w-fit cursor-pointer font-semibold underline underline-offset-8"
+				onclick={() => (isModalOpen = true)}
 			>
-				View Full Details
-			</a>
-		{/if}
+				Read More
+			</button>
+		</div>
 
 		{#if selectedMovie.providers?.GB?.flatrate || selectedMovie.providers?.GB?.rent}
 			<div class="text-main-btn mt-2 flex flex-col gap-3">
@@ -65,7 +70,7 @@
 				</ul>
 			</div>
 		{:else}
-			<p class="text-base text-white italic">No streaming options found in the UK.</p>
+			<p class="text-main-btn w-fit font-semibold">No streaming options found in the UK.</p>
 			<a
 				href={googleWatchLink}
 				target="_blank"
@@ -77,3 +82,31 @@
 		{/if}
 	</div>
 </div>
+
+{#if isModalOpen}
+	<div
+		role="button"
+		tabindex="0"
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+		onclick={closeModal}
+		onkeydown={handleKeydown}
+	>
+		<div
+			class="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-gray-900 p-6 shadow-xl"
+		>
+			<button
+				class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-white"
+				onclick={closeModal}
+				aria-label="Close modal"
+			>
+				✕
+			</button>
+
+			<div class="mb-4 flex flex-col gap-2">
+				<h2 class="text-2xl font-bold">{selectedMovie.title}</h2>
+				<p class=" text-gray-400">Overview</p>
+			</div>
+			<p class="whitespace-pre-wrap text-gray-300">{selectedMovie.overview}</p>
+		</div>
+	</div>
+{/if}

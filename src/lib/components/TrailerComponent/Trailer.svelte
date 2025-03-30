@@ -39,12 +39,13 @@
 			onclick={(e) => e.stopPropagation()}
 		>
 			<button
-				class="absolute top-3 right-3 cursor-pointer text-white"
+				class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-white"
 				onclick={closeModal}
 				aria-label="Close"
 			>
-				✖
+				✕
 			</button>
+			<h2 class="mb-4 text-2xl font-bold">Movie Trailer</h2>
 			<iframe
 				class="aspect-video w-full rounded-lg"
 				src={`https://www.youtube.com/embed/${trailer.key}`}
