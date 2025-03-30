@@ -7,6 +7,9 @@ export interface Movie {
 	poster_path: string;
 	backdrop_path: string;
 	trailer?: Trailer;
+	runtime?: number;
+	genres?: Array<{ id: number; name: string }>;
+	genre_ids?: number[];
 	providers?: {
 		GB?: {
 			link?: string;

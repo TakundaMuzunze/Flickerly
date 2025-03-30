@@ -1,30 +1,31 @@
-import { fetchMoviesWithProviders } from '$lib/filters/movieProviders';
-import { fetchMoviesWithTrailers } from '$lib/filters/movieTrailers';
-
-import { fetchTopRated } from '$lib/server/topRated/+server';
 import { fetchTrending } from '$lib/server/trendingMovies/+server';
+import { fetchTopRated } from '$lib/server/topRated/+server';
 import { fetchUpcoming } from '$lib/server/upcomingMovies/+server';
+import { fetchFullMovieDetails } from '$lib/filters/fullMovieDetails';
+import { fetchMovies } from '$lib/server/fetchMovies/+server';
 
 export async function load() {
-	const [moviesWithTrailers, moviesWithProviders, trendingMovies, topRatedMovies, upcomingMovies] =
-		await Promise.all([
-			fetchMoviesWithTrailers(),
-			fetchMoviesWithProviders(),
-			fetchTrending(),
-			fetchTopRated(),
-			fetchUpcoming()
-		]);
+	// Fetch base popular movies for the carousel
+	const popularMovies = await fetchMovies();
 
-	const movies = moviesWithTrailers.map((movie) => {
-		const matchingMovie = moviesWithProviders.find((m) => m.id === movie.id);
-		return {
-			...movie,
-			providers: matchingMovie?.providers ?? []
-		};
-	});
+	// Fetch full details (trailer + providers) for each movie
+	const carouselMovies = await Promise.all(
+		popularMovies.map(async (movie) => {
+			const fullDetails = await fetchFullMovieDetails(movie);
+			return fullDetails;
+		})
+	);
+
+	const [trendingMovies, topRatedMovies, upcomingMovies] = await Promise.all([
+		fetchTrending(),
+		fetchTopRated(),
+		fetchUpcoming()
+	]);
+
+	const finalMovies = carouselMovies.filter(Boolean);
 
 	return {
-		movies,
+		movies: finalMovies,
 		trendingMovies,
 		topRatedMovies,
 		upcomingMovies
