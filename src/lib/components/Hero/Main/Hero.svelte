@@ -4,10 +4,13 @@
 	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
 	import Carousel from '../Carousel/Carousel.svelte';
 	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
+	import type { Movie } from '$lib/types/movie';
 
-	export let movies: any[];
+	export let movies: Movie[];
 
 	let selectedMovie = movies.length ? movies[0] : null;
+	let trailer = selectedMovie?.trailer ?? null;
+	$: trailer = selectedMovie?.trailer ?? null;
 
 	movieStore.movies = movies;
 	movieStore.selectedMovie = selectedMovie;
@@ -21,7 +24,7 @@
 
 	<!-- Inject Movie Details -->
 	<div slot="details">
-		<MovieDetails {selectedMovie} />
+		<MovieDetails {selectedMovie} {trailer} />
 	</div>
 
 	<!-- Inject Carousel -->

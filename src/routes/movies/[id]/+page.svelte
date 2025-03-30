@@ -21,15 +21,7 @@
 	</div>
 
 	<div slot="details">
-		<MovieDetails {selectedMovie} />
-	</div>
-
-	<div slot="trailer">
-		<Trailer {trailer} />
-	</div>
-
-	<div slot="overview">
-		<MovieMeta {selectedMovie} />
+		<MovieDetails {selectedMovie} {trailer} />
 	</div>
 
 	<div slot="cast">
