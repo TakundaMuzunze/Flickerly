@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="relative flex min-h-[60-vh] w-full flex-col items-center justify-center bg-cover bg-center py-5 text-white md:px-8"
+	class="relative flex min-h-[60-vh] w-full flex-col items-center justify-center bg-cover bg-center py-5 pt-[5rem] text-white md:px-8"
 	style="background-image: {backgroundImage
 		? `url(https://image.tmdb.org/t/p/original${backgroundImage})`
 		: 'none'}"
@@ -16,17 +16,6 @@
 		<div class="flex flex-col items-start gap-5 md:flex-row lg:items-center lg:gap-10">
 			<slot name="poster" />
 			<slot name="details" />
-		</div>
-	</div>
-</section>
-
-<section class="mx-auto flex max-w-7xl items-start justify-center p-10 text-white">
-	<div class="grid w-full grid-cols-1 gap-10 lg:grid-cols-2">
-		<div class="w-full">
-			<slot name="trailer" />
-		</div>
-		<div class="h-full w-full">
-			<slot name="overview" />
 		</div>
 	</div>
 </section>

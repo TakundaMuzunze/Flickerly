@@ -1,5 +1,8 @@
 <script lang="ts">
+	import MovieMeta from './MovieMeta/MovieMeta.svelte';
+
 	export let selectedMovie;
+	export let trailer;
 
 	let isMobile = false;
 
@@ -11,8 +14,10 @@
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
-	<div class="flex w-full flex-col gap-2 py-4">
-		<h2 class="text-xl">{selectedMovie.title}</h2>
+	<div class="flex w-full flex-col gap-3 py-4">
+		<h2 class="text-xl font-semibold">{selectedMovie.title}</h2>
+
+		<MovieMeta {selectedMovie} {trailer} />
 
 		{#if selectedMovie.vote_average.toFixed(1) <= 0}
 			<p class="font-normal text-gray-400 italic">Be the first to review</p>
