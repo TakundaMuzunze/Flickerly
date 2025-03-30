@@ -8,8 +8,6 @@
 	export let data;
 
 	const trailer: Trailer = data.movies?.[0]?.trailer || null;
-
-	console.log('Trailer:', trailer);
 </script>
 
 <Hero movies={data.movies} {trailer} />
