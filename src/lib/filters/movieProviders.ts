@@ -1,4 +1,3 @@
-// src/lib/filters/fetchMoviesWithProviders.ts
 import { fetchMovies } from '$lib/server/fetchMovies/+server';
 import { fetchProviders } from '$lib/utils/providers';
 

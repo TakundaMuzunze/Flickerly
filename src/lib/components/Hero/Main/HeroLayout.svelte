@@ -20,7 +20,7 @@
 		<div
 			class="flex h-full min-w-[250px] flex-col items-start justify-center gap-5 max-md:px-10 md:w-[35%]"
 		>
-			<slot name="title" />
+			<!-- <slot name="title" /> -->
 			<slot name="details" />
 		</div>
 

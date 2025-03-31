@@ -26,7 +26,7 @@
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
 	<div class="flex w-full flex-col gap-3 py-4">
-		<h2 class="text-xl font-semibold">{selectedMovie.title}</h2>
+		<h2 class="text-xl font-semibold md:text-2xl lg:text-4xl">{selectedMovie.title}</h2>
 
 		<MovieMeta {selectedMovie} {trailer} />
 

@@ -8,7 +8,7 @@
 </script>
 
 {#if selectedMovie}
-	<div class="flex w-full flex-row items-center gap-2">
+	<div class="flex w-full flex-row flex-wrap items-center gap-2">
 		<Trailer {trailer} />
 		<span>|</span>
 
