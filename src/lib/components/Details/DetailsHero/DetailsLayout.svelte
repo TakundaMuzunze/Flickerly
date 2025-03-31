@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="relative flex min-h-[60-vh] w-full flex-col items-center justify-center bg-cover bg-center py-5 pt-[5rem] text-white md:px-8"
+	class="relative flex min-h-[60vh] w-full flex-col items-center justify-center bg-cover bg-center py-5 pt-[5rem] text-white md:px-8"
 	style="background-image: {backgroundImage
 		? `url(https://image.tmdb.org/t/p/original${backgroundImage})`
 		: 'none'}"

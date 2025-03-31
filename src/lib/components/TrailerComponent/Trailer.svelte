@@ -35,7 +35,7 @@
 		<div
 			tabindex="0"
 			role="button"
-			class="bg-body-colour relative w-full max-w-3xl rounded-lg p-10"
+			class="bg-body-colour relative w-full max-w-76 rounded-lg p-10 md:max-w-2xl lg:max-w-3xl"
 			onclick={(e) => e.stopPropagation()}
 		>
 			<button
@@ -45,7 +45,7 @@
 			>
 				✕
 			</button>
-			<h2 class="mb-4 text-2xl font-bold">Movie Trailer</h2>
+			<h2 class="mb-8 text-2xl font-bold">Movie Trailer</h2>
 			<iframe
 				class="aspect-video w-full rounded-lg"
 				src={`https://www.youtube.com/embed/${trailer.key}`}

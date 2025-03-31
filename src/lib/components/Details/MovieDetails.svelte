@@ -92,7 +92,7 @@
 		onkeydown={handleKeydown}
 	>
 		<div
-			class="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-gray-900 p-6 shadow-xl"
+			class="relative max-h-[80vh] w-full max-w-72 overflow-y-auto rounded-lg bg-gray-900 p-6 shadow-xl md:max-w-2xl"
 		>
 			<button
 				class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-white"
