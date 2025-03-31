@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { links } from '../../stores/navlinks.stores.svelte';
-	import MobileMenu from '../MobileNav/MobileMenu.svelte';
 	import SearchBar from '../SearchBar/SearchBar.svelte';
+	import { fly } from 'svelte/transition';
 
 	let isMenuOpen = $state(false);
 
@@ -14,22 +14,12 @@
 	}
 </script>
 
-<header class="z-50 flex w-full items-center justify-between p-5 text-white md:justify-normal">
+<header
+	class="fixed top-0 z-50 flex w-full items-center justify-between p-5 text-white backdrop-blur-lg md:justify-normal"
+>
 	<div class="w-1/4 flex-shrink-0">
 		<a href="/" class="text-xl font-semibold">Cinescope</a>
 	</div>
-
-	<nav class="mx-auto hidden w-1/4 md:block">
-		<ul class="flex justify-center gap-6">
-			{#each links.navLinks as link}
-				<li>
-					<a href={link.href} class="text-lg transition-opacity hover:opacity-75">
-						{link.label}
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</nav>
 
 	<div class="ml-auto flex items-center gap-4">
 		<SearchBar />
@@ -40,7 +30,7 @@
 			aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
 			aria-expanded={isMenuOpen}
 			aria-controls="mobile-menu"
-			class="cursor-pointer md:hidden"
+			class="cursor-pointer"
 		>
 			{#if isMenuOpen}
 				<svg class="size-6" fill="currentColor" viewBox="0 0 384 512">
@@ -57,6 +47,47 @@
 			{/if}
 		</button>
 	</div>
-
-	<MobileMenu {isMenuOpen} {closeMenu} />
 </header>
+
+{#if isMenuOpen}
+	<div
+		role="button"
+		aria-label="Close menu"
+		tabindex="0"
+		id="mobile-menu"
+		class="fixed inset-0 z-[100] mx-auto bg-black/50 backdrop-blur-md"
+		onclick={closeMenu}
+		onkeydown={(event) => event.key === 'Escape' && closeMenu()}
+	>
+		<div
+			transition:fly={{ x: 300, duration: 300 }}
+			class="bg-body-colour fixed top-0 right-0 z-[101] h-full w-1/2 p-6 shadow-lg lg:w-[35%]"
+		>
+			<div class="flex justify-end">
+				<button
+					onclick={closeMenu}
+					aria-label="Close navigation menu"
+					class="cursor-pointer text-white"
+				>
+					<svg class="size-6" fill="currentColor" viewBox="0 0 384 512">
+						<path
+							d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+						/>
+					</svg>
+				</button>
+			</div>
+
+			<nav class="mb-8 h-full">
+				<ul class="flex flex-col items-center justify-center gap-6">
+					{#each links.navLinks as link}
+						<li>
+							<a href={link.href} onclick={closeMenu} class="block text-lg text-white">
+								{link.label}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+		</div>
+	</div>
+{/if}
