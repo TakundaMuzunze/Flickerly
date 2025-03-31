@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
 
 	const movieResponse = await fetch(
-		`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&language=en-US`
+		`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&language=en-US&append_to_response=credits`
 	);
 
 	if (!movieResponse.ok) {

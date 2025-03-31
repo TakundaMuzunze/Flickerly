@@ -15,7 +15,7 @@ export async function fetchFullMovieDetails(movie: Movie) {
 
 	// Get the full movie details from TMDB
 	const response = await fetch(
-		`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=en-US`
+		`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_KEY}&language=en-US&append_to_response=credits`
 	);
 	const fullDetails = await response.json();
 

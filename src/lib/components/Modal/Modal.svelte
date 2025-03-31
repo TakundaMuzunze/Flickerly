@@ -45,8 +45,6 @@
 			</div>
 			{#if content}
 				<p class="whitespace-pre-wrap text-gray-300">{content}</p>
-			{:else}
-				<slot />
 			{/if}
 		</div>
 	</div>

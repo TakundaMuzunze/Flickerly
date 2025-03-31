@@ -1,10 +1,15 @@
 <script lang="ts">
+	import { getDirector } from '$lib/utils/movieCrew';
+	import { getProductionCompany } from '$lib/utils/productionCompanies';
 	import MovieMeta from './MovieMeta/MovieMeta.svelte';
 
 	export let selectedMovie;
 	export let trailer;
 
 	let isModalOpen = false;
+
+	$: movieDirector = getDirector(selectedMovie.credits?.crew);
+	$: productionCompanies = getProductionCompany(selectedMovie.production_companies);
 
 	const googleWatchLink = `https://www.google.com/search?q=where+to+watch+${encodeURIComponent(selectedMovie.title)}+UK`;
 
@@ -106,7 +111,13 @@
 				<h2 class="text-2xl font-bold">{selectedMovie.title}</h2>
 				<p class=" text-gray-400">Overview</p>
 			</div>
-			<p class="whitespace-pre-wrap text-gray-300">{selectedMovie.overview}</p>
+			<p class="mb-4 whitespace-pre-wrap text-gray-300">{selectedMovie.overview}</p>
+			<div class="flex flex-col gap-2">
+				<p class="whitespace-pre-wrap text-gray-400">Director: {movieDirector}</p>
+				<p class="whitespace-pre-wrap text-gray-400">
+					Production: {productionCompanies}
+				</p>
+			</div>
 		</div>
 	</div>
 {/if}
