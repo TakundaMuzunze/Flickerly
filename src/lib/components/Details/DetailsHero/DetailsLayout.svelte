@@ -8,10 +8,8 @@
 		? `url(https://image.tmdb.org/t/p/original${backgroundImage})`
 		: 'none'}"
 >
-	<!-- Dark overlay -->
 	<div class="absolute inset-0 bg-black/80"></div>
 
-	<!-- Content Layout -->
 	<div class="relative z-10 flex w-full max-w-7xl flex-col items-start justify-evenly gap-20 p-5">
 		<div class="flex flex-col items-start gap-5 md:flex-row md:gap-8 lg:items-center lg:gap-12">
 			<slot name="poster" />
