@@ -17,9 +17,9 @@
 		</a>
 	</div>
 	<div
-		class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap lg:grid lg:grid-cols-6"
+		class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap lg:grid lg:grid-cols-3"
 	>
-		{#each cast.slice(0, 6) as actor}
+		{#each cast.slice(0, 9) as actor}
 			<div class="shrink-0">
 				<CastCard {actor} />
 			</div>
