@@ -17,7 +17,7 @@ export async function fetchUpcoming() {
 			movie.release_date?.startsWith(currentYear.toString())
 		);
 
-		return processMovieData(filteredMovies.slice(0, 6));
+		return processMovieData(filteredMovies);
 	} catch (error) {
 		console.error('Error - Failed to retrieve upcoming releases', error);
 		return [];
