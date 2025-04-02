@@ -13,7 +13,7 @@ export async function fetchTrending() {
 
 		const data = await response.json();
 
-		return processMovieData(data.results.slice(0, 6));
+		return processMovieData(data.results);
 	} catch (error) {
 		console.error('Error! Failed to fetch trending movies. ', error);
 		return [];
