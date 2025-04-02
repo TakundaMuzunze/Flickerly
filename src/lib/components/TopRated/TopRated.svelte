@@ -12,7 +12,7 @@
 		</div>
 
 		<a
-			href="/trending"
+			href="/topRated"
 			class="text-accent text-lg font-semibold transition-all duration-300 hover:underline hover:underline-offset-6"
 		>
 			View All →
