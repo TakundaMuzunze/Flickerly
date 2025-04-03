@@ -3,6 +3,9 @@ import { fetchTopRated } from '$lib/server/topRated/+server';
 import { fetchFullMovieDetails } from '$lib/filters/fullMovieDetails';
 import { fetchMovies } from '$lib/server/fetchMovies/+server';
 import { fetchInCinemas } from '$lib/server/latestReleases/+server';
+import { fetchActionMovies } from '$lib/server/actionMovies/+server';
+import { fetchComedyMovies } from '$lib/server/comedyMovies/+server';
+import { fetchThrillerMovies } from '$lib/server/thrillerMovies/+server';
 
 export async function load() {
 	// Fetch base popular movies for the carousel
@@ -16,10 +19,20 @@ export async function load() {
 		})
 	);
 
-	const [trendingMovies, topRatedMovies, inCinemasMovies] = await Promise.all([
+	const [
+		trendingMovies,
+		topRatedMovies,
+		inCinemasMovies,
+		actionMovies,
+		comedyMovies,
+		thrillerMovies
+	] = await Promise.all([
 		fetchTrending(),
 		fetchTopRated(),
-		fetchInCinemas()
+		fetchInCinemas(),
+		fetchActionMovies(),
+		fetchComedyMovies(),
+		fetchThrillerMovies()
 	]);
 
 	const finalMovies = carouselMovies.filter(Boolean);
@@ -28,6 +41,9 @@ export async function load() {
 		movies: finalMovies,
 		trendingMovies,
 		topRatedMovies,
-		inCinemasMovies
+		inCinemasMovies,
+		actionMovies,
+		comedyMovies,
+		thrillerMovies
 	};
 }
