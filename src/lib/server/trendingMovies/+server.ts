@@ -1,21 +1,16 @@
 import { TMDB_KEY } from '$env/static/private';
 import { processMovieData } from '$lib/utils/setMovies';
 
+const TMDB_API_URL = 'https://api.themoviedb.org/3';
+
 export async function fetchTrending() {
-	const response = await fetch(
-		`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_KEY}&language=en-US`
-	);
-
-	try {
-		if (!response.ok) {
-			throw new Error('Error! Failed to fetch trending movies.');
-		}
-
-		const data = await response.json();
-
-		return processMovieData(data.results);
-	} catch (error) {
-		console.error('Error! Failed to fetch trending movies. ', error);
-		return [];
-	}
+	// Fetch multiple pages
+	const [page1, page2, page3] = await Promise.all([
+		fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=1`).then(res => res.json()),
+		fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=2`).then(res => res.json()),
+		fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=3`).then(res => res.json())
+	]);
+	
+	// Combine results from all pages
+	return [...page1.results, ...page2.results, ...page3.results];
 }
