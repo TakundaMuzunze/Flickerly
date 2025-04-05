@@ -1,26 +1,22 @@
 import { TMDB_KEY } from '$env/static/private';
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { processMovieData } from '$lib/utils/setMovies';
 
-export const GET: RequestHandler = async ({ url }) => {
-	const query = url.searchParams.get('query') || '';
+const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
-	if (!query.trim()) {
-		return json({ results: [] });
-	}
-	try {
-		const response = await fetch(
-			`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`
-		);
+export async function searchMovies(query: string) {
+    try {
+        const response = await fetch(
+            `${TMDB_API_URL}/search/movie?api_key=${TMDB_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`
+        );
 
-		if (!response.ok) {
-			throw new Error('Error! Failed to fetch movies');
-		}
+        if (!response.ok) {
+            throw new Error('Failed to fetch search results');
+        }
 
-		const data = await response.json();
-
-		return json({ results: data.results || [] });
-	} catch (error) {
-		console.error('Error! - No movie results found', error);
-		return json({ results: [] });
-	}
-};
+        const data = await response.json();
+        return processMovieData(data.results);
+    } catch (error) {
+        console.error('Error searching movies:', error);
+        throw error;
+    }
+} 

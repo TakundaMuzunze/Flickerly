@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { links } from '../../stores/navlinks.stores.svelte';
-	import SearchBar from '../SearchBar/SearchBar.svelte';
+
 	import { fly } from 'svelte/transition';
+	import SearchBar from '../Search/SearchBar.svelte';
 
 	let isMenuOpen = $state(false);
 
