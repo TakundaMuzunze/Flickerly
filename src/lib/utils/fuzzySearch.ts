@@ -26,23 +26,17 @@ export function createFuzzySearch<T>(items: T[], keys: string[]) {
 }
 
 export function fuzzySearchMovies(movies: Movie[], query: string): Movie[] {
-	console.log('Starting fuzzy search with query:', query);
-	console.log('Number of movies to search:', movies.length);
-
 	const normalizedQuery = query.toLowerCase().trim();
 
 	const fuse = createFuzzySearch(movies, ['title', 'overview']);
 	const results = fuse.search(normalizedQuery) as FuseResult[];
 
-	console.log('Raw Fuse.js results:', results.slice(0, 3));
-
 	const processedResults = results
-		.map(result => ({
+		.map((result) => ({
 			...result.item,
 			score: result.score ?? 1
 		}))
-		.filter(result => result.score < 0.5);
+		.filter((result) => result.score < 0.5);
 
-	console.log('Processed results:', processedResults.slice(0, 3));
 	return processedResults;
 }
