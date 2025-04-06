@@ -74,7 +74,7 @@
 			</div>
 
 			<nav class="mb-8 h-full">
-				<ul class="flex flex-col items-center justify-center gap-6">
+				<ul class="flex h-full flex-col items-center justify-center gap-6">
 					{#each links.navLinks as link}
 						<li>
 							<a href={link.href} onclick={closeMenu} class="block text-lg text-white">
