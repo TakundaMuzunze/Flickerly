@@ -10,6 +10,10 @@
 	setGenres(genres);
 </script>
 
-<Header />
-<slot />
-<Footer />
+<div class="flex min-h-screen flex-col">
+	<Header />
+	<main class="flex-1">
+		<slot />
+	</main>
+	<Footer />
+</div>
