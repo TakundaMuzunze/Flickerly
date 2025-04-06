@@ -1,10 +1,4 @@
 import Fuse from 'fuse.js';
-import type { Movie } from '$lib/types/movie';
-
-interface FuseResult {
-	item: Movie;
-	score?: number;
-}
 
 export function createFuzzySearch<T>(items: T[], keys: string[]) {
 	return new Fuse(items, {
@@ -25,16 +19,16 @@ export function createFuzzySearch<T>(items: T[], keys: string[]) {
 	});
 }
 
-export function fuzzySearchMovies(movies: Movie[], query: string): Movie[] {
+export function fuzzySearchMovies(movies: any[], query: string) {
 	const normalizedQuery = query.toLowerCase().trim();
 
 	const fuse = createFuzzySearch(movies, ['title', 'overview']);
-	const results = fuse.search(normalizedQuery) as FuseResult[];
+	const results = fuse.search(normalizedQuery);
 
 	const processedResults = results
 		.map((result) => ({
 			...result.item,
-			score: result.score ?? 1
+			score: result.score
 		}))
 		.filter((result) => result.score < 0.5);
 

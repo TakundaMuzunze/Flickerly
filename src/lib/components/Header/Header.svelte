@@ -17,7 +17,7 @@
 <header
 	class="fixed top-0 z-50 flex w-full items-center justify-between p-5 text-white backdrop-blur-lg"
 >
-	<a href="/" class="text-2xl font-semibold">Cinescope</a>
+	<a href="/" class="text-2xl font-semibold md:text-3xl">Cinescope</a>
 
 	<div class="flex items-center gap-4">
 		<SearchBar />
@@ -26,7 +26,7 @@
 			aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
 			aria-expanded={isMenuOpen}
 			aria-controls="mobile-menu"
-			class="cursor-pointer p-2"
+			class="cursor-pointer"
 		>
 			{#if isMenuOpen}
 				<svg class="size-6" fill="currentColor" viewBox="0 0 384 512">
