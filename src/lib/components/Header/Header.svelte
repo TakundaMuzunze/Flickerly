@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { links } from '../../stores/navlinks.stores.svelte';
-	import SearchBar from '../SearchBar/SearchBar.svelte';
 	import { fly } from 'svelte/transition';
+	import SearchBar from '../Search/SearchBar.svelte';
 
 	let isMenuOpen = $state(false);
 
 	function toggleMenu() {
-		isMenuOpen = true;
+		isMenuOpen = !isMenuOpen;
 	}
 
 	function closeMenu() {
@@ -15,16 +15,12 @@
 </script>
 
 <header
-	class="fixed top-0 z-50 flex w-full items-center justify-between p-5 text-white backdrop-blur-lg md:justify-normal"
+	class="fixed top-0 z-50 flex w-full items-center justify-between p-5 text-white backdrop-blur-lg"
 >
-	<div class="w-1/4 flex-shrink-0">
-		<a href="/" class="text-xl font-semibold">Cinescope</a>
-	</div>
+	<a href="/" class="text-2xl font-semibold md:text-3xl">Cinescope</a>
 
-	<div class="ml-auto flex items-center gap-4">
+	<div class="flex items-center gap-4">
 		<SearchBar />
-
-		<!-- Hamburger Button for Mobile -->
 		<button
 			onclick={toggleMenu}
 			aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -78,7 +74,7 @@
 			</div>
 
 			<nav class="mb-8 h-full">
-				<ul class="flex flex-col items-center justify-center gap-6">
+				<ul class="flex h-full flex-col items-center justify-center gap-6">
 					{#each links.navLinks as link}
 						<li>
 							<a href={link.href} onclick={closeMenu} class="block text-lg text-white">

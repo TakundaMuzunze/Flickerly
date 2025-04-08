@@ -2,8 +2,6 @@
 	import CastCard from './CastCard.svelte';
 
 	export let cast;
-
-	// let;
 </script>
 
 <div class="flex flex-col gap-10">

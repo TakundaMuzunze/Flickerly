@@ -46,6 +46,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"embla-carousel-svelte": "^8.5.2"
+		"embla-carousel-svelte": "^8.5.2",
+		"fuse.js": "^7.1.0"
 	}
 }

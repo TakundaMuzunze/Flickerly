@@ -8,7 +8,6 @@ import { fetchComedyMovies } from '$lib/server/comedyMovies/+server';
 import { fetchThrillerMovies } from '$lib/server/thrillerMovies/+server';
 
 export async function load() {
-	// Fetch base popular movies for the carousel
 	const popularMovies = await fetchMovies();
 
 	// Fetch full details (trailer + providers) for each movie
