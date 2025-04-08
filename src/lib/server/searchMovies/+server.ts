@@ -12,7 +12,7 @@ interface TMDBResponse {
 // Cache for movie pool
 let moviePoolCache: Movie[] | null = null;
 let lastCacheUpdate = 0;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 5 * 60 * 1000;
 
 async function fetchMoviesByQuery(query: string): Promise<Movie[]> {
 	const response = await fetch(
@@ -28,7 +28,6 @@ async function fetchMoviesByQuery(query: string): Promise<Movie[]> {
 }
 
 async function fetchMoviePool(): Promise<Movie[]> {
-	// Check if we have a valid cache
 	const now = Date.now();
 	if (moviePoolCache && now - lastCacheUpdate < CACHE_DURATION) {
 		return moviePoolCache;
