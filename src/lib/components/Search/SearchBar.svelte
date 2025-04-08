@@ -20,7 +20,7 @@
 			clearTimeout(timeoutId);
 		}
 
-		// Set a new timeout to update the URL after typing stops
+		// set a new timeout to update the URL after typing stops
 		timeoutId = setTimeout(() => {
 			const trimmedQuery = searchInput.trim();
 			if (trimmedQuery) {
@@ -36,13 +36,13 @@
 					keepFocus: true
 				});
 			}
-			timeoutId = null; // Reset timeoutId after URL update
+			timeoutId = null;
 		}, 500);
 	}
 
 	function openSearch() {
 		isBarOpen = true;
-		// Focus the input when opening the search
+
 		if (inputElement) {
 			setTimeout(() => inputElement.focus(), 0);
 		}
@@ -54,13 +54,11 @@
 	}
 
 	onMount(() => {
-		// Only set input from URL when first mounting on /movies/search
 		if ($page.url.pathname === '/movies/search') {
 			const urlQuery = $page.url.searchParams.get('q') || '';
 			searchInput = urlQuery;
 		}
 
-		// Cleanup any timeout when unmounting
 		return () => {
 			if (timeoutId) {
 				clearTimeout(timeoutId);

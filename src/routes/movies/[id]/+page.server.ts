@@ -1,4 +1,3 @@
-// src/routes/movies/[id]/+page.server.ts
 import { TMDB_KEY } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';

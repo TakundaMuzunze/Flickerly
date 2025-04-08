@@ -1,5 +1,4 @@
 <script>
-	// export let movies;
 	export let topRatedMovies;
 	import MovieGrid from '$lib/components/MovieGrid/MovieGrid.svelte';
 	import { fly } from 'svelte/transition';

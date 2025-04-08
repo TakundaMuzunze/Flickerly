@@ -22,14 +22,14 @@
 	function updateActiveMovie() {
 		if (!emblaApi) return;
 		activeIndex = emblaApi.selectedScrollSnap();
-		selectedMovie = movies[activeIndex]; // Update selected movie
+		selectedMovie = movies[activeIndex];
 		movieStore.selectedMovie = selectedMovie;
 	}
 
 	function handleMovieSelect(movie: any, index: number) {
 		selectedMovie = movie;
 		movieStore.selectedMovie = movie;
-		activeIndex = index; // Set active index when clicking
+		activeIndex = index;
 	}
 
 	function goToNextSlide() {
@@ -51,8 +51,8 @@
 
 		if (emblaNode) {
 			emblaApi = EmblaCarousel(emblaNode, options);
-			emblaApi.on('select', updateActiveMovie); // Detect slide changes
-			updateActiveMovie(); // Set initial selected movie
+			emblaApi.on('select', updateActiveMovie);
+			updateActiveMovie();
 		}
 	});
 </script>
