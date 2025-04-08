@@ -13,7 +13,7 @@
 		</div>
 
 		<a
-			href="/genre/comedy"
+			href="/genre/horror"
 			class="text-accent text-lg font-semibold transition-all duration-300 hover:underline hover:underline-offset-6"
 		>
 			View All →
