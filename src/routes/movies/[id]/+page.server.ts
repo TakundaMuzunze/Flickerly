@@ -4,6 +4,7 @@ import type { PageServerLoad } from './$types';
 import { fetchProviders } from '$lib/utils/providers';
 import { fetchCast } from '$lib/server/movieCast/+server';
 import { fetchTrailer } from '$lib/utils/trailers';
+import { fetchSimilarMovies } from '$lib/server/similarMovies/+server';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
@@ -20,6 +21,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const trailer = await fetchTrailer(movie.id);
 	const providers = await fetchProviders(movie.id);
 	const cast = await fetchCast(movie.id);
+	const similarMovies = await fetchSimilarMovies(movie.id);
 
-	return { movie, trailer, providers, cast };
+	return { movie, trailer, providers, cast, similarMovies };
 };
