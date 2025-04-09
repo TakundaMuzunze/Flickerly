@@ -5,6 +5,8 @@
 	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
 	import MovieMeta from '$lib/components/Details/MovieMeta/MovieMeta.svelte';
 	import Poster from '$lib/components/Hero/Poster/Poster.svelte';
+	import MovieGrid from '$lib/components/MovieGrid/MovieGrid.svelte';
+	import Similar from '$lib/components/SimilarSection/Similar.svelte';
 	import Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
 
 	export let data;
@@ -26,5 +28,9 @@
 
 	<div slot="cast">
 		<CastGrid {cast} />
+	</div>
+
+	<div slot="similar">
+		<Similar similarMovies={data.similarMovies} {selectedMovie} />
 	</div>
 </DetailsLayout>
