@@ -25,6 +25,10 @@
 	</div>
 </section>
 
+<div class="py-5">
+	<slot name="similar" />
+</div>
+
 <!-- <section class="mx-auto flex max-w-7xl flex-col items-start justify-start gap-10 p-10">
 	<div class="flex w-full flex-col gap-5">
 		<slot name="cast" />
