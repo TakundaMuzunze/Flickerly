@@ -3,11 +3,13 @@
 	import { getProductionCompany } from '$lib/utils/productionCompanies';
 	import Modal from '../Modal/Modal.svelte';
 	import MovieMeta from './MovieMeta/MovieMeta.svelte';
+	import Trailer from '../TrailerComponent/Trailer.svelte';
 
 	export let selectedMovie;
 	export let trailer;
 
 	let isModalOpen = false;
+	let isTrailerModalOpen = false;
 
 	$: movieDirector = getDirector(selectedMovie.credits?.crew);
 	$: productionCompanies = getProductionCompany(selectedMovie.production_companies);
@@ -26,26 +28,66 @@
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">
-	<div class="flex w-full flex-col gap-3 py-4">
+	<div class="flex w-full flex-col gap-4 py-4">
 		<h2 class="text-xl font-semibold md:text-2xl lg:text-4xl">{selectedMovie.title}</h2>
 
-		<MovieMeta {selectedMovie} {trailer} />
+		<MovieMeta {selectedMovie} />
 
-		{#if selectedMovie.vote_average.toFixed(1) <= 0}
-			<p class="font-normal text-gray-400 italic">Be the first to review</p>
-		{:else}
-			<p class="font-normal">⭐ {selectedMovie.vote_average.toFixed(1)} /10</p>
-		{/if}
-
-		<div class="flex flex-col gap-2">
-			<p class="text-base font-normal">
-				{selectedMovie.overview.slice(0, 150)}...
-			</p>
+		<div class=" flex flex-row items-start gap-3">
 			<button
-				class="text-accent w-fit cursor-pointer font-semibold underline underline-offset-8"
+				class="flex w-fit cursor-pointer flex-row items-center justify-center gap-1 rounded-lg bg-white px-3 py-1 font-semibold text-black transition-colors hover:bg-white/80 md:py-2"
+				onclick={() => (isTrailerModalOpen = true)}
+			>
+				<svg class="size-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+					><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+						id="SVGRepo_tracerCarrier"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></g><g id="SVGRepo_iconCarrier">
+						<path
+							d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"
+							stroke="#000000"
+							stroke-width="2"
+							stroke-linejoin="round"
+						></path>
+					</g></svg
+				>
+				Trailer
+			</button>
+
+			<button
+				aria-label="Open movie information modal"
+				class="group flex aspect-square size-11 cursor-pointer items-center justify-center rounded-full bg-white/25 backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white"
 				onclick={() => (isModalOpen = true)}
 			>
-				Read More
+				<svg
+					class="size-7 transition-colors duration-200 group-hover:stroke-black"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+						id="SVGRepo_tracerCarrier"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></g><g id="SVGRepo_iconCarrier">
+						<circle
+							cx="12"
+							cy="12"
+							r="10"
+							class="group-hover:stroke-black"
+							stroke="white"
+							stroke-width="1.5"
+						></circle>
+						<path
+							d="M12 17V11"
+							stroke="white"
+							class="group-hover:stroke-black"
+							stroke-width="1.5"
+							stroke-linecap="round"
+						></path>
+						<circle cx="1" cy="1" r="1" transform="matrix(1 0 0 -1 11 9)" fill="white"></circle>
+					</g></svg
+				>
 			</button>
 		</div>
 
@@ -58,7 +100,7 @@
 							href={selectedMovie.providers.GB.link || '#'}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="bg-main-btn rounded-2xl px-2 py-1 text-sm text-white"
+							class="bg-main-btn rounded-lg px-3 py-1 text-white"
 						>
 							{provider.provider_name}
 						</a>
@@ -68,7 +110,7 @@
 							href={selectedMovie.providers.GB.link || '#'}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="bg-main-btn rounded-2xl px-3 py-1 text-sm text-white"
+							class="bg-main-btn rounded-lg px-3 py-1 text-white"
 						>
 							{provider.provider_name}
 						</a>
@@ -81,7 +123,7 @@
 				href={googleWatchLink}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="bg-main-btn hover:bg-main-btn/80 w-fit rounded-2xl px-3 py-1 text-sm text-white transition"
+				class="bg-main-btn hover:bg-main-btn/80 w-fit rounded-lg px-3 py-1 text-white transition"
 			>
 				🔍 Find where to watch
 			</a>
@@ -95,7 +137,8 @@
 	title={selectedMovie.title}
 	subtitle="Overview"
 	content={selectedMovie.overview}
-	releaseDate={selectedMovie.release_date}
 	director={movieDirector}
-	productionCompanies={productionCompanies}
+	{productionCompanies}
 />
+
+<Trailer {trailer} isOpen={isTrailerModalOpen} onClose={() => (isTrailerModalOpen = false)} />
