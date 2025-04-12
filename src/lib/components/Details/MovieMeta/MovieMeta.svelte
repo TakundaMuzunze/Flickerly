@@ -1,19 +1,36 @@
 <script lang="ts">
-	import Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
-
 	export let selectedMovie;
-	export let trailer;
 
 	const genreNames = selectedMovie?.genres?.map((g) => g.name) ?? [];
+	const runtime = selectedMovie?.runtime ? `${selectedMovie.runtime} min` : 'N/A';
+	const voteRating = selectedMovie?.vote_average
+		? `⭐ ${selectedMovie.vote_average.toFixed(1)}/10`
+		: 'N/A';
+	const releaseYear = new Date(selectedMovie.release_date).getFullYear();
 </script>
 
 {#if selectedMovie}
-	<div class="flex w-full flex-row flex-wrap items-center gap-2">
-		<Trailer {trailer} />
-		<span>|</span>
+	<div class="flex w-full flex-col gap-2">
+		<div class="flex flex-row flex-wrap items-center gap-2">
+			{#each [voteRating, releaseYear, runtime, selectedMovie?.original_language?.toUpperCase() ?? 'N/A'] as item, i}
+				<span class="flex items-center gap-2">
+					<span class="text-sm text-gray-300 md:text-base">{item}</span>
+					{#if i < 3}
+						<span class="size-1 rounded-full bg-gray-300"></span>
+					{/if}
+				</span>
+			{/each}
+		</div>
 
-		{#each [selectedMovie?.original_language?.toUpperCase() ?? '', `${selectedMovie?.runtime ?? 'N/A'} min`, genreNames.join(', ') || 'N/A'] as item, i}
-			<p>{item}{i < 2 ? ' | ' : ''}</p>
-		{/each}
+		<div class="flex flex-row flex-wrap items-center gap-2">
+			{#each genreNames as genre, i}
+				<span class="flex items-center gap-2">
+					<span class="text-sm text-gray-300 md:text-base">{genre}</span>
+					{#if i < genreNames.length - 1}
+						<span class="size-1 rounded-full bg-gray-300"></span>
+					{/if}
+				</span>
+			{/each}
+		</div>
 	</div>
 {/if}

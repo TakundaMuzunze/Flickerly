@@ -4,7 +4,6 @@
 	export let title: string;
 	export let subtitle: string;
 	export let content: string;
-	export let releaseDate: string;
 	export let director: string;
 	export let productionCompanies: string;
 
@@ -60,12 +59,9 @@
 				{/if}
 			</div>
 			<p class="mb-4 whitespace-pre-wrap text-gray-300">{content}</p>
-			<div class="flex flex-col gap-2">
-				{#if releaseDate}
-					<p class="text-gray-400">Release Date: {releaseDate}</p>
-				{/if}
-				<p class="text-gray-400">Director: {director}</p>
-				<p class="text-gray-400">Production: {productionCompanies}</p>
+			<div class="flex flex-col gap-2 text-gray-400">
+				<p>Director: {director}</p>
+				<p>Production: {productionCompanies}</p>
 			</div>
 		</div>
 	</div>
