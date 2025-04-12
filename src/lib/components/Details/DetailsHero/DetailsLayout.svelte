@@ -11,14 +11,19 @@
 	<div class="absolute inset-0 bg-black/80"></div>
 
 	<div class="relative z-10 flex w-full max-w-7xl flex-col items-start justify-evenly p-5">
-		<div class="grid w-full grid-cols-1 gap-8 xl:grid-cols-12">
-			<div class="xl:col-span-3">
+		<div class="grid w-full grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+			<!-- Poster -->
+			<div class="md:col-span-4 xl:col-span-3">
 				<slot name="poster" />
 			</div>
-			<div class="xl:col-span-6">
+
+			<!-- Details -->
+			<div class="md:col-span-8 xl:col-span-6">
 				<slot name="details" />
 			</div>
-			<div class="xl:col-span-3">
+
+			<!-- Cast -->
+			<div class="md:col-span-12 xl:col-span-3">
 				<slot name="cast" />
 			</div>
 		</div>

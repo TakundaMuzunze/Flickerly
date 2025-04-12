@@ -15,7 +15,7 @@
 		</a>
 	</div>
 	<div
-		class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap lg:grid lg:grid-cols-3"
+		class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap xl:grid xl:grid-cols-3"
 	>
 		{#each cast.slice(0, 9) as actor}
 			<div class="shrink-0">
