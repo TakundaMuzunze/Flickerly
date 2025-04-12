@@ -9,12 +9,11 @@
 	import Similar from '$lib/components/SimilarSection/Similar.svelte';
 	import Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
 
-	export let data;
+	const { data } = $props();
 
-	const trailer = data.trailer;
-	const cast = data.cast;
-
-	const selectedMovie = { ...data.movie, providers: data.providers };
+	const trailer = $derived(data.trailer);
+	const cast = $derived(data.cast);
+	const selectedMovie = $derived({ ...data.movie, providers: data.providers });
 </script>
 
 <DetailsLayout backgroundImage={selectedMovie.backdrop_path}>

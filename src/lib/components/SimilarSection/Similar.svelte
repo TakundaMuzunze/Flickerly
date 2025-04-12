@@ -13,13 +13,21 @@
 			<h2 class="relative text-xl font-semibold text-white md:text-2xl">Similar movies</h2>
 		</div>
 
-		<a
-			href={`/movies/${selectedMovie.id}/similar`}
-			class="text-accent text-lg font-semibold transition-all duration-300 hover:underline hover:underline-offset-6"
-		>
-			View All →
-		</a>
+		{#if similarMovies?.length}
+			<a
+				href={`/movies/${selectedMovie.id}/similar`}
+				class="text-accent text-lg font-semibold transition-all duration-300 hover:underline hover:underline-offset-6"
+			>
+				View All →
+			</a>
+		{/if}
 	</div>
 
-	<MovieGrid movies={similarMovies} limit={6} />
+	{#if similarMovies?.length > 0}
+		<MovieGrid movies={similarMovies} limit={6} />
+	{:else}
+		<p class="text-sm text-gray-300 italic">
+			No similar movies found just yet — this one's fresh out the oven 🍿
+		</p>
+	{/if}
 </section>

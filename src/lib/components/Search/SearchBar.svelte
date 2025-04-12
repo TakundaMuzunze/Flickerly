@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 
 	let searchInput = '';
 	let isBarOpen = false;
@@ -16,36 +17,27 @@
 		const input = event.target as HTMLInputElement;
 		searchInput = input.value;
 
-		if (timeoutId) {
-			clearTimeout(timeoutId);
-		}
+		if (timeoutId) clearTimeout(timeoutId);
 
-		// set a new timeout to update the URL after typing stops
 		timeoutId = setTimeout(() => {
 			const trimmedQuery = searchInput.trim();
-			if (trimmedQuery) {
-				goto(`/movies/search?q=${encodeURIComponent(trimmedQuery)}`, {
-					replaceState: true,
-					noScroll: true,
-					keepFocus: true
-				});
-			} else {
-				goto('/movies/search', {
-					replaceState: true,
-					noScroll: true,
-					keepFocus: true
-				});
-			}
+			const url = trimmedQuery
+				? `/movies/search?q=${encodeURIComponent(trimmedQuery)}`
+				: '/movies/search';
+
+			goto(url, {
+				replaceState: true,
+				noScroll: true,
+				keepFocus: true
+			});
+
 			timeoutId = null;
 		}, 500);
 	}
 
 	function openSearch() {
 		isBarOpen = true;
-
-		if (inputElement) {
-			setTimeout(() => inputElement.focus(), 0);
-		}
+		setTimeout(() => inputElement?.focus(), 0);
 	}
 
 	function closeSearch() {
@@ -53,16 +45,25 @@
 		searchInput = '';
 	}
 
+	function clearInput() {
+		searchInput = '';
+		inputElement?.focus();
+		goto('/movies/search', {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
+	}
+
 	onMount(() => {
-		if ($page.url.pathname === '/movies/search') {
-			const urlQuery = $page.url.searchParams.get('q') || '';
-			searchInput = urlQuery;
-		}
+		const unsubscribe = page.subscribe(($page) => {
+			if ($page.url.pathname !== '/movies/search') {
+				closeSearch();
+			}
+		});
 
 		return () => {
-			if (timeoutId) {
-				clearTimeout(timeoutId);
-			}
+			unsubscribe();
 		};
 	});
 </script>
@@ -94,13 +95,36 @@
 			bind:value={searchInput}
 			oninput={handleSearch}
 		/>
-		<button aria-label="Close search" onclick={closeSearch} class="cursor-pointer text-white">
-			<svg fill="white" class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-				<path
-					d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-				/>
-			</svg>
-		</button>
+
+		{#if searchInput}
+			<button
+				onclick={clearInput}
+				class="group absolute right-5 flex cursor-pointer items-center justify-center text-gray-400 hover:text-white"
+				aria-label="Clear search bar input"
+			>
+				<svg class="size-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+					><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+						id="SVGRepo_tracerCarrier"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></g><g id="SVGRepo_iconCarrier">
+						<path
+							class="group-hover:stroke-white"
+							d="M5.73708 6.54391V18.9857C5.73708 19.7449 6.35257 20.3604 7.11182 20.3604H16.8893C17.6485 20.3604 18.264 19.7449 18.264 18.9857V6.54391M2.90906 6.54391H21.0909"
+							stroke="#99a1af"
+							stroke-width="1.7"
+							stroke-linecap="round"
+						></path>
+						<path
+							d="M8 6V4.41421C8 3.63317 8.63317 3 9.41421 3H14.5858C15.3668 3 16 3.63317 16 4.41421V6"
+							stroke="#99a1af"
+							stroke-width="1.7"
+							stroke-linecap="round"
+						></path>
+					</g></svg
+				>
+			</button>
+		{/if}
 	</div>
 </div>
 
