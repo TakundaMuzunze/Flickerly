@@ -2,35 +2,30 @@
 	import type { Trailer } from '$lib/types/trailer';
 
 	export let trailer: Trailer | null;
+	export let isOpen: boolean = false;
+	export let onClose: () => void;
 
-	let isModalOpen: boolean = false;
-
-	function openModal() {
-		isModalOpen = !isModalOpen;
+	function handleBackdropClick(event: MouseEvent) {
+		if (event.target === event.currentTarget) {
+			onClose();
+		}
 	}
 
-	function closeModal() {
-		isModalOpen = false;
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape') {
+			onClose();
+		}
 	}
 </script>
 
-<button
-	onclick={openModal}
-	class="flex cursor-pointer flex-row items-center justify-center gap-2 rounded-md"
-	><svg fill="white" class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-		><path
-			d="M0 128C0 92.7 28.7 64 64 64l256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2l0 256c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1l0-17.1 0-128 0-17.1 14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"
-		/></svg
-	>Trailer</button
->
-
-{#if isModalOpen && trailer}
+{#if isOpen}
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div
 		tabindex="0"
 		role="button"
 		class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md"
-		onclick={closeModal}
+		onclick={handleBackdropClick}
+		onkeydown={handleKeydown}
 	>
 		<div
 			tabindex="0"
@@ -40,19 +35,29 @@
 		>
 			<button
 				class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-white"
-				onclick={closeModal}
+				onclick={onClose}
 				aria-label="Close"
 			>
 				✕
 			</button>
 			<h2 class="mb-8 text-2xl font-bold">Movie Trailer</h2>
-			<iframe
-				class="aspect-video w-full rounded-lg"
-				src={`https://www.youtube.com/embed/${trailer.key}`}
-				title={trailer.name}
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			></iframe>
+			{#if trailer}
+				<iframe
+					class="aspect-video w-full rounded-lg"
+					src={`https://www.youtube.com/embed/${trailer.key}`}
+					title={trailer.name}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen
+				></iframe>
+			{:else}
+				<div class="flex flex-col items-center justify-center gap-4 p-8 text-center">
+					<svg class="size-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2z"/>
+					</svg>
+					<h3 class="text-xl font-semibold text-white">No Trailer Available</h3>
+					<p class="text-gray-400">We couldn't find a trailer for this movie. Check back later or explore other movies.</p>
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}
