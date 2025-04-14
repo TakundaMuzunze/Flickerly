@@ -27,7 +27,7 @@
 		<MovieGrid movies={similarMovies} limit={6} />
 	{:else}
 		<p class="text-sm text-gray-300 italic">
-			No similar movies found just yet — this one's fresh out the oven 🍿
+			No similar movies found for this one — it might be a bit of a unique gem 👀
 		</p>
 	{/if}
 </section>
