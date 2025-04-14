@@ -4,6 +4,7 @@
 	import Thriller from '$lib/components/ThrillerSection/Thriller.svelte';
 	import Drama from '$lib/components/DramaSection/Drama.svelte';
 	import Horror from '$lib/components/HorrorSection/Horror.svelte';
+	import SciFi from '$lib/components/scienceFictionSection/Sci-Fi.svelte';
 	export let data;
 </script>
 
@@ -13,4 +14,5 @@
 	<Comedy comedyMovies={data.comedyMovies} />
 	<Drama dramaMovies={data.dramaMovies} />
 	<Horror horrorMovies={data.horrorMovies} />
+	<SciFi scifiMovies={data.scifiMovies} />
 </section>
