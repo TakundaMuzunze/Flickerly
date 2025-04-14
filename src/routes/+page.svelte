@@ -15,10 +15,9 @@
 </script>
 
 <Hero movies={data.movies} {trailer} />
-
 <Trending movies={data.trendingMovies} />
 <NowPlaying upcomingMovies={data.inCinemasMovies} releaseDate={true} />
+<Comedy comedyMovies={data.comedyMovies} />
 <Action actionMovies={data.actionMovies} />
 <Thriller thrillerMovies={data.thrillerMovies} />
-<Comedy comedyMovies={data.comedyMovies} />
 <TopRated topRatedMovies={data.topRatedMovies} />
