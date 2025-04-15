@@ -5,6 +5,7 @@ import { fetchDramaMovies } from '$lib/server/dramaMovies/+server';
 import { fetchHorrorMovies } from '$lib/server/horrorMovies/+server';
 import { fetchScifiMovies } from '$lib/server/scifiMovies/+server';
 import { fetchRomanceMovies } from '$lib/server/romanceMovies/+server';
+import { fetchFantasyMovies } from '$lib/server/fantasyMovies/+server';
 
 export async function load() {
 	const [
@@ -14,7 +15,8 @@ export async function load() {
 		dramaMovies,
 		horrorMovies,
 		scifiMovies,
-		romanceMovies
+		romanceMovies,
+		fantasyMovies
 	] = await Promise.all([
 		fetchActionMovies(),
 		fetchComedyMovies(),
@@ -22,7 +24,8 @@ export async function load() {
 		fetchDramaMovies(),
 		fetchHorrorMovies(),
 		fetchScifiMovies(),
-		fetchRomanceMovies()
+		fetchRomanceMovies(),
+		fetchFantasyMovies()
 	]);
 
 	return {
@@ -32,6 +35,7 @@ export async function load() {
 		dramaMovies,
 		horrorMovies,
 		scifiMovies,
-		romanceMovies
+		romanceMovies,
+		fantasyMovies
 	};
 }
