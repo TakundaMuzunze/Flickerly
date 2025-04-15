@@ -1,4 +1,7 @@
 export const genreSubtitles: Record<string, string> = {
+	trending: 'The hottest titles right now',
+	topRated: 'Critically acclaimed by audiences worldwide',
+	nowPlaying: 'Fresh releases currently in theatres',
 	action: 'High-octane films full of explosive moments and daring heroes.',
 	comedy: 'Laugh-out-loud moments from witty to ridiculous.',
 	thriller: 'Tense and suspenseful stories to keep you on edge.',
