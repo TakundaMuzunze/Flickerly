@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getGenreName } from '$lib/utils/genres';
+	import { hasImageLoaded, markImageAsLoaded } from '$lib/utils/imageCaching';
 	import { onMount } from 'svelte';
 
 	export let movie: any;
@@ -7,6 +8,30 @@
 	export let releaseDate: boolean = false;
 
 	const genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
+
+	let hasLoaded = false;
+	let hasError = false;
+
+	const posterUrl = movie.poster_path
+		? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+		: null;
+
+	function handleLoad() {
+		if (posterUrl) {
+			markImageAsLoaded(posterUrl);
+			hasLoaded = true;
+		}
+	}
+
+	function handleError() {
+		hasError = true;
+	}
+
+	onMount(() => {
+		if (posterUrl && hasImageLoaded(posterUrl)) {
+			hasLoaded = true;
+		}
+	});
 </script>
 
 <a href={`/movies/${movie.id}`}>
@@ -14,8 +39,11 @@
 		<div class="relative">
 			<img
 				class="movie aspect-[2/3] w-full rounded-lg"
-				src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+				src={posterUrl}
 				alt={movie.title}
+				loading="lazy"
+				on:load={handleLoad}
+				on:error={handleError}
 			/>
 
 			<!-- <div class="bg-accent absolute top-0 right-0 rounded-lg px-3 py-2 text-white">
