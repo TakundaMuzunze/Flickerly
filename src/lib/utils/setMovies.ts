@@ -8,7 +8,7 @@ export function processMovieData(movies: Movie[]) {
 			runtime: movie.runtime || 0,
 			genres: movie.genres || [],
 			genre_ids: movie.genre_ids || [],
-			posterUrl: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null,
+			posterUrl: movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null,
 			backdropUrl: movie.backdrop_path
 				? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`
 				: null

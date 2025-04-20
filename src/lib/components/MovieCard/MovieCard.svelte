@@ -12,7 +12,7 @@
 	let hasLoaded = false;
 	let hasError = false;
 
-	const posterUrl = movie.posterUrl || null;
+	const posterUrl = movie.posterUrl || `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
 
 	function handleLoad() {
 		if (posterUrl) {
@@ -39,7 +39,6 @@
 				class="movie aspect-[2/3] w-full rounded-lg"
 				src={posterUrl}
 				alt={movie.title}
-				loading="lazy"
 				on:load={handleLoad}
 				on:error={handleError}
 			/>
