@@ -12,9 +12,7 @@
 	let hasLoaded = false;
 	let hasError = false;
 
-	const posterUrl = movie.poster_path
-		? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
-		: null;
+	const posterUrl = movie.posterUrl || null;
 
 	function handleLoad() {
 		if (posterUrl) {
