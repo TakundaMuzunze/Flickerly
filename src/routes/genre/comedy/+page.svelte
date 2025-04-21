@@ -1,15 +1,36 @@
 <script lang="ts">
 	import ResultsGrid from '$lib/components/MovieGrid/ResultsGrid.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
-	export let data;
+	import FilterBar from '$lib/components/FilterBar/FilterBar.svelte';
+	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
+	import { onMount } from 'svelte';
+	import { fetchMovies } from '$lib/stores/movieStore.stores.svelte';
+
+	let data = $props();
+	const movies = $state($movieStore.movies);
+	const selectedMovie = $state($movieStore.selectedMovie);
+	const trailer = $state($movieStore.trailer);
+	const sortBy = $state($movieStore.sortBy);
+
+	onMount(async () => {
+		await fetchMovies('35', sortBy);
+	});
+
+	$effect(() => {
+		if (sortBy) {
+			fetchMovies('35', sortBy);
+		}
+	});
 </script>
 
 <section
-	class="mx-auto flex max-w-7xl flex-col items-start justify-start gap-8 p-5 pt-[8rem] xl:p-10 xl:pt-[10rem]"
+	class="min-w-screen-2xl flex flex-col items-start justify-start gap-8 p-5 pt-[8rem] xl:p-10 xl:pt-[10rem]"
 >
 	<div class="space-y-2">
 		<h2 class="relative text-xl font-semibold text-white md:text-2xl">Comedy Movies</h2>
 		<p class="text-gray-300 md:text-lg">{genreSubtitles.comedy}</p>
+		<FilterBar />
 	</div>
-	<ResultsGrid movies={data.comedyMovies} />
+
+	<ResultsGrid {movies} releaseDate={true} />
 </section>
