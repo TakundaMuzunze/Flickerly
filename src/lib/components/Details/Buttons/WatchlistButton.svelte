@@ -2,6 +2,7 @@
 	import type { Movie } from '$lib/types/movie';
 	import { watchlist } from '$lib/stores/watchlist.stores.svelte';
 	import { addToWatchlist, removeFromWatchlist } from '$lib/utils/addToWatchlist';
+	import toast from 'svelte-hot-french-toast';
 
 	export let movie: Movie;
 
@@ -13,6 +14,8 @@
 		} else {
 			addToWatchlist(movie);
 		}
+
+		toast.success(`${movie.title} ${isInWatchlist ? 'removed from' : 'added to'} your watchlist`);
 	}
 </script>
 

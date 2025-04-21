@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer/Footer.svelte';
 	import Header from '$lib/components/Header/Header.svelte';
+	import toast, { Toaster } from 'svelte-hot-french-toast';
 	import { setGenres } from '$lib/utils/genres';
 	import '../app.css';
 
@@ -17,3 +18,5 @@
 	</main>
 	<Footer />
 </div>
+
+<Toaster />
