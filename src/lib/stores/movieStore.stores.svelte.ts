@@ -39,6 +39,10 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey)
 		}
 
 		const data = await response.json();
+		if (data.error) {
+			throw new Error(data.error);
+		}
+
 		movieStore.update((store) => {
 			return {
 				...store,
@@ -49,6 +53,7 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey)
 		});
 	} catch (error) {
 		console.error('Error fetching movies:', error);
+		throw error;
 	}
 }
 
