@@ -14,6 +14,7 @@
 
 	onMount(async () => {
 		await fetchMovies('35', sortBy);
+		document.title = 'Comedy Movies | Flickerly';
 	});
 
 	$effect(() => {

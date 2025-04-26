@@ -7,7 +7,12 @@
 	import SciFi from '$lib/components/scienceFictionSection/Sci-Fi.svelte';
 	import Romance from '$lib/components/RomanceSection/Romance.svelte';
 	import Fantasy from '$lib/components/FantasySection/Fantasy.svelte';
+	import { onMount } from 'svelte';
 	export let data;
+
+	onMount(() => {
+		document.title = 'Browse Different Movies Genres | Flickerly';
+	});
 </script>
 
 <section class="pt-[8rem]">

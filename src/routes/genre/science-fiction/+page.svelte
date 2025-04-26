@@ -13,6 +13,8 @@
 
 	onMount(async () => {
 		await fetchMovies('878', 'popularity');
+
+		document.title = 'Science Fiction Movies | Flickerly';
 	});
 
 	// export let data;

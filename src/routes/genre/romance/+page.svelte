@@ -13,6 +13,7 @@
 
 	onMount(async () => {
 		await fetchMovies('10749', 'popularity');
+		document.title = 'Romance Movies | Flickerly';
 	});
 
 	// export let data;

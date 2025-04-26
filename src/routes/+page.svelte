@@ -8,10 +8,15 @@
 	import Comedy from '$lib/components/ComedySection/Comedy.svelte';
 	import Thriller from '$lib/components/ThrillerSection/Thriller.svelte';
 	import NowPlaying from '$lib/components/NowPlayingSection/NowPlaying.svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
 
 	const trailer: Trailer = data.movies?.[0]?.trailer || null;
+
+	onMount(() => {
+		document.title = 'Flickerly - Discover Movies & TV Shows';
+	});
 </script>
 
 <Hero movies={data.movies} {trailer} />

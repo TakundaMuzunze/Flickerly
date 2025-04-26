@@ -13,6 +13,7 @@
 
 	onMount(async () => {
 		await fetchMovies('18', 'popularity');
+		document.title = 'Drama Movies | Flickerly';
 	});
 
 	// export let data;

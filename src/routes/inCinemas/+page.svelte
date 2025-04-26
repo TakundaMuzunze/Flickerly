@@ -2,7 +2,12 @@
 	import ResultsGrid from '$lib/components/MovieGrid/ResultsGrid.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
 	import FilterBar from '$lib/components/FilterBar/FilterBar.svelte';
+	import { onMount } from 'svelte';
 	export let data;
+
+	onMount(() => {
+		document.title = 'Movies in Cinemas Now | Flickerly';
+	});
 </script>
 
 <section

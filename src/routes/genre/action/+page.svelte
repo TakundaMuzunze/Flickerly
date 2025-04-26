@@ -13,6 +13,7 @@
 
 	onMount(async () => {
 		await fetchMovies('28', 'popularity');
+		document.title = 'Action Movies | Flickerly';
 	});
 </script>
 
