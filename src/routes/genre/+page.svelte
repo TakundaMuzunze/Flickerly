@@ -10,7 +10,7 @@
 	export let data;
 </script>
 
-<section class="mx-auto flex flex-col items-start justify-start pt-[8rem] xl:pt-[10rem]">
+<section class="pt-[8rem]">
 	<Action actionMovies={data.actionMovies} />
 	<Comedy comedyMovies={data.comedyMovies} />
 	<Drama dramaMovies={data.dramaMovies} />

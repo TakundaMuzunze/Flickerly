@@ -6,7 +6,9 @@
 	const { movies = [], releaseDate = false } = $props();
 </script>
 
-<div class="grid w-full grid-cols-2 gap-6 gap-y-10 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8">
+<div
+	class="grid w-full grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+>
 	{#each $movieStore.movies as movie (movie.id)}
 		<div in:fade={{ duration: 200 }}>
 			<MovieCard {movie} showGenre={true} {releaseDate} />
