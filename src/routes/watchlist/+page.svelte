@@ -9,7 +9,7 @@
 	$: movies = $watchlist;
 
 	onMount(() => {
-		document.title = 'My Watchlist - Flickerly';
+		document.title = 'My Watchlist | Flickerly';
 	});
 </script>
 

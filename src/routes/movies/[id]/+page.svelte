@@ -13,7 +13,7 @@
 	const cast = $derived(data.cast);
 	const selectedMovie = $derived({ ...data.movie, providers: data.providers });
 
-	onMount(() => {
+	$effect(() => {
 		document.title = `${selectedMovie.title} | Flickerly`;
 	});
 </script>
