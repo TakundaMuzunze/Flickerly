@@ -87,8 +87,10 @@
 						>
 							<img
 								class="w-full rounded-md shadow-lg"
-								src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+								src={movie.posterUrl}
 								alt={movie.title || 'Movie poster'}
+								width="750"
+								height="500"
 							/>
 
 							{#if i === activeIndex}

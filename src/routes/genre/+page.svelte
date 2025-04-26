@@ -4,13 +4,19 @@
 	import Thriller from '$lib/components/ThrillerSection/Thriller.svelte';
 	import Drama from '$lib/components/DramaSection/Drama.svelte';
 	import Horror from '$lib/components/HorrorSection/Horror.svelte';
+	import SciFi from '$lib/components/scienceFictionSection/Sci-Fi.svelte';
+	import Romance from '$lib/components/RomanceSection/Romance.svelte';
+	import Fantasy from '$lib/components/FantasySection/Fantasy.svelte';
 	export let data;
 </script>
 
-<section class="mx-auto flex flex-col items-start justify-start pt-[8rem] xl:pt-[10rem]">
+<section class="pt-[8rem]">
 	<Action actionMovies={data.actionMovies} />
-	<Thriller thrillerMovies={data.thrillerMovies} />
 	<Comedy comedyMovies={data.comedyMovies} />
 	<Drama dramaMovies={data.dramaMovies} />
+	<Thriller thrillerMovies={data.thrillerMovies} />
 	<Horror horrorMovies={data.horrorMovies} />
+	<Romance romanceMovies={data.romanceMovies} />
+	<SciFi scifiMovies={data.scifiMovies} />
+	<Fantasy fantasyMovies={data.fantasyMovies} />
 </section>

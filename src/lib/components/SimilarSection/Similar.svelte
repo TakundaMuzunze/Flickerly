@@ -7,7 +7,9 @@
 	export let selectedMovie;
 </script>
 
-<section class="mx-auto flex max-w-7xl flex-col items-start justify-start gap-6 p-10">
+<section
+	class="min-w-screen-2xl flex flex-col items-start justify-start gap-4 p-5 pt-[8rem] xl:p-10"
+>
 	<div in:fly|global={{ y: 50, duration: 650 }} class="flex w-full items-center justify-between">
 		<div class="flex flex-col gap-2">
 			<h2 class="relative text-xl font-semibold text-white md:text-2xl">Similar movies</h2>
@@ -27,7 +29,7 @@
 		<MovieGrid movies={similarMovies} limit={6} />
 	{:else}
 		<p class="text-sm text-gray-300 italic">
-			No similar movies found just yet — this one's fresh out the oven 🍿
+			No similar movies found for this one — it might be a bit of a unique gem 👀
 		</p>
 	{/if}
 </section>
