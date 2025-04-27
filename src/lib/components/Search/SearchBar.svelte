@@ -87,6 +87,19 @@
 			? 'max-sm:bg-body-colour w-64 rounded-lg p-2 opacity-100 max-sm:fixed max-sm:top-0 max-sm:right-0 max-sm:left-0 max-sm:z-50 max-sm:w-full max-sm:border-b max-sm:border-white/10 max-sm:p-4 max-sm:backdrop-blur-lg md:relative md:opacity-100'
 			: 'pointer-events-none w-0 opacity-0'}"
 	>
+		<button
+			onclick={closeSearch}
+			class="cursor-pointer text-white md:hidden"
+			aria-label="Close search bar"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="size-4 fill-white">
+				<path
+					d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+					fill="currentColor"
+				/>
+			</svg>
+		</button>
+
 		<input
 			bind:this={inputElement}
 			class="w-full cursor-auto rounded-lg border border-white bg-white/10 p-2 text-sm text-white focus:outline-none"
