@@ -13,7 +13,9 @@
 	<div class="mt-3 w-full">
 		<div class="flex flex-col items-center justify-center gap-1 text-wrap">
 			<p class="font-semibold text-white lg:text-lg">{actor.name}</p>
-			<p class=" text-sm text-gray-400">as {actor.character}</p>
+			{#if actor.character}
+				<p class=" text-sm text-gray-400">as {actor.character}</p>
+			{/if}
 		</div>
 	</div>
 </div>
