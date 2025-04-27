@@ -95,7 +95,7 @@
 
 							{#if i === activeIndex}
 								<a
-									aria-label="Link to movie"
+									aria-label="Link to view movie details"
 									href={`/movies/${movie.id}`}
 									class="group absolute inset-0 flex w-full items-center justify-center rounded-md bg-black/0 transition-all duration-200 ease-in-out hover:bg-black/70"
 								>
@@ -137,15 +137,21 @@
 	}
 
 	.embla__slide {
-		flex: 0 0 80%; /* Makes slides take 80% of the screen on mobile */
-		max-width: 280px; /* Prevents them from getting too large on wider screens */
+		flex: 0 0 80%;
+		max-width: 280px;
 		position: relative;
 		box-sizing: border-box;
 	}
 
 	@media (min-width: 768px) {
 		.embla__slide {
-			flex: 0 0 240px; /* Standard size for larger screens */
+			flex: 0 0 240px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.embla__slide {
+			flex: 0 0 192px;
 		}
 	}
 
