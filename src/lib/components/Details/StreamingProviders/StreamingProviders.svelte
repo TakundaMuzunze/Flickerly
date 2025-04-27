@@ -6,7 +6,7 @@
 </script>
 
 {#if providers?.GB?.flatrate || providers?.GB?.rent}
-	<div class="text-main-btn mt-2 flex flex-col gap-3">
+	<div class="text-main-btn flex flex-col gap-3">
 		<p class="font-semibold">Available to stream or rent on:</p>
 		<ul class="flex flex-wrap gap-2">
 			{#each providers.GB.flatrate || [] as provider}

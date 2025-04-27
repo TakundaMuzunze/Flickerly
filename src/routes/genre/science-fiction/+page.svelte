@@ -13,13 +13,15 @@
 
 	onMount(async () => {
 		await fetchMovies('878', 'popularity');
+
+		document.title = 'Science Fiction Movies | Flickerly';
 	});
 
 	// export let data;
 </script>
 
 <section
-	class="min-w-screen-2xl flex flex-col items-start justify-start gap-8 p-5 pt-[8rem] xl:p-10 xl:pt-[10rem]"
+	class="min-w-screen-2xl flex flex-col items-start justify-start gap-8 p-5 xl:p-10 xl:pt-[10rem]"
 >
 	<div class="space-y-2">
 		<h2 class="relative text-xl font-semibold text-white md:text-2xl">Science Fiction Movies</h2>

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
 	import MovieCard from '../MovieCard/MovieCard.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -7,9 +6,9 @@
 </script>
 
 <div
-	class="grid w-full grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+	class="grid w-full grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-4 md:gap-5 xl:grid-cols-6 xl:gap-x-0 2xl:grid-cols-8"
 >
-	{#each $movieStore.movies as movie (movie.id)}
+	{#each movies as movie (movie.id)}
 		<div in:fade={{ duration: 200 }}>
 			<MovieCard {movie} showGenre={true} {releaseDate} />
 		</div>

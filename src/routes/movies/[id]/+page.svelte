@@ -3,17 +3,19 @@
 	import CastGrid from '$lib/components/Details/Cast/CastGrid.svelte';
 	import DetailsLayout from '$lib/components/Details/DetailsHero/DetailsLayout.svelte';
 	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
-	import MovieMeta from '$lib/components/Details/MovieMeta/MovieMeta.svelte';
 	import Poster from '$lib/components/Hero/Poster/Poster.svelte';
-	import MovieGrid from '$lib/components/MovieGrid/MovieGrid.svelte';
 	import Similar from '$lib/components/SimilarSection/Similar.svelte';
-	import Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
+	import { onMount } from 'svelte';
 
 	const { data } = $props();
 
 	const trailer = $derived(data.trailer);
 	const cast = $derived(data.cast);
 	const selectedMovie = $derived({ ...data.movie, providers: data.providers });
+
+	$effect(() => {
+		document.title = `${selectedMovie.title} | Flickerly`;
+	});
 </script>
 
 <DetailsLayout backgroundImage={selectedMovie.backdrop_path}>

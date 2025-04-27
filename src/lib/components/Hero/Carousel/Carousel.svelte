@@ -95,20 +95,19 @@
 
 							{#if i === activeIndex}
 								<a
-									aria-label="Link to movie"
+									aria-label="Link to view movie details"
 									href={`/movies/${movie.id}`}
-									class="group absolute inset-0 flex w-full items-center justify-center rounded-md bg-black/0 transition-all duration-200 ease-in-out hover:bg-black/60"
+									class="group absolute inset-0 flex w-full items-center justify-center rounded-md bg-black/0 transition-all duration-200 ease-in-out hover:bg-black/70"
 								>
 									<svg
 										class="size-16 opacity-0 transition-all group-hover:opacity-100"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 512 512"
+										viewBox="0 0 576 512"
 										fill="white"
+										><path
+											d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"
+										/></svg
 									>
-										<path
-											d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"
-										/>
-									</svg>
 								</a>
 							{/if}
 						</div>
@@ -138,15 +137,21 @@
 	}
 
 	.embla__slide {
-		flex: 0 0 80%; /* Makes slides take 80% of the screen on mobile */
-		max-width: 280px; /* Prevents them from getting too large on wider screens */
+		flex: 0 0 80%;
+		max-width: 280px;
 		position: relative;
 		box-sizing: border-box;
 	}
 
 	@media (min-width: 768px) {
 		.embla__slide {
-			flex: 0 0 240px; /* Standard size for larger screens */
+			flex: 0 0 240px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.embla__slide {
+			flex: 0 0 192px;
 		}
 	}
 

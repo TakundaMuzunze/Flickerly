@@ -19,7 +19,6 @@
 </script>
 
 {#if isOpen}
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div
 		tabindex="0"
 		role="button"
@@ -30,8 +29,9 @@
 		<div
 			tabindex="0"
 			role="button"
-			class="bg-body-colour relative w-full max-w-76 rounded-lg p-10 md:max-w-2xl lg:max-w-3xl"
+			class="bg-body-colour relative w-full max-w-84 rounded-lg p-4 md:max-w-2xl md:p-10 lg:max-w-3xl"
 			onclick={(e) => e.stopPropagation()}
+			onkeydown={handleKeydown}
 		>
 			<button
 				class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-white"
@@ -52,10 +52,14 @@
 			{:else}
 				<div class="flex flex-col items-center justify-center gap-4 p-8 text-center">
 					<svg class="size-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2z"/>
+						<path
+							d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2z"
+						/>
 					</svg>
 					<h3 class="text-xl font-semibold text-white">No Trailer Available</h3>
-					<p class="text-gray-400">We couldn't find a trailer for this movie. Check back later or explore other movies.</p>
+					<p class="text-gray-400">
+						We couldn't find a trailer for this movie. Check back later or explore other movies.
+					</p>
 				</div>
 			{/if}
 		</div>
