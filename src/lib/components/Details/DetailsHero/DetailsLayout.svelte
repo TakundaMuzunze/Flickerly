@@ -8,7 +8,7 @@
 		? `url(https://image.tmdb.org/t/p/original${backgroundImage})`
 		: 'none'}"
 >
-	<div class="absolute inset-0 bg-black/40"></div>
+	<div class="absolute inset-0 bg-black/50"></div>
 
 	<div class="relative z-10 flex w-full max-w-7xl flex-col items-start justify-evenly p-5">
 		<div class="grid w-full grid-cols-1 md:grid-cols-12 md:gap-8">

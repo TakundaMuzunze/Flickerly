@@ -7,7 +7,7 @@
 
 {#if providers?.GB?.flatrate || providers?.GB?.rent}
 	<div class="text-main-btn flex flex-col gap-3">
-		<p class="font-semibold">Available to stream or rent on:</p>
+		<p class="font-semibold md:text-lg">Available to stream or rent on:</p>
 		<ul class="flex flex-wrap gap-2">
 			{#each providers.GB.flatrate || [] as provider}
 				<a
@@ -32,7 +32,7 @@
 		</ul>
 	</div>
 {:else}
-	<p class="text-main-btn w-fit font-semibold">No streaming options found in the UK.</p>
+	<p class="text-main-btn w-fit font-semibold md:text-lg">No streaming options found in the UK.</p>
 	<a
 		href={googleWatchLink}
 		target="_blank"
