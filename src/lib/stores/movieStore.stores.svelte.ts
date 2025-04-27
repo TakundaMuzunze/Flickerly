@@ -2,7 +2,6 @@ import type Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
 import type { Movie } from '$lib/types/movie';
 import { writable, get } from 'svelte/store';
 
-console.log('Environment variables:', import.meta.env);
 const TMDB_API_KEY = import.meta.env.TMDB_KEY;
 
 export const movieStore = writable<{
