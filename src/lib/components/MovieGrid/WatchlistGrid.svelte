@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="grid w-full grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+	class="grid w-full grid-cols-2 gap-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
 >
 	{#each movies as movie (movie.id)}
 		<div in:fade={{ duration: 200 }}>
