@@ -11,7 +11,7 @@
 		class="aspect-square rounded-full object-cover object-center"
 	/>
 	<div class="mt-3 w-full">
-		<div class="flex flex-col items-center justify-center gap-1 text-wrap">
+		<div class="flex flex-col items-center justify-center gap-1 text-center text-wrap">
 			<p class="font-semibold text-white lg:text-lg">{actor.name}</p>
 			{#if actor.character}
 				<p class=" text-sm text-gray-400">as {actor.character}</p>
