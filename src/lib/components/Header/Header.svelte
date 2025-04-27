@@ -15,7 +15,7 @@
 </script>
 
 <header
-	class="fixed top-0 z-50 flex w-full items-center justify-between px-10 py-5 text-white backdrop-blur-lg"
+	class="min-w-screen-2xl fixed top-0 z-50 flex w-full items-center justify-between p-5 text-white backdrop-blur-lg 2xl:px-10"
 >
 	<a href="/" class="text-2xl font-semibold md:text-3xl">Flickerly</a>
 
