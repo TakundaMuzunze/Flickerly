@@ -61,18 +61,19 @@
 	<div class="flex w-full max-w-6xl items-center justify-center md:max-w-4xl lg:justify-evenly">
 		<button
 			onclick={goToPrevious}
-			class=" mr-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
+			class=" mr-3 aspect-square size-10 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black"
 			aria-label="Previous slide"
 		>
 			←
 		</button>
 
-		<div class="relative w-full">
+		<div aria-label="Movie carousel" class="relative w-full">
 			<div bind:this={emblaNode} class="embla overflow-hidden py-5">
 				<div class="embla__container flex w-full gap-2 md:gap-4">
 					{#each movies as movie, i}
 						<div
 							role="button"
+							aria-label="Carousel Slide"
 							tabindex="0"
 							class={`embla__slide transition-transform ${
 								i === activeIndex ? 'cursor-pointer opacity-100' : 'pointer-events-none opacity-20'
@@ -118,7 +119,7 @@
 
 		<button
 			onclick={goToNextSlide}
-			class=" ml-3 cursor-pointer rounded-2xl bg-black/60 px-4 py-2 text-white transition-colors hover:bg-black/80"
+			class=" ml-3 aspect-square size-10 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black"
 			aria-label="Next slide"
 		>
 			→
