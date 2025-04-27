@@ -12,5 +12,4 @@ if (browser) {
 	watchlist.subscribe((value) => {
 		localStorage.setItem('watchlist', JSON.stringify(value));
 	});
-	console.log('the list: ', watchlist);
 }

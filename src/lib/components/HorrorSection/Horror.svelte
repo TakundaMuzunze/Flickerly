@@ -6,9 +6,7 @@
 	export let horrorMovies: Movie[];
 </script>
 
-<section
-	class="min-w-screen-2xl flex flex-col items-start justify-start gap-4 p-5 pt-[8rem] xl:p-10"
->
+<section class="min-w-screen-2xl flex flex-col items-start justify-start gap-4 p-5 xl:p-10">
 	<div in:fly|global={{ y: 50, duration: 650 }} class="flex w-full items-center justify-between">
 		<div class="flex flex-col gap-2">
 			<h2 class="relative text-xl font-semibold text-white md:text-2xl">Horror Movies</h2>

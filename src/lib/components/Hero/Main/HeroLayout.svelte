@@ -12,7 +12,7 @@
 	<div class="absolute inset-0 bg-black/80"></div>
 
 	<div
-		class="relative z-10 flex w-full max-w-7xl flex-col items-center justify-center gap-5 md:flex-row lg:gap-10"
+		class="relative z-10 flex w-full max-w-7xl flex-col items-center justify-center gap-5 max-md:items-start md:flex-row lg:gap-10"
 	>
 		<div
 			class="flex h-full min-w-[250px] flex-col items-start justify-center gap-5 max-md:px-10 md:w-[35%]"

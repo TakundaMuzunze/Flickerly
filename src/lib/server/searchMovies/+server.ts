@@ -15,16 +15,21 @@ let lastCacheUpdate = 0;
 const CACHE_DURATION = 5 * 60 * 1000;
 
 async function fetchMoviesByQuery(query: string): Promise<Movie[]> {
-	const response = await fetch(
-		`${TMDB_API_URL}/search/movie?api_key=${TMDB_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`
-	);
+	try {
+		const response = await fetch(
+			`${TMDB_API_URL}/search/movie?api_key=${TMDB_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`
+		);
 
-	if (!response.ok) {
-		throw new Error('Failed to fetch search results');
+		if (!response.ok) {
+			throw new Error(`TMDB API error: ${response.status}`);
+		}
+
+		const data: TMDBResponse = await response.json();
+		return processMovieData(data.results);
+	} catch (error) {
+		console.error('Error in fetchMoviesByQuery:', error);
+		return [];
 	}
-
-	const data: TMDBResponse = await response.json();
-	return data.results;
 }
 
 async function fetchMoviePool(): Promise<Movie[]> {
@@ -33,44 +38,50 @@ async function fetchMoviePool(): Promise<Movie[]> {
 		return moviePoolCache;
 	}
 
-	const pages = [1, 2, 3, 4, 5];
-	const responses = await Promise.all(
-		pages.map((page) =>
-			fetch(`${TMDB_API_URL}/movie/popular?api_key=${TMDB_KEY}&language=en-US&page=${page}`).then(
-				(res) => res.json()
+	try {
+		const pages = [1, 2, 3, 4, 5];
+		const responses = await Promise.all(
+			pages.map((page) =>
+				fetch(`${TMDB_API_URL}/movie/popular?api_key=${TMDB_KEY}&language=en-US&page=${page}`).then(
+					(res) => res.json()
+				)
 			)
-		)
-	);
+		);
 
-	// Combine and deduplicate movies
-	const allMovies = responses.flatMap((response: TMDBResponse) => response.results);
-	const uniqueMovies = Array.from(new Map(allMovies.map((movie) => [movie.id, movie])).values());
+		// Combine and deduplicate movies
+		const allMovies = responses.flatMap((response: TMDBResponse) => response.results);
+		const uniqueMovies = Array.from(new Map(allMovies.map((movie) => [movie.id, movie])).values());
 
-	// Update cache
-	moviePoolCache = uniqueMovies;
-	lastCacheUpdate = now;
+		// Update cache
+		moviePoolCache = uniqueMovies;
+		lastCacheUpdate = now;
 
-	return uniqueMovies;
+		return uniqueMovies;
+	} catch (error) {
+		console.error('Error in fetchMoviePool:', error);
+		return [];
+	}
 }
 
 export async function searchMovies(query: string): Promise<Movie[]> {
+	if (!query.trim()) {
+		return [];
+	}
+
 	try {
 		// First try exact search
 		const exactMatches = await fetchMoviesByQuery(query);
-
+		
 		if (exactMatches.length > 0) {
-			return processMovieData(exactMatches);
+			return exactMatches;
 		}
 
-		// If no exact matches, get movie pool and try fuzzy search
+		// If no exact matches, try fuzzy search
 		const moviePool = await fetchMoviePool();
-
 		const processedMovies = processMovieData(moviePool);
-		const fuzzyResults = fuzzySearchMovies(processedMovies, query);
-
-		return fuzzyResults;
+		return fuzzySearchMovies(processedMovies, query);
 	} catch (error) {
-		console.error('Error searching movies:', error);
-		throw error;
+		console.error('Error in searchMovies:', error);
+		return [];
 	}
 }

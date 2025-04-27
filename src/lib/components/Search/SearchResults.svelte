@@ -4,7 +4,7 @@
 	export let data;
 </script>
 
-<div class="w-full">
+<div class="min-w-screen-2xl flex flex-col items-start justify-start gap-4 p-5 pt-[8rem]">
 	{#if data.error}
 		<div class="mb-3 md:mb-6">
 			<h3 class="text-xl font-semibold text-white md:text-2xl">Search Error</h3>

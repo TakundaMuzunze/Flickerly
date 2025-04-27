@@ -2,10 +2,15 @@
 	import WatchlistGrid from '$lib/components/MovieGrid/WatchlistGrid.svelte';
 	import { watchlist } from '$lib/stores/watchlist.stores.svelte';
 	import type { Movie } from '$lib/types/movie';
+	import { onMount } from 'svelte';
 
 	let movies: Movie[] = [];
 
 	$: movies = $watchlist;
+
+	onMount(() => {
+		document.title = 'My Watchlist | Flickerly';
+	});
 </script>
 
 <section
