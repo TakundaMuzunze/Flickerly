@@ -15,7 +15,7 @@
 	});
 </script>
 
-<section class="pt-[8rem]">
+<section class="pt-[5rem] 2xl:pt-[8rem]">
 	<Action actionMovies={data.actionMovies} />
 	<Comedy comedyMovies={data.comedyMovies} />
 	<Drama dramaMovies={data.dramaMovies} />

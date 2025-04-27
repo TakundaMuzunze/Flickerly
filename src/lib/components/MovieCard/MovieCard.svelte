@@ -32,8 +32,8 @@
 	});
 </script>
 
-<a href={`/movies/${movie.id}`}>
-	<div class="relative w-full max-w-48 cursor-pointer rounded-lg 2xl:w-54">
+<div class="flex max-w-48 flex-col">
+	<a href={`/movies/${movie.id}`} class="inline-block">
 		<div class="relative">
 			<img
 				class="movie aspect-[2/3] w-full rounded-lg"
@@ -57,17 +57,17 @@
 				</svg>
 			</div>
 		</div>
+	</a>
 
-		<!-- {#if showGenre}
-			<div class="mt-3 w-full">
-				<div class="flex flex-col items-start justify-center gap-2 text-wrap">
-					<p class="font-semibold text-white">{movie.title}</p>
-					<p class=" text-sm text-gray-400">{genres}</p>
-				</div>
-				{#if releaseDate}
-					<p class="mt-2 text-sm text-gray-400 italic">({movie.release_date})</p>
-				{/if}
+	<!-- {#if showGenre}
+		<div class="mt-3 w-full">
+			<div class="flex flex-col items-start justify-center gap-2 text-wrap">
+				<p class="font-semibold text-white">{movie.title}</p>
+				<p class="text-sm text-gray-400">{genres}</p>
 			</div>
-		{/if} -->
-	</div>
-</a>
+			{#if releaseDate}
+				<p class="mt-2 text-sm text-gray-400 italic">({movie.release_date})</p>
+			{/if}
+		</div>
+	{/if} -->
+</div>
