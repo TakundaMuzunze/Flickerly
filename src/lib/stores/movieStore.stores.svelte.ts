@@ -10,15 +10,19 @@ export const movieStore = writable<{
 	trailer: Trailer | null;
 	sortBy: 'popularity' | 'rating' | 'release_desc' | 'release_asc';
 	currentGenreId: string | null;
+	currentPage: number;
+	totalPages: number;
 }>({
 	movies: [],
 	selectedMovie: null,
 	trailer: null,
 	sortBy: 'popularity',
-	currentGenreId: null
+	currentGenreId: null,
+	currentPage: 1,
+	totalPages: 1
 });
 
-type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
+export type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
 
 const sortOptions: Record<SortOptionKey, string> = {
 	popularity: 'popularity.desc',
@@ -27,31 +31,47 @@ const sortOptions: Record<SortOptionKey, string> = {
 	release_asc: 'release_date.asc'
 };
 
-export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey) {
+export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey, page: number = 1) {
+	console.log('=== fetchMovies called ===');
+	console.log('Parameters:', { genreId, sortOptionKey, page });
+
 	const sortValue = sortOptions[sortOptionKey];
-	const url = `/api/genre/${genreId}?sortBy=${sortValue}`;
+	if (!sortValue) {
+		console.error('Invalid sort option key:', sortOptionKey);
+		throw new Error('Invalid sort option');
+	}
+
+	const url = `/api/genre/${genreId}?sortBy=${sortValue}&page=${page}`;
 
 	try {
+		console.log('Making API request...');
 		const response = await fetch(url);
+		console.log('Response status:', response.status);
+
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 
 		const data = await response.json();
+
 		if (data.error) {
 			throw new Error(data.error);
 		}
 
 		movieStore.update((store) => {
-			return {
+			const newStore = {
 				...store,
 				movies: data.results,
 				sortBy: sortOptionKey,
-				currentGenreId: genreId
+				currentGenreId: genreId,
+				currentPage: page,
+				totalPages: data.total_pages
 			};
+
+			return newStore;
 		});
 	} catch (error) {
-		console.error('Error fetching movies:', error);
+		console.error('Error in fetchMovies:', error);
 		throw error;
 	}
 }
@@ -59,7 +79,7 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey)
 export async function sortMovies(sortBy: SortOptionKey): Promise<void> {
 	const store = get(movieStore);
 	if (store.currentGenreId) {
-		await fetchMovies(store.currentGenreId, sortBy);
+		await fetchMovies(store.currentGenreId, sortBy, 1);
 	}
 }
 
