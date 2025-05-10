@@ -49,7 +49,7 @@
 >
 	<div class="space-y-2">
 		<h2 class="relative text-xl font-semibold text-white md:text-2xl">Top Rated Movies</h2>
-		<p class="text-gray-300 md:text-lg">{genreSubtitles.top_rated}</p>
+		<p class="text-gray-300 md:text-lg">{genreSubtitles.topRated}</p>
 		<FilterBar />
 	</div>
 
