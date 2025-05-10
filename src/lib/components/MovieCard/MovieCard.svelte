@@ -32,9 +32,9 @@
 	});
 </script>
 
-<div class="flex max-w-48 flex-col">
-	<a href={`/movies/${movie.id}`} class="inline-block">
-		<div class="relative">
+<div class="flex flex-col">
+	<a href={`/movies/${movie.id}`} class="inline-block w-full">
+		<div class="relative w-full">
 			<img
 				class="movie aspect-[2/3] w-full rounded-lg"
 				src={posterUrl}
@@ -44,7 +44,7 @@
 			/>
 
 			<div
-				class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-black/90 p-2 text-center text-wrap opacity-0 duration-300 hover:opacity-100"
+				class="absolute inset-0 z-10 flex w-full flex-col items-center justify-center gap-3 rounded-lg bg-black/90 p-2 text-center text-wrap opacity-0 duration-300 hover:opacity-100"
 			>
 				<p class="font-semibold text-white">{movie.title}</p>
 				<p class="text-sm text-gray-400">{genres}</p>
