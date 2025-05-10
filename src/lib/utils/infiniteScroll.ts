@@ -13,9 +13,11 @@ export async function handleScroll(
 	}
 
 	const scrollPosition = window.innerHeight + window.scrollY;
-	const threshold = document.documentElement.scrollHeight - 1000;
+	const totalHeight = document.documentElement.scrollHeight;
+	const scrollPercentage = (scrollPosition / totalHeight) * 100;
 
-	if (scrollPosition >= threshold) {
+	// Only trigger when we're at 90% of the total scroll height
+	if (scrollPercentage >= 90) {
 		try {
 			await fetchMovies(genreId, sortBy, currentPage + 1);
 		} catch (error) {

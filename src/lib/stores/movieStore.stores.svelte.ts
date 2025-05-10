@@ -4,6 +4,16 @@ import { writable, get } from 'svelte/store';
 
 const TMDB_API_KEY = import.meta.env.TMDB_KEY;
 
+const initialState = {
+	movies: [],
+	selectedMovie: null,
+	trailer: null,
+	sortBy: 'popularity' as const,
+	currentGenreId: null,
+	currentPage: 1,
+	totalPages: 1
+};
+
 export const movieStore = writable<{
 	movies: Movie[];
 	selectedMovie: Movie | null;
@@ -12,15 +22,7 @@ export const movieStore = writable<{
 	currentGenreId: string | null;
 	currentPage: number;
 	totalPages: number;
-}>({
-	movies: [],
-	selectedMovie: null,
-	trailer: null,
-	sortBy: 'popularity',
-	currentGenreId: null,
-	currentPage: 1,
-	totalPages: 1
-});
+}>(initialState);
 
 export type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
 
@@ -31,6 +33,10 @@ const sortOptions: Record<SortOptionKey, string> = {
 	release_asc: 'release_date.asc'
 };
 
+export function resetStore() {
+	movieStore.set(initialState);
+}
+
 export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey, page: number = 1) {
 	const sortValue = sortOptions[sortOptionKey];
 	if (!sortValue) {
@@ -38,7 +44,16 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 		throw new Error('Invalid sort option');
 	}
 
-	const url = `/api/genre/${genreId}?sortBy=${sortValue}&page=${page}`;
+	let url: string;
+	if (genreId === 'trending') {
+		url = `/api/movies/trending?page=${page}`;
+	} else if (genreId === 'top_rated') {
+		url = `/api/movies/top-rated?page=${page}`;
+	} else if (genreId === 'now_playing') {
+		url = `/api/movies/now-playing?page=${page}`;
+	} else {
+		url = `/api/genre/${genreId}?sortBy=${sortValue}&page=${page}`;
+	}
 
 	try {
 		const response = await fetch(url);
