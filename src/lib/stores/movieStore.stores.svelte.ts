@@ -32,9 +32,6 @@ const sortOptions: Record<SortOptionKey, string> = {
 };
 
 export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey, page: number = 1) {
-	console.log('=== fetchMovies called ===');
-	console.log('Parameters:', { genreId, sortOptionKey, page });
-
 	const sortValue = sortOptions[sortOptionKey];
 	if (!sortValue) {
 		console.error('Invalid sort option key:', sortOptionKey);
@@ -44,31 +41,24 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 	const url = `/api/genre/${genreId}?sortBy=${sortValue}&page=${page}`;
 
 	try {
-		console.log('Making API request...');
 		const response = await fetch(url);
-		console.log('Response status:', response.status);
 
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 
 		const data = await response.json();
-		console.log('API Response:', {
-			page,
-			totalPages: data.total_pages,
-			resultsCount: data.results.length
-		});
-
 		if (data.error) {
 			throw new Error(data.error);
 		}
 
 		movieStore.update((store) => {
 			// Filter out any duplicate movies by ID
-			const existingIds = new Set(store.movies.map(movie => movie.id));
-			const newMovies = page === 1 
-				? data.results 
-				: [...store.movies, ...data.results.filter((movie: Movie) => !existingIds.has(movie.id))];
+			const existingIds = new Set(store.movies.map((movie) => movie.id));
+			const newMovies =
+				page === 1
+					? data.results
+					: [...store.movies, ...data.results.filter((movie: Movie) => !existingIds.has(movie.id))];
 
 			const newStore = {
 				...store,

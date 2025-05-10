@@ -8,16 +8,7 @@ export async function handleScroll(
 	totalPages: number,
 	isLoading: boolean
 ) {
-	console.log('Scroll handler called:', {
-		isLoading,
-		currentPage,
-		totalPages,
-		scrollPosition: window.innerHeight + window.scrollY,
-		threshold: document.documentElement.scrollHeight - 1000
-	});
-
 	if (isLoading || currentPage >= totalPages) {
-		console.log('Not loading more:', { isLoading, currentPage, totalPages });
 		return;
 	}
 
@@ -25,11 +16,10 @@ export async function handleScroll(
 	const threshold = document.documentElement.scrollHeight - 1000;
 
 	if (scrollPosition >= threshold) {
-		console.log('Loading more movies...');
 		try {
 			await fetchMovies(genreId, sortBy, currentPage + 1);
 		} catch (error) {
 			console.error('Error loading more movies:', error);
 		}
 	}
-} 
+}

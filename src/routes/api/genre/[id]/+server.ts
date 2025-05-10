@@ -6,7 +6,6 @@ import { processMovieData } from '$lib/utils/setMovies';
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 export async function GET({ params, url }: RequestEvent) {
-	console.log('=== API Request Received ===');
 	const genreId = params.id;
 	const sortBy = url.searchParams.get('sortBy') || 'popularity.desc';
 	const page = url.searchParams.get('page') || '1';
