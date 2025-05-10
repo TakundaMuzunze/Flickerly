@@ -1,12 +1,45 @@
 <script lang="ts">
+	import { movieStore, resetStore } from '$lib/stores/movieStore.stores.svelte';
+	import { onMount } from 'svelte';
+	import { fetchMovies } from '$lib/stores/movieStore.stores.svelte';
 	import ResultsGrid from '$lib/components/MovieGrid/ResultsGrid.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
 	import FilterBar from '$lib/components/FilterBar/FilterBar.svelte';
-	import { onMount } from 'svelte';
-	export let data;
+	import { handleScroll } from '$lib/utils/infiniteScroll';
 
-	onMount(() => {
+	let movies = $movieStore.movies;
+	let selectedMovie = $movieStore.selectedMovie;
+	let trailer = $movieStore.trailer;
+	let sortBy = $movieStore.sortBy;
+	let currentPage = $movieStore.currentPage;
+	let totalPages = $movieStore.totalPages;
+	let isLoading = false;
+
+	$: {
+		movies = $movieStore.movies;
+		selectedMovie = $movieStore.selectedMovie;
+		trailer = $movieStore.trailer;
+		sortBy = $movieStore.sortBy;
+		currentPage = $movieStore.currentPage;
+		totalPages = $movieStore.totalPages;
+	}
+
+	onMount(async () => {
+		resetStore();
+		await fetchMovies('trending', 'popularity', 1);
 		document.title = 'Trending Movies | Flickerly';
+	});
+
+	// Add scroll event listener
+	onMount(() => {
+		window.addEventListener('scroll', () =>
+			handleScroll('trending', sortBy, currentPage, totalPages, isLoading)
+		);
+		return () => {
+			window.removeEventListener('scroll', () =>
+				handleScroll('trending', sortBy, currentPage, totalPages, isLoading)
+			);
+		};
 	});
 </script>
 
@@ -15,8 +48,21 @@
 >
 	<div class="space-y-2">
 		<h2 class="relative text-xl font-semibold text-white md:text-2xl">Trending Movies</h2>
-		<p class="text-gray-300 md:text-lg">{genreSubtitles.topRated}</p>
+		<p class="text-gray-300 md:text-lg">{genreSubtitles.trending}</p>
 		<FilterBar />
 	</div>
-	<ResultsGrid movies={data.trendingMovies} releaseDate={true} />
+
+	{#if movies.length === 0 && isLoading}
+		<div class="flex h-64 w-full items-center justify-center">
+			<div class="text-white">Loading...</div>
+		</div>
+	{:else}
+		<ResultsGrid {movies} releaseDate={true} />
+	{/if}
+
+	{#if isLoading && movies.length > 0}
+		<div class="flex h-32 w-full items-center justify-center">
+			<div class="text-white">Loading more movies...</div>
+		</div>
+	{/if}
 </section>
