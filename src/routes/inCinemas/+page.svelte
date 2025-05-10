@@ -48,7 +48,7 @@
 	class="min-w-screen-2xl flex flex-col items-start justify-start gap-8 p-5 pt-[8rem] xl:p-10 xl:pt-[10rem]"
 >
 	<div class="space-y-2">
-		<h2 class="relative text-xl font-semibold text-white md:text-2xl">Movies in Cinemas Now</h2>
+		<h2 class="relative text-xl font-semibold text-white md:text-2xl">In Cinemas Now</h2>
 		<p class="text-gray-300 md:text-lg">{genreSubtitles.nowPlaying}</p>
 		<FilterBar />
 	</div>
