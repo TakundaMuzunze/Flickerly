@@ -5,20 +5,18 @@ import { processMovieData } from '$lib/utils/setMovies';
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
-export async function GET({ params, url }: RequestEvent) {
-	const genreId = params.id;
-	const sortBy = url.searchParams.get('sortBy') || 'popularity.desc';
+export async function GET({ url }: RequestEvent) {
 	const page = url.searchParams.get('page') || '1';
 
 	try {
-		const tmdbUrl = `${TMDB_API_URL}/discover/movie?with_genres=${genreId}&sort_by=${sortBy}&api_key=${TMDB_KEY}&page=${page}`;
+		const tmdbUrl = `${TMDB_API_URL}/movie/now_playing?api_key=${TMDB_KEY}&page=${page}`;
 
 		const response = await fetch(tmdbUrl);
 
 		const data = await response.json();
 
 		if (!response.ok) {
-			throw new Error('Failed to fetch movies');
+			throw new Error('Failed to fetch now playing movies');
 		}
 
 		const processedResults = processMovieData(data.results);
@@ -30,6 +28,6 @@ export async function GET({ params, url }: RequestEvent) {
 		});
 	} catch (error) {
 		console.error('API Error:', error);
-		return json({ error: 'Failed to fetch movies' }, { status: 500 });
+		return json({ error: 'Failed to fetch now playing movies' }, { status: 500 });
 	}
-}
+} 
