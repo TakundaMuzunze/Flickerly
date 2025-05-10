@@ -53,15 +53,26 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 		}
 
 		const data = await response.json();
+		console.log('API Response:', {
+			page,
+			totalPages: data.total_pages,
+			resultsCount: data.results.length
+		});
 
 		if (data.error) {
 			throw new Error(data.error);
 		}
 
 		movieStore.update((store) => {
+			// Filter out any duplicate movies by ID
+			const existingIds = new Set(store.movies.map(movie => movie.id));
+			const newMovies = page === 1 
+				? data.results 
+				: [...store.movies, ...data.results.filter((movie: Movie) => !existingIds.has(movie.id))];
+
 			const newStore = {
 				...store,
-				movies: data.results,
+				movies: newMovies,
 				sortBy: sortOptionKey,
 				currentGenreId: genreId,
 				currentPage: page,

@@ -12,7 +12,7 @@ export async function GET({ params, url }: RequestEvent) {
 	const page = url.searchParams.get('page') || '1';
 
 	try {
-		const tmdbUrl = `${TMDB_API_URL}/discover/movie?with_genres=${genreId}&sort_by=${sortBy}&api_key=${TMDB_KEY}&page=${page}&per_page=24`;
+		const tmdbUrl = `${TMDB_API_URL}/discover/movie?with_genres=${genreId}&sort_by=${sortBy}&api_key=${TMDB_KEY}&page=${page}`;
 
 		const response = await fetch(tmdbUrl);
 
