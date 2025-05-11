@@ -17,17 +17,10 @@
 </script>
 
 <HeroLayout backgroundImage={selectedMovie?.backdrop_path} showCarousel={true}>
-	<!-- Inject Title Component -->
-	<div slot="title">
-		<HeroTitle />
-	</div>
-
-	<!-- Inject Movie Details -->
 	<div slot="details">
 		<MovieDetails {selectedMovie} {trailer} />
 	</div>
 
-	<!-- Inject Carousel -->
 	<div slot="carousel">
 		<Carousel {movies} bind:selectedMovie />
 	</div>
