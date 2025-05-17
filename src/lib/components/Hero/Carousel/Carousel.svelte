@@ -57,11 +57,11 @@
 	});
 </script>
 
-<div class="flex w-full justify-center py-5">
-	<div class="flex w-full max-w-6xl items-center justify-center md:max-w-4xl lg:justify-evenly">
+<div class="flex w-full justify-center p-5">
+	<div class="flex w-full items-center justify-center gap-4">
 		<button
 			onclick={goToPrevious}
-			class=" mr-3 aspect-square size-10 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black"
+			class="z-20 aspect-square size-6 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black max-md:text-sm md:size-10"
 			aria-label="Previous slide"
 		>
 			←
@@ -76,7 +76,9 @@
 							aria-label="Carousel Slide"
 							tabindex="0"
 							class={`embla__slide transition-transform ${
-								i === activeIndex ? 'cursor-pointer opacity-100' : 'pointer-events-none opacity-20'
+								i === activeIndex
+									? 'cursor-pointer opacity-100'
+									: 'pointer-events-none cursor-not-allowed opacity-15'
 							}`}
 							class:selected={i === activeIndex}
 							onclick={() => i === activeIndex && handleMovieSelect(movie, i)}
@@ -119,7 +121,7 @@
 
 		<button
 			onclick={goToNextSlide}
-			class=" ml-3 aspect-square size-10 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black"
+			class="z-20 aspect-square size-6 cursor-pointer rounded-full bg-white/25 text-white backdrop-blur-lg transition-all duration-300 ease-in-out hover:scale-105 hover:bg-white hover:text-black max-md:text-sm md:size-10"
 			aria-label="Next slide"
 		>
 			→
@@ -152,7 +154,7 @@
 
 	@media (max-width: 768px) {
 		.embla__slide {
-			flex: 0 0 192px;
+			flex: 0 0 160px;
 		}
 	}
 
@@ -160,7 +162,7 @@
 		opacity: 1;
 		/* border: 2px solid #3d5a80;
 		border-radius: 6px; */
-		transform: translateY(-15px);
+		transform: translateY(-20px);
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
