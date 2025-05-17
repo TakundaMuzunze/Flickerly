@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ageCertificationImages } from '$lib/constants/ageRatings';
+
 	export let isOpen: boolean;
 	export let onClose: () => void;
 	export let title: string;
@@ -6,6 +8,7 @@
 	export let content: string;
 	export let director: string;
 	export let productionCompanies: string;
+	export let certification: string;
 
 	function handleBackdropClick(event: MouseEvent) {
 		if (event.target === event.currentTarget) {
@@ -53,7 +56,16 @@
 			</button>
 
 			<div class="mb-4 flex flex-col gap-2">
-				<h2 class="text-2xl font-bold">{title}</h2>
+				<div class="flex flex-row items-center gap-2">
+					<h2 class="text-2xl font-bold">{title}</h2>
+					{#if certification}
+						<img
+							src={ageCertificationImages[certification] || null}
+							alt="Certification for {title}"
+							class="size-6"
+						/>
+					{/if}
+				</div>
 				{#if subtitle}
 					<p class="text-gray-400">{subtitle}</p>
 				{/if}

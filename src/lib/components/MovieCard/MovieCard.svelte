@@ -33,7 +33,7 @@
 </script>
 
 <div class="flex flex-col">
-	<a href={`/movies/${movie.id}`} class="inline-block w-full">
+	<a href={`/movies/${movie.id}`} class="inline-block w-full cursor-default">
 		<div class="relative w-full">
 			<img
 				class="movie aspect-[2/3] w-full rounded-lg"

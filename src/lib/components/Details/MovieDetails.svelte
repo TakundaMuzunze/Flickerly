@@ -17,6 +17,7 @@
 
 	$: movieDirector = getDirector(selectedMovie.credits?.crew);
 	$: productionCompanies = getProductionCompany(selectedMovie.production_companies);
+	$: certification = selectedMovie.certification;
 
 	function closeModal() {
 		isModalOpen = false;
@@ -53,6 +54,7 @@
 	content={selectedMovie.overview}
 	director={movieDirector}
 	{productionCompanies}
+	{certification}
 />
 
 <Trailer {trailer} isOpen={isTrailerModalOpen} onClose={() => (isTrailerModalOpen = false)} />
