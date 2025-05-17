@@ -7,10 +7,10 @@
 </script>
 
 <div
-	class="flex w-full gap-4 overflow-x-auto scroll-smooth whitespace-nowrap md:gap-6 2xl:grid 2xl:grid-cols-8 2xl:gap-0"
+	class="flex w-full gap-3 overflow-x-auto scroll-smooth whitespace-nowrap lg:gap-6 2xl:grid 2xl:grid-cols-8 2xl:gap-0"
 >
 	{#each limit === 6 ? movies.slice(0, 8) : limit ? movies.slice(0, limit) : movies as movie}
-		<div class="max-w-36 shrink-0 md:max-w-52">
+		<div class="max-w-28 shrink-0 md:max-w-40 xl:max-w-52">
 			<MovieCard {movie} showGenre={true} {releaseDate} />
 		</div>
 	{/each}

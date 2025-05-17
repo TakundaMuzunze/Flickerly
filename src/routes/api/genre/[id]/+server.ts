@@ -10,16 +10,22 @@ export async function GET({ params, url }: RequestEvent) {
 	const sortBy = url.searchParams.get('sortBy') || 'popularity.desc';
 	const page = url.searchParams.get('page') || '1';
 
+	const today = new Date().toISOString().split('T')[0];
+
+	const tmdbUrl =
+		`${TMDB_API_URL}/discover/movie?` +
+		`with_genres=${genreId}` +
+		`&sort_by=${sortBy}` +
+		`&with_runtime.gte=60` +
+		`&release_date.lte=${today}` +
+		`&api_key=${TMDB_KEY}` +
+		`&page=${page}`;
+
 	try {
-		const tmdbUrl = `${TMDB_API_URL}/discover/movie?with_genres=${genreId}&sort_by=${sortBy}&api_key=${TMDB_KEY}&page=${page}`;
-
 		const response = await fetch(tmdbUrl);
-
 		const data = await response.json();
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch movies');
-		}
+		if (!response.ok) throw new Error('Failed to fetch movies');
 
 		const processedResults = processMovieData(data.results);
 

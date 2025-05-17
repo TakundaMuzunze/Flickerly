@@ -19,10 +19,6 @@
 </script>
 
 <DetailsLayout backgroundImage={selectedMovie.backdrop_path}>
-	<div slot="poster">
-		<Poster {selectedMovie} />
-	</div>
-
 	<div slot="details">
 		<MovieDetails {selectedMovie} {trailer} />
 	</div>

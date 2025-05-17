@@ -5,5 +5,5 @@
 <div
 	class="bg-body-colour border-whte mt-auto flex w-full items-center justify-center border-t-2 p-5 font-normal text-white"
 >
-	&copy; {date} Cinescope | All rights reserved
+	&copy; {date} Flickerly | All rights reserved
 </div>
