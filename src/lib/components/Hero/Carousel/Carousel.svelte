@@ -76,9 +76,7 @@
 							aria-label="Carousel Slide"
 							tabindex="0"
 							class={`embla__slide transition-transform ${
-								i === activeIndex
-									? 'cursor-pointer opacity-100'
-									: 'pointer-events-none cursor-not-allowed opacity-15'
+								i === activeIndex ? 'cursor-pointer opacity-100' : 'pointer-events-none opacity-20'
 							}`}
 							class:selected={i === activeIndex}
 							onclick={() => i === activeIndex && handleMovieSelect(movie, i)}
@@ -89,11 +87,13 @@
 							}}
 						>
 							<img
-								class="w-full rounded-md shadow-lg"
+								class="w-full rounded-md shadow-lg max-md:max-w-40 md:max-w-60"
 								src={movie.posterUrl}
 								alt={movie.title || 'Movie poster'}
-								width="750"
-								height="500"
+								width="240"
+								height="360"
+								decoding="async"
+								loading={i === 0 ? undefined : 'lazy'}
 							/>
 
 							{#if i === activeIndex}
