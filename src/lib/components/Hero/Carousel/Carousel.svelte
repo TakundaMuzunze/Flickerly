@@ -13,7 +13,7 @@
 	const options: EmblaOptionsType = {
 		align: 'start',
 		slidesToScroll: 1,
-		containScroll: 'trimSnaps',
+		containScroll: 'keepSnaps',
 		dragFree: false,
 		loop: false,
 		skipSnaps: false
