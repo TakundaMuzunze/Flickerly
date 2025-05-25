@@ -63,7 +63,6 @@
 
 <SocialModal
 	isOpen={isSocialModalOpen}
-	content={selectedMovie.overview}
 	movieTitle={selectedMovie.title}
 	movieId={selectedMovie.id}
 	onClose={() => (isSocialModalOpen = false)}
