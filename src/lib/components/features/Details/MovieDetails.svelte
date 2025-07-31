@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { getDirector } from '$lib/utils/movieCrew';
 	import { getProductionCompany } from '$lib/utils/productionCompanies';
-	import Modal from '../Modal/Modal.svelte';
 	import MovieMeta from './MovieMeta/MovieMeta.svelte';
 	import Trailer from '../TrailerComponent/Trailer.svelte';
 	import TrailerButton from './Buttons/TrailerButton.svelte';
 	import InfoButton from './Buttons/InfoButton.svelte';
 	import WatchlistButton from './Buttons/WatchlistButton.svelte';
 	import StreamingProviders from './StreamingProviders/StreamingProviders.svelte';
-	import SocialModal from '../Modal/SocialModal.svelte';
 	import ShareButton from './Buttons/ShareButton.svelte';
+	import Modal from '$lib/components/ui/Modals/Modal.svelte';
+	import SocialModal from '$lib/components/ui/Modals/SocialModal.svelte';
 
 	export let selectedMovie;
 	export let trailer;
