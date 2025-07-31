@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MovieCard from '../MovieCard/MovieCard.svelte';
+	import MovieCard from '$lib/components/ui/Cards/MovieCard.svelte';
 	import { fade } from 'svelte/transition';
 
 	export let movies: any[] = [];
