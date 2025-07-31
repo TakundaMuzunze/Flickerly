@@ -30,7 +30,6 @@
 		document.title = 'Trending Movies | Flickerly';
 	});
 
-	// Add scroll event listener
 	onMount(() => {
 		window.addEventListener('scroll', () =>
 			handleScroll('trending', sortBy, currentPage, totalPages, isLoading)

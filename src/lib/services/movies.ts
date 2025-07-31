@@ -4,7 +4,6 @@ import type { Movie } from '$lib/types/movie';
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
-// Genre IDs
 export const GENRES = {
 	action: 28,
 	comedy: 35,
@@ -16,7 +15,6 @@ export const GENRES = {
 	thriller: 53
 } as const;
 
-// Fetch popular movies (with full details)
 export async function fetchPopularMovies(): Promise<Movie[]> {
 	try {
 		const response = await fetch(
@@ -30,13 +28,14 @@ export async function fetchPopularMovies(): Promise<Movie[]> {
 		const data = await response.json();
 		const { results } = data;
 
-		// Fetch full details for each movie to get runtime and genres
 		const moviesWithDetails = await Promise.all(
 			results.map(async (movie: any) => {
 				const detailsResponse = await fetch(
 					`${TMDB_API_URL}/movie/${movie.id}?api_key=${TMDB_KEY}&language=en-US`
 				);
+
 				const details = await detailsResponse.json();
+
 				return { ...movie, ...details };
 			})
 		);
@@ -48,7 +47,6 @@ export async function fetchPopularMovies(): Promise<Movie[]> {
 	}
 }
 
-// Fetch movies by genre
 export async function fetchMoviesByGenre(genreId: number) {
 	try {
 		const [page1, page2, page3] = await Promise.all([
@@ -71,7 +69,6 @@ export async function fetchMoviesByGenre(genreId: number) {
 	}
 }
 
-// Fetch trending movies
 export async function fetchTrending() {
 	try {
 		const [page1, page2, page3] = await Promise.all([
@@ -94,7 +91,6 @@ export async function fetchTrending() {
 	}
 }
 
-// Fetch top rated movies
 export async function fetchTopRated() {
 	try {
 		const [page1, page2, page3] = await Promise.all([
@@ -117,7 +113,6 @@ export async function fetchTopRated() {
 	}
 }
 
-// Fetch in cinemas movies (now playing)
 export async function fetchInCinemas() {
 	try {
 		const [page1, page2, page3] = await Promise.all([
@@ -138,4 +133,4 @@ export async function fetchInCinemas() {
 		console.error('Error fetching in cinemas movies:', error);
 		return [];
 	}
-} 
+}

@@ -30,12 +30,10 @@
 		document.title = 'Movies in Cinemas Now | Flickerly';
 	});
 
-	// Create a single scroll handler function
 	function scrollHandler() {
 		handleScroll('now_playing', sortBy, currentPage, totalPages, isLoading);
 	}
 
-	// Add scroll event listener
 	onMount(() => {
 		window.addEventListener('scroll', scrollHandler);
 		return () => {

@@ -29,11 +29,14 @@
 		document.title = 'Action Movies | Flickerly';
 	});
 
-	// Add scroll event listener
 	onMount(() => {
-		window.addEventListener('scroll', () => handleScroll('28', sortBy, currentPage, totalPages, isLoading));
+		window.addEventListener('scroll', () =>
+			handleScroll('28', sortBy, currentPage, totalPages, isLoading)
+		);
 		return () => {
-			window.removeEventListener('scroll', () => handleScroll('28', sortBy, currentPage, totalPages, isLoading));
+			window.removeEventListener('scroll', () =>
+				handleScroll('28', sortBy, currentPage, totalPages, isLoading)
+			);
 		};
 	});
 </script>

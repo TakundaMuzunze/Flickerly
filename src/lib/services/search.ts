@@ -3,7 +3,6 @@ import { processMovieData } from '$lib/utils/setMovies';
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
-// Search movies
 export async function searchMovies(query: string) {
 	try {
 		if (!query.trim()) return [];
@@ -24,7 +23,6 @@ export async function searchMovies(query: string) {
 	}
 }
 
-// Fetch similar movies
 export async function fetchSimilarMovies(movieId: number) {
 	try {
 		const [page1, page2, page3] = await Promise.all([
@@ -45,4 +43,4 @@ export async function fetchSimilarMovies(movieId: number) {
 		console.error('Error fetching similar movies:', error);
 		return [];
 	}
-} 
+}
