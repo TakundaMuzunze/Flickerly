@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SearchResults from '$lib/components/Search/SearchResults.svelte';
+	import SearchResults from '$lib/components/features/Search/SearchResults.svelte';
 	import { onMount } from 'svelte';
 
 	export let data;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MovieCard from '../MovieCard/MovieCard.svelte';
+	import MovieCard from '$lib/components/ui/Cards/MovieCard.svelte';
 
 	export let movies: any[] = [];
 	export let releaseDate: boolean = false;
@@ -45,7 +45,6 @@
 		{/each}
 	</div>
 
-	<!-- Left Arrow -->
 	{#if showLeftArrow}
 		<div
 			class="absolute top-0 left-0 z-10 hidden h-full w-32 bg-gradient-to-r from-black/60 via-black/80 to-transparent transition-all duration-300 ease-out lg:block 2xl:hidden"
@@ -71,7 +70,6 @@
 		</div>
 	{/if}
 
-	<!-- Right Arrow -->
 	{#if showRightArrow}
 		<div
 			class="absolute top-0 right-0 z-10 hidden h-full w-32 bg-gradient-to-l from-black/60 via-black/80 to-transparent transition-all duration-300 ease-in-out lg:block 2xl:hidden"

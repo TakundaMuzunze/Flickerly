@@ -1,4 +1,4 @@
-import type Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
+import type Trailer from '$lib/components/features/TrailerComponent/Trailer.svelte';
 import type { Movie } from '$lib/types/movie';
 import { writable, get } from 'svelte/store';
 

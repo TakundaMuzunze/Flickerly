@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer/Footer.svelte';
-	import Header from '$lib/components/Header/Header.svelte';
+	import Footer from '$lib/components/layout/Footer/Footer.svelte';
+	import Header from '$lib/components/layout/Header/Header.svelte';
 	import toast, { Toaster } from 'svelte-hot-french-toast';
 	import { setGenres } from '$lib/utils/genres';
 	import { page } from '$app/stores';
@@ -12,7 +12,8 @@
 	setGenres(genres);
 
 	// Default meta tags
-	const description = 'Discover, track, and explore movies and TV shows with Flickerly. Create personalized watchlists and find where to stream your favorite content.';
+	const description =
+		'Discover, track, and explore movies and TV shows with Flickerly. Create personalized watchlists and find where to stream your favorite content.';
 	const keywords = 'movies, tv shows, watchlist, streaming, discover movies, movie recommendations';
 	const image = 'https://flickerly.netlify.app/og-image.jpg';
 	const canonicalUrl = `https://flickerly.netlify.app${$page.url.pathname}`;
@@ -40,7 +41,7 @@
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="/favicon.png" />
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" href="/favicon.png" />
 
 	<!-- Additional Meta Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

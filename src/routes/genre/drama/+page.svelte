@@ -2,8 +2,8 @@
 	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
 	import { onMount } from 'svelte';
 	import { fetchMovies } from '$lib/stores/movieStore.stores.svelte';
-	import ResultsGrid from '$lib/components/MovieGrid/ResultsGrid.svelte';
-	import FilterBar from '$lib/components/FilterBar/FilterBar.svelte';
+	import ResultsGrid from '$lib/components/layout/Grids/ResultsGrid.svelte';
+	import FilterBar from '$lib/components/ui/FilterBar/FilterBar.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
 	import { handleScroll } from '$lib/utils/infiniteScroll';
 

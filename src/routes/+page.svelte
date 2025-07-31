@@ -1,13 +1,7 @@
 <script lang="ts">
-	import Hero from '$lib/components/Hero/Main/Hero.svelte';
-	import TopRated from '$lib/components/TopRated/TopRated.svelte';
-	import Trending from '$lib/components/TrendingSection/Trending.svelte';
-	import Upcoming from '$lib/components/NowPlayingSection/NowPlaying.svelte';
-	import Action from '$lib/components/ActionSection/Action.svelte';
+	import Hero from '$lib/components/sections/Hero/Main/Hero.svelte';
+	import MovieSection from '$lib/components/sections/MovieSection.svelte';
 	import type { Trailer } from '$lib/types/trailer.js';
-	import Comedy from '$lib/components/ComedySection/Comedy.svelte';
-	import Thriller from '$lib/components/ThrillerSection/Thriller.svelte';
-	import NowPlaying from '$lib/components/NowPlayingSection/NowPlaying.svelte';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -20,9 +14,39 @@
 </script>
 
 <Hero movies={data.movies} {trailer} />
-<Trending movies={data.trendingMovies} />
-<NowPlaying upcomingMovies={data.inCinemasMovies} releaseDate={true} />
-<Comedy comedyMovies={data.comedyMovies} />
-<Action actionMovies={data.actionMovies} />
-<Thriller thrillerMovies={data.thrillerMovies} />
-<TopRated topRatedMovies={data.topRatedMovies} />
+
+<MovieSection 
+	title="Trending Movies" 
+	movies={data.trendingMovies} 
+	link="/trending" 
+/>
+
+<MovieSection 
+	title="In Cinemas" 
+	movies={data.inCinemasMovies} 
+	link="/inCinemas" 
+/>
+
+<MovieSection 
+	title="Comedy Movies" 
+	movies={data.comedyMovies} 
+	link="/genre/comedy" 
+/>
+
+<MovieSection 
+	title="Action Movies" 
+	movies={data.actionMovies} 
+	link="/genre/action" 
+/>
+
+<MovieSection 
+	title="Thriller Movies" 
+	movies={data.thrillerMovies} 
+	link="/genre/thriller" 
+/>
+
+<MovieSection 
+	title="Top Rated Movies" 
+	movies={data.topRatedMovies} 
+	link="/topRated" 
+/>
