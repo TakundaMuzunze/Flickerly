@@ -1,6 +1,6 @@
-import { fetchRomanceMovies } from '$lib/server/romanceMovies/+server';
+import { fetchMoviesByGenre, GENRES } from '$lib/services/movies';
 
 export async function load() {
-	const romanceMovies = await fetchRomanceMovies();
+	const romanceMovies = await fetchMoviesByGenre(GENRES.romance);
 	return { romanceMovies };
 }
