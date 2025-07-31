@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ResultsGrid from '$lib/components/MovieGrid/ResultsGrid.svelte';
+	import ResultsGrid from '$lib/components/layout/Grids/ResultsGrid.svelte';
 	export let data;
 </script>
 

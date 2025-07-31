@@ -1,7 +1,7 @@
 <script lang="ts">
-	import HeroLayout from '$lib/components/Hero/Main/HeroLayout.svelte';
+	import HeroLayout from './HeroLayout.svelte';
 	import HeroTitle from '../HeroTitle/HeroTitle.svelte';
-	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
+	import MovieDetails from '$lib/components/features/Details/MovieDetails.svelte';
 	import Carousel from '../Carousel/Carousel.svelte';
 	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
 	import type { Movie } from '$lib/types/movie';

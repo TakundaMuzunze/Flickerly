@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer/Footer.svelte';
-	import Header from '$lib/components/Header/Header.svelte';
+	import Footer from '$lib/components/layout/Footer/Footer.svelte';
+	import Header from '$lib/components/layout/Header/Header.svelte';
 	import toast, { Toaster } from 'svelte-hot-french-toast';
 	import { setGenres } from '$lib/utils/genres';
 	import { page } from '$app/stores';
@@ -39,7 +39,7 @@
 	<link rel="canonical" href={canonicalUrl} />
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/favicon.png" />
+	<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon.png" />
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 	<!-- Additional Meta Tags -->

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import CastCard from '$lib/components/Details/Cast/CastCard.svelte';
-	import CastGrid from '$lib/components/Details/Cast/CastGrid.svelte';
-	import DetailsLayout from '$lib/components/Details/DetailsHero/DetailsLayout.svelte';
-	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
-	import Similar from '$lib/components/SimilarSection/Similar.svelte';
+	import CastCard from '$lib/components/features/Details/Cast/CastCard.svelte';
+	import CastGrid from '$lib/components/features/Details/Cast/CastGrid.svelte';
+	import DetailsLayout from '$lib/components/features/Details/DetailsHero/DetailsLayout.svelte';
+	import MovieDetails from '$lib/components/features/Details/MovieDetails.svelte';
+	import Similar from '$lib/components/sections/SimilarSection/Similar.svelte';
 
 	const { data } = $props();
 

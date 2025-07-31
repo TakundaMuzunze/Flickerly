@@ -1,12 +1,5 @@
 <script lang="ts">
-	import Action from '$lib/components/ActionSection/Action.svelte';
-	import Comedy from '$lib/components/ComedySection/Comedy.svelte';
-	import Thriller from '$lib/components/ThrillerSection/Thriller.svelte';
-	import Drama from '$lib/components/DramaSection/Drama.svelte';
-	import Horror from '$lib/components/HorrorSection/Horror.svelte';
-	import SciFi from '$lib/components/scienceFictionSection/Sci-Fi.svelte';
-	import Romance from '$lib/components/RomanceSection/Romance.svelte';
-	import Fantasy from '$lib/components/FantasySection/Fantasy.svelte';
+	import MovieSection from '$lib/components/sections/MovieSection.svelte';
 	import { onMount } from 'svelte';
 	export let data;
 
@@ -16,12 +9,44 @@
 </script>
 
 <section class="pt-[5rem] 2xl:pt-[8rem]">
-	<Action actionMovies={data.actionMovies} />
-	<Comedy comedyMovies={data.comedyMovies} />
-	<Drama dramaMovies={data.dramaMovies} />
-	<Thriller thrillerMovies={data.thrillerMovies} />
-	<Horror horrorMovies={data.horrorMovies} />
-	<Romance romanceMovies={data.romanceMovies} />
-	<SciFi scifiMovies={data.scifiMovies} />
-	<Fantasy fantasyMovies={data.fantasyMovies} />
+	<MovieSection 
+		title="Action Movies" 
+		movies={data.actionMovies} 
+		link="/genre/action" 
+	/>
+	<MovieSection 
+		title="Comedy Movies" 
+		movies={data.comedyMovies} 
+		link="/genre/comedy" 
+	/>
+	<MovieSection 
+		title="Drama Movies" 
+		movies={data.dramaMovies} 
+		link="/genre/drama" 
+	/>
+	<MovieSection 
+		title="Thriller Movies" 
+		movies={data.thrillerMovies} 
+		link="/genre/thriller" 
+	/>
+	<MovieSection 
+		title="Horror Movies" 
+		movies={data.horrorMovies} 
+		link="/genre/horror" 
+	/>
+	<MovieSection 
+		title="Romance Movies" 
+		movies={data.romanceMovies} 
+		link="/genre/romance" 
+	/>
+	<MovieSection 
+		title="Science Fiction Movies" 
+		movies={data.scifiMovies} 
+		link="/genre/science-fiction" 
+	/>
+	<MovieSection 
+		title="Fantasy Movies" 
+		movies={data.fantasyMovies} 
+		link="/genre/fantasy" 
+	/>
 </section>
