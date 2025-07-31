@@ -30,12 +30,10 @@
 		document.title = 'Top Rated Movies | Flickerly';
 	});
 
-	// Create a single scroll handler function
 	function scrollHandler() {
 		handleScroll('top_rated', sortBy, currentPage, totalPages, isLoading);
 	}
 
-	// Add scroll event listener
 	onMount(() => {
 		window.addEventListener('scroll', scrollHandler);
 		return () => {

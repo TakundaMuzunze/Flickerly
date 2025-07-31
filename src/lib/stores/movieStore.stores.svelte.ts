@@ -2,8 +2,6 @@ import type Trailer from '$lib/components/TrailerComponent/Trailer.svelte';
 import type { Movie } from '$lib/types/movie';
 import { writable, get } from 'svelte/store';
 
-const TMDB_API_KEY = import.meta.env.TMDB_KEY;
-
 const initialState = {
 	movies: [],
 	selectedMovie: null,
@@ -46,13 +44,13 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 
 	let url: string;
 	if (genreId === 'trending') {
-		url = `/api/movies/trending?page=${page}`;
+		url = `/api/movies?type=trending&page=${page}`;
 	} else if (genreId === 'top_rated') {
-		url = `/api/movies/top-rated?page=${page}`;
+		url = `/api/movies?type=top_rated&page=${page}`;
 	} else if (genreId === 'now_playing') {
-		url = `/api/movies/now-playing?page=${page}`;
+		url = `/api/movies?type=now_playing&page=${page}`;
 	} else {
-		url = `/api/genre/${genreId}?sortBy=${sortValue}&page=${page}`;
+		url = `/api/movies?genre=${genreId}&page=${page}`;
 	}
 
 	try {

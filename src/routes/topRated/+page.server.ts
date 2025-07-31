@@ -1,4 +1,4 @@
-import { fetchTopRated } from '$lib/server/topRated/+server';
+import { fetchTopRated } from '$lib/services/movies';
 
 export async function load() {
 	const topRatedMovies = await fetchTopRated();
