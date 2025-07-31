@@ -6,7 +6,7 @@
 	const voteRating = selectedMovie?.vote_average
 		? `⭐ ${selectedMovie.vote_average.toFixed(1)}/10`
 		: 'N/A';
-	const releaseYear = new Date(selectedMovie.release_date).getFullYear();
+	$: releaseYear = selectedMovie?.release_date ? new Date(selectedMovie.release_date).getFullYear() : 'N/A';
 </script>
 
 {#if selectedMovie}

@@ -3,15 +3,14 @@
 	import CastGrid from '$lib/components/Details/Cast/CastGrid.svelte';
 	import DetailsLayout from '$lib/components/Details/DetailsHero/DetailsLayout.svelte';
 	import MovieDetails from '$lib/components/Details/MovieDetails.svelte';
-	import Poster from '$lib/components/Hero/Poster/Poster.svelte';
 	import Similar from '$lib/components/SimilarSection/Similar.svelte';
-	import { onMount } from 'svelte';
 
 	const { data } = $props();
 
 	const trailer = $derived(data.trailer);
 	const cast = $derived(data.cast);
 	const selectedMovie = $derived({ ...data.movie, providers: data.providers });
+	const similarMovies = $derived(data.similarMovies);
 
 	$effect(() => {
 		document.title = `${selectedMovie.title} | Flickerly`;
@@ -28,6 +27,6 @@
 	</div>
 
 	<div slot="similar">
-		<Similar similarMovies={data.similarMovies} {selectedMovie} />
+		<Similar {similarMovies} {selectedMovie} />
 	</div>
 </DetailsLayout>

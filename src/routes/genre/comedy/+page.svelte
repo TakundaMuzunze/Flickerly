@@ -29,7 +29,6 @@
 		document.title = 'Comedy Movies | Flickerly';
 	});
 
-	// Add scroll event listener
 	onMount(() => {
 		window.addEventListener('scroll', () =>
 			handleScroll('35', sortBy, currentPage, totalPages, isLoading)

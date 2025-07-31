@@ -6,7 +6,6 @@
 
 	export let isOpen: boolean;
 	export let onClose: () => void;
-	export let content: string;
 	export let movieTitle: string;
 	export let movieId: number;
 

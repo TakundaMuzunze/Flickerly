@@ -2,9 +2,9 @@ import { TMDB_KEY } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { fetchProviders } from '$lib/utils/providers';
-import { fetchCast } from '$lib/server/movieCast/+server';
 import { fetchTrailer } from '$lib/utils/trailers';
-import { fetchSimilarMovies } from '$lib/server/similarMovies/+server';
+import { fetchCast } from '$lib/services/cast';
+import { fetchSimilarMovies } from '$lib/services/search';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;

@@ -12,15 +12,6 @@
 		<div class="flex flex-col gap-2">
 			<h2 class="relative text-xl font-semibold text-white md:text-2xl">Similar movies</h2>
 		</div>
-
-		<!-- {#if similarMovies?.length}
-			<a
-				href={`/movies/${selectedMovie.id}/similar`}
-				class="text-accent text-lg font-semibold transition-all duration-300 hover:underline hover:underline-offset-6"
-			>
-				View All →
-			</a>
-		{/if} -->
 	</div>
 
 	{#if similarMovies?.length > 0}

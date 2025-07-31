@@ -1,8 +1,8 @@
-import { fetchMovies } from '$lib/server/fetchMovies/+server';
+import { fetchPopularMovies } from '$lib/services/movies';
 import { fetchTrailer } from '$lib/utils/trailers';
 
 export async function fetchMoviesWithTrailers() {
-	const movies = await fetchMovies();
+	const movies = await fetchPopularMovies();
 
 	const moviesWithTrailers = await Promise.all(
 		movies.map(async (movie) => {

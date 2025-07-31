@@ -29,11 +29,14 @@
 		document.title = 'Drama Movies | Flickerly';
 	});
 
-	// Add scroll event listener
 	onMount(() => {
-		window.addEventListener('scroll', () => handleScroll('18', sortBy, currentPage, totalPages, isLoading));
+		window.addEventListener('scroll', () =>
+			handleScroll('18', sortBy, currentPage, totalPages, isLoading)
+		);
 		return () => {
-			window.removeEventListener('scroll', () => handleScroll('18', sortBy, currentPage, totalPages, isLoading));
+			window.removeEventListener('scroll', () =>
+				handleScroll('18', sortBy, currentPage, totalPages, isLoading)
+			);
 		};
 	});
 </script>
@@ -52,7 +55,7 @@
 			<div class="text-white">Loading...</div>
 		</div>
 	{:else}
-	<ResultsGrid {movies} releaseDate={true} />
+		<ResultsGrid {movies} releaseDate={true} />
 	{/if}
 
 	{#if isLoading && movies.length > 0}
