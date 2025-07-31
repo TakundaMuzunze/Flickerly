@@ -1,38 +1,187 @@
-# sv
+# 🎬 Flickerly - Movie Discovery Platform
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern, responsive movie discovery application built with SvelteKit that helps users explore, track, and discover movies and TV shows. Create personalized watchlists and find where to stream your favorite content.
 
-## Creating a project
+## ✨ Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+### 🎯 Core Functionality
 
-```bash
-# create a new project in the current directory
-npx sv create
+- **Movie Discovery**: Browse trending, top-rated, and genre-specific movies
+- **Search & Filter**: Advanced search with filtering by genre, rating, and release date
+- **Watchlist Management**: Save and organize your favorite movies
+- **Movie Details**: Comprehensive movie information including cast, trailers, and streaming providers
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 
-# create a new project in my-app
-npx sv create my-app
+### 🎨 User Interface
+
+- **Modern UI**: Clean, intuitive interface with smooth animations
+- **Dark Theme**: Eye-friendly dark mode design
+- **Infinite Scroll**: Seamless browsing experience
+- **Interactive Components**: Modal dialogs, carousels, and dynamic grids
+
+### 🔧 Technical Features
+
+- **Server-Side Rendering**: Fast initial page loads with SvelteKit
+- **API Integration**: TMDB (The Movie Database) integration for comprehensive movie data
+- **Type Safety**: Full TypeScript support throughout the application
+- **Component Architecture**: Modular, reusable component system
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd cinescope
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   Create a `.env` file in the root directory:
+
+   ```env
+   TMDB_KEY=your_tmdb_api_key_here
+   ```
+
+   Get your TMDB API key from [The Movie Database](https://www.themoviedb.org/settings/api)
+
+4. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+## 🏗️ Project Structure
+
+```
+cinescope/
+├── src/
+│   ├── lib/
+│   │   ├── components/
+│   │   │   ├── ui/              # Reusable UI components
+│   │   │   │   ├── Cards/       # Movie cards, modals
+│   │   │   │   ├── FilterBar/   # Search and filter components
+│   │   │   │   └── Modals/      # Modal dialogs
+│   │   │   ├── layout/          # Layout components
+│   │   │   │   ├── Grids/       # Movie grid layouts
+│   │   │   │   ├── Header/      # Navigation header
+│   │   │   │   └── Footer/      # Site footer
+│   │   │   ├── sections/        # Page sections
+│   │   │   │   ├── Hero/        # Hero banner components
+│   │   │   │   └── MovieSection/ # Reusable movie sections
+│   │   │   └── features/        # Feature-specific components
+│   │   │       ├── Search/      # Search functionality
+│   │   │       ├── Details/     # Movie detail components
+│   │   │       └── TrailerComponent/ # Video trailers
+│   │   ├── services/            # API service layer
+│   │   │   ├── movies.ts        # Movie data services
+│   │   │   ├── search.ts        # Search functionality
+│   │   │   ├── cast.ts          # Cast information
+│   │   │   └── genres.ts        # Genre management
+│   │   ├── stores/              # Svelte stores
+│   │   │   ├── movieStore.stores.svelte.ts
+│   │   │   ├── watchlist.stores.svelte.ts
+│   │   │   └── genres.stores.svelte.ts
+│   │   ├── types/               # TypeScript type definitions
+│   │   │   ├── movie.ts
+│   │   │   ├── genres.ts
+│   │   │   └── trailer.ts
+│   │   └── utils/               # Utility functions
+│   │       ├── fuzzySearch.ts
+│   │       ├── imageCaching.ts
+│   │       └── infiniteScroll.ts
+│   ├── routes/                  # SvelteKit routes
+│   │   ├── api/                 # API endpoints
+│   │   ├── genre/               # Genre-specific pages
+│   │   ├── movies/              # Movie detail pages
+│   │   └── watchlist/           # User watchlist
+│   └── app.html                 # HTML template
+├── static/                      # Static assets
+│   ├── favicon.png
+│   ├── images/                  # Rating icons
+│   └── fonts/                   # Custom fonts
+└── package.json
 ```
 
-## Developing
+## 🛠️ Architecture
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Frontend Framework
+
+- **SvelteKit**: Full-stack framework with SSR capabilities
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+
+### State Management
+
+- **Svelte Stores**: Reactive state management
+- **Local Storage**: Persistent watchlist data
+
+### API Integration
+
+- **TMDB API**: Movie data and metadata
+- **Server-Side API**: Secure API endpoints for client-side consumption
+
+### Component Architecture
+
+- **Modular Design**: Reusable components organized by functionality
+- **Composition Pattern**: Components composed of smaller, focused pieces
+- **Type Safety**: Full TypeScript integration for all components
+
+## 📱 Available Scripts
 
 ```bash
-npm run dev
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Code Quality
+npm run check        # Type check
+npm run lint         # Lint code
+npm run format       # Format code
+
+
 ```
 
-## Building
+## 🌐 API Endpoints
 
-To create a production version of your app:
+### Internal API Routes
+
+- `GET /api/movies` - Fetch movies by type or genre
+- `GET /api/genre/[id]` - Get genre-specific movies
+- `GET /api/movies/trending` - Trending movies
+- `GET /api/movies/top-rated` - Top-rated movies
+- `GET /api/movies/now-playing` - Currently in theaters
+
+### External API
+
+- **TMDB API**: All movie data sourced from The Movie Database
+
+## 🔒 Environment Variables
+
+```env
+TMDB_KEY=your_tmdb_api_key_here
+```
+
+## 🚀 Deployment
+
+### Build for Production
 
 ```bash
 npm run build
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
