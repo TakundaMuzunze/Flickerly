@@ -74,16 +74,16 @@ cinescope/
 │   ├── lib/
 │   │   ├── components/
 │   │   │   ├── ui/              # Reusable UI components
-│   │   │   │   ├── Cards/       # Movie cards, modals
-│   │   │   │   ├── FilterBar/   # Search and filter components
-│   │   │   │   └── Modals/      # Modal dialogs
+│   │   │   │   ├── Cards/      
+│   │   │   │   ├── FilterBar/   
+│   │   │   │   └── Modals/      
 │   │   │   ├── layout/          # Layout components
-│   │   │   │   ├── Grids/       # Movie grid layouts
-│   │   │   │   ├── Header/      # Navigation header
-│   │   │   │   └── Footer/      # Site footer
+│   │   │   │   ├── Grids/       
+│   │   │   │   ├── Header/      
+│   │   │   │   └── Footer/      
 │   │   │   ├── sections/        # Page sections
-│   │   │   │   ├── Hero/        # Hero banner components
-│   │   │   │   └── MovieSection/ # Reusable movie sections
+│   │   │   │   ├── Hero/        
+│   │   │   │   └── MovieSection/ 
 │   │   │   └── features/        # Feature-specific components
 │   │   │       ├── Search/      # Search functionality
 │   │   │       ├── Details/     # Movie detail components
@@ -125,6 +125,7 @@ cinescope/
 - **SvelteKit**: Full-stack framework with SSR capabilities
 - **TypeScript**: Type-safe development
 - **Tailwind CSS**: Utility-first CSS framework
+- **Storybook**: For building and etsting UI components in isolation
 
 ### State Management
 
