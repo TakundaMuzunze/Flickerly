@@ -1,6 +1,6 @@
-import { fetchTrending } from '$lib/services/movies';
+import { fetchTrending, safeMovieResults } from '$lib/services/movies';
 
 export async function load() {
-	const trendingMovies = await fetchTrending();
+	const trendingMovies = await safeMovieResults(fetchTrending());
 	return { trendingMovies };
 }

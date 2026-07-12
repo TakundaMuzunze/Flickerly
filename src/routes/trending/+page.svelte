@@ -1,44 +1,36 @@
 <script lang="ts">
-	import { movieStore, resetStore } from '$lib/stores/movieStore.stores.svelte';
-	import { onMount } from 'svelte';
-	import { fetchMovies } from '$lib/stores/movieStore.stores.svelte';
-	import ResultsGrid from '$lib/components/layout/Grids/ResultsGrid.svelte';
+	import { browser } from '$app/environment';
+	import {
+		movieStore,
+		resetStore,
+		fetchMovies,
+		retryFetch
+	} from '$lib/stores/movieStore.stores.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
 	import FilterBar from '$lib/components/ui/FilterBar/FilterBar.svelte';
+	import MovieListingBody from '$lib/components/ui/MovieListing/MovieListingBody.svelte';
 	import { handleScroll } from '$lib/utils/infiniteScroll';
 
-	let movies = $movieStore.movies;
-	let selectedMovie = $movieStore.selectedMovie;
-	let trailer = $movieStore.trailer;
-	let sortBy = $movieStore.sortBy;
-	let currentPage = $movieStore.currentPage;
-	let totalPages = $movieStore.totalPages;
-	let isLoading = false;
+	const listKey = 'trending';
 
-	$: {
-		movies = $movieStore.movies;
-		selectedMovie = $movieStore.selectedMovie;
-		trailer = $movieStore.trailer;
-		sortBy = $movieStore.sortBy;
-		currentPage = $movieStore.currentPage;
-		totalPages = $movieStore.totalPages;
-	}
+	const movies = $derived($movieStore.movies);
+	const isLoading = $derived($movieStore.isLoading);
+	const isLoadingMore = $derived($movieStore.isLoadingMore);
+	const error = $derived($movieStore.error);
 
-	onMount(async () => {
-		resetStore();
-		await fetchMovies('trending', 'popularity', 1);
+	$effect(() => {
 		document.title = 'Trending Movies | Flickerly';
+
+		resetStore();
+		fetchMovies(listKey, 'popularity', 1).catch(() => {});
 	});
 
-	onMount(() => {
-		window.addEventListener('scroll', () =>
-			handleScroll('trending', sortBy, currentPage, totalPages, isLoading)
-		);
-		return () => {
-			window.removeEventListener('scroll', () =>
-				handleScroll('trending', sortBy, currentPage, totalPages, isLoading)
-			);
-		};
+	$effect(() => {
+		if (!browser) return;
+
+		const onScroll = () => handleScroll(listKey);
+		window.addEventListener('scroll', onScroll);
+		return () => window.removeEventListener('scroll', onScroll);
 	});
 </script>
 
@@ -51,17 +43,11 @@
 		<FilterBar />
 	</div>
 
-	{#if movies.length === 0 && isLoading}
-		<div class="flex h-64 w-full items-center justify-center">
-			<div class="text-white">Loading...</div>
-		</div>
-	{:else}
-		<ResultsGrid {movies} releaseDate={true} />
-	{/if}
-
-	{#if isLoading && movies.length > 0}
-		<div class="flex h-32 w-full items-center justify-center">
-			<div class="text-white">Loading more movies...</div>
-		</div>
-	{/if}
+	<MovieListingBody
+		{movies}
+		{isLoading}
+		{isLoadingMore}
+		{error}
+		onRetry={() => retryFetch().catch(() => {})}
+	/>
 </section>

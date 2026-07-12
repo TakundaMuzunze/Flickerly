@@ -2,27 +2,35 @@ import type Trailer from '$lib/components/features/TrailerComponent/Trailer.svel
 import type { Movie } from '$lib/types/movie';
 import { writable, get } from 'svelte/store';
 
-const initialState = {
-	movies: [],
-	selectedMovie: null,
-	trailer: null,
-	sortBy: 'popularity' as const,
-	currentGenreId: null,
-	currentPage: 1,
-	totalPages: 1
-};
+export type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
 
-export const movieStore = writable<{
+type MovieStoreState = {
 	movies: Movie[];
 	selectedMovie: Movie | null;
 	trailer: Trailer | null;
-	sortBy: 'popularity' | 'rating' | 'release_desc' | 'release_asc';
+	sortBy: SortOptionKey;
 	currentGenreId: string | null;
 	currentPage: number;
 	totalPages: number;
-}>(initialState);
+	isLoading: boolean;
+	isLoadingMore: boolean;
+	error: string | null;
+};
 
-export type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
+const initialState: MovieStoreState = {
+	movies: [],
+	selectedMovie: null,
+	trailer: null,
+	sortBy: 'popularity',
+	currentGenreId: null,
+	currentPage: 1,
+	totalPages: 1,
+	isLoading: false,
+	isLoadingMore: false,
+	error: null
+};
+
+export const movieStore = writable<MovieStoreState>(initialState);
 
 const sortOptions: Record<SortOptionKey, string> = {
 	popularity: 'popularity.desc',
@@ -35,12 +43,30 @@ export function resetStore() {
 	movieStore.set(initialState);
 }
 
+function dedupeMovies(movies: Movie[]): Movie[] {
+	const seen = new Set<number>();
+	return movies.filter((movie) => {
+		if (seen.has(movie.id)) return false;
+		seen.add(movie.id);
+		return true;
+	});
+}
+
 export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey, page: number = 1) {
 	const sortValue = sortOptions[sortOptionKey];
 	if (!sortValue) {
 		console.error('Invalid sort option key:', sortOptionKey);
 		throw new Error('Invalid sort option');
 	}
+
+	const isFirstPage = page === 1;
+
+	movieStore.update((store) => ({
+		...store,
+		error: null,
+		isLoading: isFirstPage,
+		isLoadingMore: !isFirstPage
+	}));
 
 	let url: string;
 	if (genreId === 'trending') {
@@ -50,7 +76,7 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 	} else if (genreId === 'now_playing') {
 		url = `/api/movies?type=now_playing&page=${page}`;
 	} else {
-		url = `/api/movies?genre=${genreId}&page=${page}`;
+		url = `/api/movies?genre=${genreId}&page=${page}&sort_by=${sortValue}`;
 	}
 
 	try {
@@ -66,25 +92,30 @@ export async function fetchMovies(genreId: string, sortOptionKey: SortOptionKey,
 		}
 
 		movieStore.update((store) => {
-			// Filter out any duplicate movies by ID
 			const existingIds = new Set(store.movies.map((movie) => movie.id));
-			const newMovies =
-				page === 1
-					? data.results
-					: [...store.movies, ...data.results.filter((movie: Movie) => !existingIds.has(movie.id))];
+			const incoming = data.results.filter((movie: Movie) => !existingIds.has(movie.id));
+			const newMovies = isFirstPage ? dedupeMovies(data.results) : [...store.movies, ...incoming];
 
-			const newStore = {
+			return {
 				...store,
 				movies: newMovies,
 				sortBy: sortOptionKey,
 				currentGenreId: genreId,
 				currentPage: page,
-				totalPages: data.total_pages
+				totalPages: data.total_pages,
+				isLoading: false,
+				isLoadingMore: false,
+				error: null
 			};
-
-			return newStore;
 		});
 	} catch (error) {
+		const message = error instanceof Error ? error.message : 'Failed to load movies';
+		movieStore.update((store) => ({
+			...store,
+			isLoading: false,
+			isLoadingMore: false,
+			error: isFirstPage ? message : store.error
+		}));
 		console.error('Error in fetchMovies:', error);
 		throw error;
 	}
@@ -94,6 +125,13 @@ export async function sortMovies(sortBy: SortOptionKey): Promise<void> {
 	const store = get(movieStore);
 	if (store.currentGenreId) {
 		await fetchMovies(store.currentGenreId, sortBy, 1);
+	}
+}
+
+export async function retryFetch(): Promise<void> {
+	const store = get(movieStore);
+	if (store.currentGenreId) {
+		await fetchMovies(store.currentGenreId, store.sortBy, 1);
 	}
 }
 

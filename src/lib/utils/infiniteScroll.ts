@@ -1,18 +1,14 @@
-import { fetchMovies } from '$lib/stores/movieStore.stores.svelte';
-import type { SortOptionKey } from '$lib/stores/movieStore.stores.svelte';
+import { get } from 'svelte/store';
+import { fetchMovies, movieStore } from '$lib/stores/movieStore.stores.svelte';
 
 let lastScrollY = 0;
 let lastScrollTime = 0;
 const SCROLL_DEBOUNCE = 200;
 
-export async function handleScroll(
-	genreId: string,
-	sortBy: SortOptionKey,
-	currentPage: number,
-	totalPages: number,
-	isLoading: boolean
-) {
-	if (isLoading || currentPage >= totalPages) {
+export async function handleScroll(listKey: string) {
+	const { isLoading, isLoadingMore, currentPage, totalPages, sortBy } = get(movieStore);
+
+	if (isLoading || isLoadingMore || currentPage >= totalPages) {
 		return;
 	}
 
@@ -35,10 +31,7 @@ export async function handleScroll(
 
 	if (scrollPercentage >= 90) {
 		try {
-			if (currentPage >= totalPages) {
-				return;
-			}
-			await fetchMovies(genreId, sortBy, currentPage + 1);
+			await fetchMovies(listKey, sortBy, currentPage + 1);
 		} catch (error) {
 			console.error('Error loading more movies:', error);
 		}

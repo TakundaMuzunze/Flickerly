@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { sortMovies } from '$lib/stores/movieStore.stores.svelte';
-	import { fade, scale } from 'svelte/transition';
+	import { movieStore, sortMovies } from '$lib/stores/movieStore.stores.svelte';
+	import { fade } from 'svelte/transition';
 
 	type SortOptionKey = 'popularity' | 'rating' | 'release_desc' | 'release_asc';
 
@@ -14,11 +14,15 @@
 	let isFilterOpen = $state(false);
 	let currentSort = $state<SortOptionKey>('popularity');
 
+	const isBusy = $derived($movieStore.isLoading || $movieStore.isLoadingMore);
+
 	function toggleSortBar(): void {
+		if (isBusy) return;
 		isFilterOpen = !isFilterOpen;
 	}
 
 	function handleSort(option: SortOptionKey): void {
+		if (isBusy) return;
 		currentSort = option;
 		sortMovies(option);
 		isFilterOpen = false;
@@ -29,8 +33,10 @@
 	<button
 		tabindex="0"
 		aria-label="Open sort filter bar"
+		aria-disabled={isBusy}
+		disabled={isBusy}
 		onclick={toggleSortBar}
-		class="flex cursor-pointer flex-row items-center justify-center gap-2 rounded-lg text-white"
+		class="flex cursor-pointer flex-row items-center justify-center gap-2 rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
 	>
 		<span>Sort By: {sortLabels[currentSort]}</span>
 		<svg

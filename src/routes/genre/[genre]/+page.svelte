@@ -1,48 +1,39 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { movieStore, resetStore, fetchMovies } from '$lib/stores/movieStore.stores.svelte';
+	import {
+		movieStore,
+		resetStore,
+		fetchMovies,
+		retryFetch
+	} from '$lib/stores/movieStore.stores.svelte';
 	import { genreSubtitles } from '$lib/constants/genreSubtitles.js';
-	import ResultsGrid from '$lib/components/layout/Grids/ResultsGrid.svelte';
 	import FilterBar from '$lib/components/ui/FilterBar/FilterBar.svelte';
+	import MovieListingBody from '$lib/components/ui/MovieListing/MovieListingBody.svelte';
 	import { handleScroll } from '$lib/utils/infiniteScroll';
 
 	const { data } = $props();
 
-	let isLoading = $state(false);
-
 	const movies = $derived($movieStore.movies);
-	const sortBy = $derived($movieStore.sortBy);
-	const currentPage = $derived($movieStore.currentPage);
-	const totalPages = $derived($movieStore.totalPages);
+	const isLoading = $derived($movieStore.isLoading);
+	const isLoadingMore = $derived($movieStore.isLoadingMore);
+	const error = $derived($movieStore.error);
 	const subtitle = $derived(genreSubtitles[data.subtitleKey]);
 
 	$effect(() => {
 		const slug = data.slug;
 		const title = data.title;
-		let cancelled = false;
 
 		document.title = `${title} | Flickerly`;
 
-		(async () => {
-			resetStore();
-			isLoading = true;
-			try {
-				await fetchMovies(slug, 'popularity', 1);
-			} finally {
-				if (!cancelled) isLoading = false;
-			}
-		})();
-
-		return () => {
-			cancelled = true;
-		};
+		resetStore();
+		fetchMovies(slug, 'popularity', 1).catch(() => {});
 	});
 
 	$effect(() => {
 		if (!browser) return;
 
 		const slug = data.slug;
-		const onScroll = () => handleScroll(slug, sortBy, currentPage, totalPages, isLoading);
+		const onScroll = () => handleScroll(slug);
 
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
@@ -58,17 +49,11 @@
 		<FilterBar />
 	</div>
 
-	{#if movies.length === 0 && isLoading}
-		<div class="flex h-64 w-full items-center justify-center">
-			<div class="text-white">Loading...</div>
-		</div>
-	{:else}
-		<ResultsGrid {movies} releaseDate={true} />
-	{/if}
-
-	{#if isLoading && movies.length > 0}
-		<div class="flex h-32 w-full items-center justify-center">
-			<div class="text-white">Loading more movies...</div>
-		</div>
-	{/if}
+	<MovieListingBody
+		{movies}
+		{isLoading}
+		{isLoadingMore}
+		{error}
+		onRetry={() => retryFetch().catch(() => {})}
+	/>
 </section>

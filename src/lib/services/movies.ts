@@ -6,6 +6,32 @@ export { GENRES } from '$lib/constants/genres';
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
+export type PaginatedMovies = {
+	results: Movie[];
+	total_pages: number;
+	total_results: number;
+};
+
+function emptyPage(): PaginatedMovies {
+	return { results: [], total_pages: 0, total_results: 0 };
+}
+
+async function fetchPaginated(url: string): Promise<PaginatedMovies> {
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error('Failed to fetch movies');
+	}
+
+	const data = await response.json();
+
+	return {
+		results: processMovieData(data.results ?? []),
+		total_pages: data.total_pages ?? 1,
+		total_results: data.total_results ?? 0
+	};
+}
+
 export async function fetchPopularMovies(): Promise<Movie[]> {
 	try {
 		const response = await fetch(
@@ -38,90 +64,60 @@ export async function fetchPopularMovies(): Promise<Movie[]> {
 	}
 }
 
-export async function fetchMoviesByGenre(genreId: number) {
+export async function fetchMoviesByGenre(
+	genreId: number,
+	page = 1,
+	sortBy = 'popularity.desc'
+): Promise<PaginatedMovies> {
 	try {
-		const [page1, page2, page3] = await Promise.all([
-			fetch(
-				`${TMDB_API_URL}/discover/movie?api_key=${TMDB_KEY}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc&page=1`
-			).then((res) => res.json()),
-			fetch(
-				`${TMDB_API_URL}/discover/movie?api_key=${TMDB_KEY}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc&page=2`
-			).then((res) => res.json()),
-			fetch(
-				`${TMDB_API_URL}/discover/movie?api_key=${TMDB_KEY}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc&page=3`
-			).then((res) => res.json())
-		]);
-
-		const results = [...page1.results, ...page2.results, ...page3.results];
-		return processMovieData(results);
+		return await fetchPaginated(
+			`${TMDB_API_URL}/discover/movie?api_key=${TMDB_KEY}&with_genres=${genreId}&language=en-US&sort_by=${sortBy}&page=${page}`
+		);
 	} catch (error) {
 		console.error(`Error fetching movies for genre ${genreId}:`, error);
-		return [];
+		throw error;
 	}
 }
 
-export async function fetchTrending() {
+export async function fetchTrending(page = 1): Promise<PaginatedMovies> {
 	try {
-		const [page1, page2, page3] = await Promise.all([
-			fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=1`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=2`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=3`).then(
-				(res) => res.json()
-			)
-		]);
-
-		const results = [...page1.results, ...page2.results, ...page3.results];
-		return processMovieData(results);
+		return await fetchPaginated(
+			`${TMDB_API_URL}/trending/movie/day?api_key=${TMDB_KEY}&language=en-US&page=${page}`
+		);
 	} catch (error) {
 		console.error('Error fetching trending movies:', error);
-		return [];
+		throw error;
 	}
 }
 
-export async function fetchTopRated() {
+export async function fetchTopRated(page = 1): Promise<PaginatedMovies> {
 	try {
-		const [page1, page2, page3] = await Promise.all([
-			fetch(`${TMDB_API_URL}/movie/top_rated?api_key=${TMDB_KEY}&language=en-US&page=1`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/movie/top_rated?api_key=${TMDB_KEY}&language=en-US&page=2`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/movie/top_rated?api_key=${TMDB_KEY}&language=en-US&page=3`).then(
-				(res) => res.json()
-			)
-		]);
-
-		const results = [...page1.results, ...page2.results, ...page3.results];
-		return processMovieData(results);
+		return await fetchPaginated(
+			`${TMDB_API_URL}/movie/top_rated?api_key=${TMDB_KEY}&language=en-US&page=${page}`
+		);
 	} catch (error) {
 		console.error('Error fetching top rated movies:', error);
-		return [];
+		throw error;
 	}
 }
 
-export async function fetchInCinemas() {
+export async function fetchInCinemas(page = 1): Promise<PaginatedMovies> {
 	try {
-		const [page1, page2, page3] = await Promise.all([
-			fetch(`${TMDB_API_URL}/movie/now_playing?api_key=${TMDB_KEY}&language=en-US&page=1`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/movie/now_playing?api_key=${TMDB_KEY}&language=en-US&page=2`).then(
-				(res) => res.json()
-			),
-			fetch(`${TMDB_API_URL}/movie/now_playing?api_key=${TMDB_KEY}&language=en-US&page=3`).then(
-				(res) => res.json()
-			)
-		]);
-
-		const results = [...page1.results, ...page2.results, ...page3.results];
-		return processMovieData(results);
+		return await fetchPaginated(
+			`${TMDB_API_URL}/movie/now_playing?api_key=${TMDB_KEY}&language=en-US&page=${page}`
+		);
 	} catch (error) {
 		console.error('Error fetching in cinemas movies:', error);
+		throw error;
+	}
+}
+
+/** Helper for SSR section previews */
+export async function safeMovieResults(promise: Promise<PaginatedMovies>): Promise<Movie[]> {
+	try {
+		const page = await promise;
+		return page.results;
+	} catch {
 		return [];
 	}
 }

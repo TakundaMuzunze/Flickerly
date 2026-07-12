@@ -1,15 +1,20 @@
 <script lang="ts">
 	import Footer from '$lib/components/layout/Footer/Footer.svelte';
 	import Header from '$lib/components/layout/Header/Header.svelte';
+	import LoadingState from '$lib/components/ui/LoadingState/LoadingState.svelte';
 	import toast, { Toaster } from 'svelte-hot-french-toast';
 	import { setGenres } from '$lib/utils/genres';
-	import { page } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import '../app.css';
 
 	export let data;
 	const { genres } = data;
 
 	setGenres(genres);
+
+	$: isLoadingMovieDetail = Boolean(
+		$navigating?.to?.url.pathname.match(/^\/movies\/[^/]+\/?$/)
+	);
 
 	// Default meta tags
 	const description =
@@ -71,8 +76,17 @@
 
 <div class="flex min-h-screen flex-col">
 	<Header />
-	<main class="flex-1">
+	<main class="relative flex-1">
 		<slot />
+		{#if isLoadingMovieDetail}
+			<div
+				class="fixed inset-0 z-40 flex items-center justify-center bg-zinc-950/80 pt-[5rem] text-white"
+				role="status"
+				aria-live="polite"
+			>
+				<LoadingState message="Loading movie..." />
+			</div>
+		{/if}
 	</main>
 	<Footer />
 </div>

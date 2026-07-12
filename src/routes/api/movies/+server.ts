@@ -6,32 +6,33 @@ export async function GET({ url }) {
 	const searchParams = url.searchParams;
 	const type = searchParams.get('type');
 	const genre = searchParams.get('genre');
-	const page = searchParams.get('page') || '1';
+	const page = Number(searchParams.get('page') || '1');
+	const sortBy = searchParams.get('sort_by') || 'popularity.desc';
 
 	try {
-		let movies;
+		let data;
 
 		if (type === 'trending') {
-			movies = await fetchTrending();
+			data = await fetchTrending(page);
 		} else if (type === 'top_rated') {
-			movies = await fetchTopRated();
+			data = await fetchTopRated(page);
 		} else if (type === 'now_playing') {
-			movies = await fetchInCinemas();
+			data = await fetchInCinemas(page);
 		} else if (genre) {
 			const genrePage = getGenrePage(genre);
 			if (!genrePage) {
 				return json({ error: 'Invalid genre' }, { status: 400 });
 			}
 
-			movies = await fetchMoviesByGenre(genrePage.id);
+			data = await fetchMoviesByGenre(genrePage.id, page, sortBy);
 		} else {
 			return json({ error: 'Missing type or genre parameter' }, { status: 400 });
 		}
 
 		return json({
-			results: movies,
-			total_pages: 1,
-			total_results: movies.length
+			results: data.results,
+			total_pages: data.total_pages,
+			total_results: data.total_results
 		});
 	} catch (error) {
 		console.error('API Error:', error);

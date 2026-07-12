@@ -1,5 +1,6 @@
 <script lang="ts">
 	import WatchlistGrid from '$lib/components/layout/Grids/WatchlistGrid.svelte';
+	import EmptyState from '$lib/components/ui/EmptyState/EmptyState.svelte';
 	import { watchlist } from '$lib/stores/watchlist.stores.svelte';
 	import type { Movie } from '$lib/types/movie';
 	import { onMount } from 'svelte';
@@ -23,10 +24,11 @@
 	{#if movies.length > 0}
 		<WatchlistGrid {movies} />
 	{:else}
-		<p class="text-gray-300 md:text-lg">
-			No movies saved to your watchlist yet. <a class="text-white underline" href="/"
-				>Start exploring</a
-			> and tap the '+' to add them here.
-		</p>
+		<EmptyState
+			title="Your watchlist is empty"
+			description="Start exploring and tap the + on a movie to save it here."
+			href="/"
+			ctaLabel="Start exploring"
+		/>
 	{/if}
 </section>

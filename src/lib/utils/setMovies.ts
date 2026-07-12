@@ -1,8 +1,14 @@
 import type { Movie } from '$lib/types/movie';
 
 export function processMovieData(movies: Movie[]) {
-	const moviesWithPoster = movies
-		.filter((movie) => movie.poster_path)
+	const seen = new Set<number>();
+
+	return movies
+		.filter((movie) => {
+			if (!movie.poster_path || seen.has(movie.id)) return false;
+			seen.add(movie.id);
+			return true;
+		})
 		.map((movie) => ({
 			...movie,
 			runtime: movie.runtime || 0,
@@ -13,6 +19,4 @@ export function processMovieData(movies: Movie[]) {
 				? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`
 				: null
 		}));
-
-	return moviesWithPoster;
 }

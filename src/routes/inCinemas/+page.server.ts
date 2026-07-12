@@ -1,6 +1,6 @@
-import { fetchInCinemas } from '$lib/services/movies';
+import { fetchInCinemas, safeMovieResults } from '$lib/services/movies';
 
 export async function load() {
-	const inCinemasMovies = await fetchInCinemas();
+	const inCinemasMovies = await safeMovieResults(fetchInCinemas());
 	return { inCinemasMovies };
 }

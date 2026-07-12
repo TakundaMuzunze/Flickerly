@@ -5,6 +5,7 @@ import {
 	fetchTopRated,
 	fetchInCinemas,
 	fetchMoviesByGenre,
+	safeMovieResults,
 	GENRES
 } from '$lib/services/movies';
 
@@ -26,12 +27,12 @@ export async function load() {
 		comedyMovies,
 		thrillerMovies
 	] = await Promise.all([
-		fetchTrending(),
-		fetchTopRated(),
-		fetchInCinemas(),
-		fetchMoviesByGenre(GENRES.action),
-		fetchMoviesByGenre(GENRES.comedy),
-		fetchMoviesByGenre(GENRES.thriller)
+		safeMovieResults(fetchTrending()),
+		safeMovieResults(fetchTopRated()),
+		safeMovieResults(fetchInCinemas()),
+		safeMovieResults(fetchMoviesByGenre(GENRES.action)),
+		safeMovieResults(fetchMoviesByGenre(GENRES.comedy)),
+		safeMovieResults(fetchMoviesByGenre(GENRES.thriller))
 	]);
 
 	const finalMovies = carouselMovies.filter(Boolean);
