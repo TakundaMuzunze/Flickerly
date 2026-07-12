@@ -2,18 +2,9 @@ import { TMDB_KEY } from '$env/static/private';
 import { processMovieData } from '$lib/utils/setMovies';
 import type { Movie } from '$lib/types/movie';
 
-const TMDB_API_URL = 'https://api.themoviedb.org/3';
+export { GENRES } from '$lib/constants/genres';
 
-export const GENRES = {
-	action: 28,
-	comedy: 35,
-	drama: 18,
-	fantasy: 14,
-	horror: 27,
-	romance: 10749,
-	scifi: 878,
-	thriller: 53
-} as const;
+const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 export async function fetchPopularMovies(): Promise<Movie[]> {
 	try {

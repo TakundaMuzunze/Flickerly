@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
-import { fetchTrending, fetchTopRated, fetchInCinemas, fetchMoviesByGenre, GENRES } from '$lib/services/movies';
+import { fetchTrending, fetchTopRated, fetchInCinemas, fetchMoviesByGenre } from '$lib/services/movies';
+import { getGenrePage } from '$lib/constants/genres';
 
 export async function GET({ url }) {
 	const searchParams = url.searchParams;
@@ -9,7 +10,7 @@ export async function GET({ url }) {
 
 	try {
 		let movies;
-		
+
 		if (type === 'trending') {
 			movies = await fetchTrending();
 		} else if (type === 'top_rated') {
@@ -17,23 +18,12 @@ export async function GET({ url }) {
 		} else if (type === 'now_playing') {
 			movies = await fetchInCinemas();
 		} else if (genre) {
-			const genreMap: Record<string, number> = {
-				'action': GENRES.action,
-				'comedy': GENRES.comedy,
-				'drama': GENRES.drama,
-				'fantasy': GENRES.fantasy,
-				'horror': GENRES.horror,
-				'romance': GENRES.romance,
-				'scifi': GENRES.scifi,
-				'thriller': GENRES.thriller
-			};
-			
-			const genreId = genreMap[genre];
-			if (!genreId) {
+			const genrePage = getGenrePage(genre);
+			if (!genrePage) {
 				return json({ error: 'Invalid genre' }, { status: 400 });
 			}
-			
-			movies = await fetchMoviesByGenre(genreId);
+
+			movies = await fetchMoviesByGenre(genrePage.id);
 		} else {
 			return json({ error: 'Missing type or genre parameter' }, { status: 400 });
 		}
@@ -47,4 +37,4 @@ export async function GET({ url }) {
 		console.error('API Error:', error);
 		return json({ error: 'Internal server error' }, { status: 500 });
 	}
-} 
+}
