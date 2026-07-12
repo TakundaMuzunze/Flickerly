@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getGenreName } from '$lib/utils/genres';
-	import { onMount } from 'svelte';
 
 	export let movie: any;
 	export let showGenre: boolean = false;
@@ -8,6 +7,7 @@
 
 	$: genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
 	$: posterUrl = movie.posterUrl || `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+	$: year = movie.release_date ? new Date(movie.release_date).getFullYear() : null;
 
 	let hasLoaded = false;
 	let hasError = false;
@@ -24,20 +24,26 @@
 <div class="flex flex-col">
 	<a href={`/movies/${movie.id}`} class="inline-block w-full cursor-default">
 		<div class="relative w-full">
-			<img
-				class="movie aspect-[2/3] w-full rounded-lg"
-				src={posterUrl}
-				alt={movie.title}
-				on:load={handleLoad}
-				on:error={handleError}
-				key={movie.id + posterUrl}
-			/>
+			{#key movie.id + posterUrl}
+				<img
+					class="movie aspect-[2/3] w-full rounded-lg"
+					src={posterUrl}
+					alt={movie.title}
+					on:load={handleLoad}
+					on:error={handleError}
+				/>
+			{/key}
 
 			<div
 				class="absolute inset-0 z-10 flex w-full flex-col items-center justify-center gap-3 rounded-lg bg-black/90 p-2 text-center text-wrap opacity-0 duration-300 hover:opacity-100"
 			>
 				<p class="font-semibold text-white">{movie.title}</p>
-				<p class="text-sm text-gray-400">{genres}</p>
+				{#if showGenre}
+					<p class="text-sm text-gray-400">{genres}</p>
+				{/if}
+				{#if releaseDate && year}
+					<p class="text-sm text-gray-400">{year}</p>
+				{/if}
 
 				<div class="group relative w-fit">
 					<button

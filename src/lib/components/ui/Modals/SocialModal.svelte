@@ -7,7 +7,6 @@
 	export let isOpen: boolean;
 	export let onClose: () => void;
 	export let movieTitle: string;
-	export let movieId: number;
 
 	const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 	const shareText = `Check out ${movieTitle} on Flickerly!`;

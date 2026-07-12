@@ -1,12 +1,20 @@
 <script lang="ts">
-	export let selectedMovie;
+	import type { Movie } from '$lib/types/movie';
 
-	const genreNames = selectedMovie?.genres?.map((g) => g.name) ?? [];
+	export let selectedMovie: (Movie & {
+		vote_average?: number;
+		release_date?: string;
+		original_language?: string;
+	}) | null;
+
+	const genreNames = selectedMovie?.genres?.map((g: { name: string }) => g.name) ?? [];
 	const runtime = selectedMovie?.runtime ? `${selectedMovie.runtime} min` : 'N/A';
 	const voteRating = selectedMovie?.vote_average
 		? `⭐ ${selectedMovie.vote_average.toFixed(1)}/10`
 		: 'N/A';
-	$: releaseYear = selectedMovie?.release_date ? new Date(selectedMovie.release_date).getFullYear() : 'N/A';
+	$: releaseYear = selectedMovie?.release_date
+		? new Date(selectedMovie.release_date).getFullYear()
+		: 'N/A';
 </script>
 
 {#if selectedMovie}
