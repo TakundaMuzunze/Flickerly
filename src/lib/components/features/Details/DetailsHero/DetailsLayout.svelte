@@ -4,12 +4,8 @@
 	let previewLoaded = false;
 	let imageLoaded = false;
 
-	$: previewUrl = backgroundImage
-		? `https://image.tmdb.org/t/p/w780${backgroundImage}`
-		: '';
-	$: imageUrl = backgroundImage
-		? `https://image.tmdb.org/t/p/original${backgroundImage}`
-		: '';
+	$: previewUrl = backgroundImage ? `https://image.tmdb.org/t/p/w780${backgroundImage}` : '';
+	$: imageUrl = backgroundImage ? `https://image.tmdb.org/t/p/original${backgroundImage}` : '';
 
 	$: {
 		void backgroundImage;

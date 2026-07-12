@@ -12,9 +12,7 @@
 
 	setGenres(genres);
 
-	$: isLoadingMovieDetail = Boolean(
-		$navigating?.to?.url.pathname.match(/^\/movies\/[^/]+\/?$/)
-	);
+	$: isLoadingMovieDetail = Boolean($navigating?.to?.url.pathname.match(/^\/movies\/[^/]+\/?$/));
 
 	// Default meta tags
 	const description =

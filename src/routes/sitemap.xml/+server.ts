@@ -33,4 +33,4 @@ export const GET: RequestHandler = async () => {
 			'Content-Type': 'application/xml'
 		}
 	});
-}; 
+};

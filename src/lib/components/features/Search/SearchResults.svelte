@@ -8,11 +8,7 @@
 
 <div class="min-w-screen-2xl flex flex-col items-start justify-start gap-4 p-5 pt-[8rem]">
 	{#if data.error}
-		<EmptyState
-			title="Search Error"
-			description={data.error}
-			onRetry={() => invalidateAll()}
-		/>
+		<EmptyState title="Search Error" description={data.error} onRetry={() => invalidateAll()} />
 	{:else if data.movies.length === 0 && data.query}
 		<EmptyState
 			title="No results found"

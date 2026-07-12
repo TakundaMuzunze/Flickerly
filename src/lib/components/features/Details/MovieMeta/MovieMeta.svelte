@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { Movie } from '$lib/types/movie';
 
-	export let selectedMovie: (Movie & {
-		vote_average?: number;
-		release_date?: string;
-		original_language?: string;
-	}) | null;
+	export let selectedMovie:
+		| (Movie & {
+				vote_average?: number;
+				release_date?: string;
+				original_language?: string;
+		  })
+		| null;
 
 	const genreNames = selectedMovie?.genres?.map((g: { name: string }) => g.name) ?? [];
 	const runtime = selectedMovie?.runtime ? `${selectedMovie.runtime} min` : 'N/A';

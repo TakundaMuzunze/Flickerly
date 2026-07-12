@@ -1,5 +1,10 @@
 import { json } from '@sveltejs/kit';
-import { fetchTrending, fetchTopRated, fetchInCinemas, fetchMoviesByGenre } from '$lib/services/movies';
+import {
+	fetchTrending,
+	fetchTopRated,
+	fetchInCinemas,
+	fetchMoviesByGenre
+} from '$lib/services/movies';
 import { getGenrePage } from '$lib/constants/genres';
 
 export async function GET({ url }) {

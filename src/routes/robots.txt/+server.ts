@@ -27,4 +27,4 @@ Allow: /inCinemas/`,
 			}
 		}
 	);
-}; 
+};
