@@ -31,10 +31,12 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	if (releaseInfoRes.ok) {
 		const releaseInfo = await releaseInfoRes.json();
-		const ukRelease = releaseInfo.results.find((rel: any) => rel.iso_3166_1 === 'GB');
+		const ukRelease = releaseInfo.results.find(
+			(rel: { iso_3166_1: string }) => rel.iso_3166_1 === 'GB'
+		);
 
 		if (ukRelease) {
-			const cert = ukRelease.release_dates.find((r: any) => r.certification);
+			const cert = ukRelease.release_dates.find((r: { certification: string }) => r.certification);
 			if (cert) certification = cert.certification;
 		}
 	}

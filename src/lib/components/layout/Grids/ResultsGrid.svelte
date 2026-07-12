@@ -1,8 +1,9 @@
 <script lang="ts">
 	import MovieCard from '$lib/components/ui/Cards/MovieCard.svelte';
+	import type { Movie } from '$lib/types/movie';
 	import { fade } from 'svelte/transition';
 
-	export let movies: any[] = [];
+	export let movies: Movie[] = [];
 	export let releaseDate = false;
 </script>
 

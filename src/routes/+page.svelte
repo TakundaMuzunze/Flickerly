@@ -12,38 +12,14 @@
 
 <Hero movies={data.movies} />
 
-<MovieSection 
-	title="Trending Movies" 
-	movies={data.trendingMovies} 
-	link="/trending" 
-/>
+<MovieSection title="Trending Movies" movies={data.trendingMovies} link="/trending" />
 
-<MovieSection 
-	title="In Cinemas" 
-	movies={data.inCinemasMovies} 
-	link="/inCinemas" 
-/>
+<MovieSection title="In Cinemas" movies={data.inCinemasMovies} link="/inCinemas" />
 
-<MovieSection 
-	title="Comedy Movies" 
-	movies={data.comedyMovies} 
-	link="/genre/comedy" 
-/>
+<MovieSection title="Comedy Movies" movies={data.comedyMovies} link="/genre/comedy" />
 
-<MovieSection 
-	title="Action Movies" 
-	movies={data.actionMovies} 
-	link="/genre/action" 
-/>
+<MovieSection title="Action Movies" movies={data.actionMovies} link="/genre/action" />
 
-<MovieSection 
-	title="Thriller Movies" 
-	movies={data.thrillerMovies} 
-	link="/genre/thriller" 
-/>
+<MovieSection title="Thriller Movies" movies={data.thrillerMovies} link="/genre/thriller" />
 
-<MovieSection 
-	title="Top Rated Movies" 
-	movies={data.topRatedMovies} 
-	link="/topRated" 
-/>
+<MovieSection title="Top Rated Movies" movies={data.topRatedMovies} link="/topRated" />

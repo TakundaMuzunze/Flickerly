@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
+	import type { Movie } from '$lib/types/movie';
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 
-	export let movies: any[] = [];
-	export let selectedMovie: any;
+	export let movies: (Movie & { posterUrl?: string | null })[] = [];
+	export let selectedMovie: (Movie & { posterUrl?: string | null }) | null;
 
 	let emblaNode: HTMLElement;
 	let emblaApi: EmblaCarouselType | null = null;
@@ -26,7 +27,7 @@
 		movieStore.update((store) => ({ ...store, selectedMovie }));
 	}
 
-	function handleMovieSelect(movie: any, index: number) {
+	function handleMovieSelect(movie: Movie, index: number) {
 		selectedMovie = movie;
 		movieStore.update((store) => ({ ...store, selectedMovie: movie }));
 		activeIndex = index;
@@ -70,7 +71,7 @@
 		<div aria-label="Movie carousel" class="relative w-full">
 			<div bind:this={emblaNode} class="embla overflow-hidden py-5">
 				<div class="embla__container flex w-full gap-2 md:gap-4">
-					{#each movies as movie, i}
+					{#each movies as movie, i (movie.id)}
 						<div
 							role="button"
 							aria-label="Carousel Slide"

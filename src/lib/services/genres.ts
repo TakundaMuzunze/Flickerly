@@ -19,4 +19,4 @@ export async function fetchGenres() {
 		console.error('Error fetching genres:', error);
 		return [];
 	}
-} 
+}

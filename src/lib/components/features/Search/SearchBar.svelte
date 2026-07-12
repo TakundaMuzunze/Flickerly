@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { afterNavigate } from '$app/navigation';
 
 	let searchInput = '';
 	let isBarOpen = false;

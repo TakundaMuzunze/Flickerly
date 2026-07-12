@@ -29,7 +29,7 @@
 		</button>
 	{:else if href && ctaLabel}
 		<a
-			href={href}
+			{href}
 			class="mt-1 inline-flex rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90"
 		>
 			{ctaLabel}
