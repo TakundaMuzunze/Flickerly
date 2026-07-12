@@ -1,4 +1,5 @@
 import type { RequestHandler } from './$types';
+import { GENRE_SLUGS } from '$lib/constants/genres';
 
 export const GET: RequestHandler = async () => {
 	const baseUrl = 'https://flickerly.netlify.app';
@@ -6,6 +7,7 @@ export const GET: RequestHandler = async () => {
 		'',
 		'/movies',
 		'/genre',
+		...GENRE_SLUGS.map((slug) => `/genre/${slug}`),
 		'/watchlist',
 		'/trending',
 		'/topRated',
