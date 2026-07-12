@@ -1,5 +1,10 @@
 import { TMDB_KEY } from '$env/static/private';
 
+type TmdbVideo = {
+	type: string;
+	site: string;
+};
+
 export async function fetchTrailer(movieId: number) {
 	try {
 		const trailerResponse = await fetch(
@@ -13,8 +18,9 @@ export async function fetchTrailer(movieId: number) {
 		const trailerData = await trailerResponse.json();
 
 		return (
-			trailerData.results.find((video) => video.type === 'Trailer' && video.site === 'YouTube') ||
-			null
+			trailerData.results.find(
+				(video: TmdbVideo) => video.type === 'Trailer' && video.site === 'YouTube'
+			) || null
 		);
 	} catch (error) {
 		console.error('Error fetching trailer:', error);

@@ -23,12 +23,12 @@
 		if (!emblaApi) return;
 		activeIndex = emblaApi.selectedScrollSnap();
 		selectedMovie = movies[activeIndex];
-		movieStore.selectedMovie = selectedMovie;
+		movieStore.update((store) => ({ ...store, selectedMovie }));
 	}
 
 	function handleMovieSelect(movie: any, index: number) {
 		selectedMovie = movie;
-		movieStore.selectedMovie = movie;
+		movieStore.update((store) => ({ ...store, selectedMovie: movie }));
 		activeIndex = index;
 	}
 

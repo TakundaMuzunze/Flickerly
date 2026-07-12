@@ -27,6 +27,6 @@
 	</div>
 
 	<div slot="similar">
-		<Similar {similarMovies} {selectedMovie} />
+		<Similar {similarMovies} />
 	</div>
 </DetailsLayout>

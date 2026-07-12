@@ -1,19 +1,16 @@
 <script lang="ts">
 	import Hero from '$lib/components/sections/Hero/Main/Hero.svelte';
 	import MovieSection from '$lib/components/sections/MovieSection.svelte';
-	import type { Trailer } from '$lib/types/trailer.js';
 	import { onMount } from 'svelte';
 
 	export let data;
-
-	const trailer: Trailer = data.movies?.[0]?.trailer || null;
 
 	onMount(() => {
 		document.title = 'Flickerly - Discover Movies & TV Shows';
 	});
 </script>
 
-<Hero movies={data.movies} {trailer} />
+<Hero movies={data.movies} />
 
 <MovieSection 
 	title="Trending Movies" 

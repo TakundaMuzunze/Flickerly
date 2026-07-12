@@ -1,6 +1,5 @@
 <script lang="ts">
 	import HeroLayout from './HeroLayout.svelte';
-	import HeroTitle from '../HeroTitle/HeroTitle.svelte';
 	import MovieDetails from '$lib/components/features/Details/MovieDetails.svelte';
 	import Carousel from '../Carousel/Carousel.svelte';
 	import { movieStore } from '$lib/stores/movieStore.stores.svelte';
@@ -12,8 +11,11 @@
 	let trailer = selectedMovie?.trailer ?? null;
 	$: trailer = selectedMovie?.trailer ?? null;
 
-	movieStore.movies = movies;
-	movieStore.selectedMovie = selectedMovie;
+	$: movieStore.update((store) => ({
+		...store,
+		movies,
+		selectedMovie
+	}));
 </script>
 
 <HeroLayout backgroundImage={selectedMovie?.backdrop_path} showCarousel={true}>
