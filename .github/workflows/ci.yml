@@ -11,6 +11,9 @@ jobs:
     name: Quality checks
     runs-on: ubuntu-latest
 
+    env:
+      TMDB_KEY: ${{ secrets.TMDB_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
