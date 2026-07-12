@@ -1,37 +1,24 @@
 <script lang="ts">
 	import { getGenreName } from '$lib/utils/genres';
+	import type { Movie } from '$lib/types/movie';
 
-	export let movie: any;
+	export let movie: Movie & {
+		posterUrl?: string | null;
+		release_date?: string;
+	};
 	export let showGenre: boolean = false;
 	export let releaseDate: boolean = false;
 
 	$: genres = movie.genre_ids?.map((id: number) => getGenreName(id)).join(', ') || 'Unknown';
 	$: posterUrl = movie.posterUrl || `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
 	$: year = movie.release_date ? new Date(movie.release_date).getFullYear() : null;
-
-	let hasLoaded = false;
-	let hasError = false;
-
-	function handleLoad() {
-		hasLoaded = true;
-	}
-
-	function handleError() {
-		hasError = true;
-	}
 </script>
 
 <div class="flex flex-col">
 	<a href={`/movies/${movie.id}`} class="inline-block w-full cursor-default">
 		<div class="relative w-full">
 			{#key movie.id + posterUrl}
-				<img
-					class="movie aspect-[2/3] w-full rounded-lg"
-					src={posterUrl}
-					alt={movie.title}
-					on:load={handleLoad}
-					on:error={handleError}
-				/>
+				<img class="movie aspect-[2/3] w-full rounded-lg" src={posterUrl} alt={movie.title} />
 			{/key}
 
 			<div

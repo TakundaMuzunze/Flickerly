@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CastCard from '$lib/components/features/Details/Cast/CastCard.svelte';
 	import CastGrid from '$lib/components/features/Details/Cast/CastGrid.svelte';
 	import DetailsLayout from '$lib/components/features/Details/DetailsHero/DetailsLayout.svelte';
 	import MovieDetails from '$lib/components/features/Details/MovieDetails.svelte';

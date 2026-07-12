@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let providers: any;
+	import type { Movie } from '$lib/types/movie';
+
+	export let providers: Movie['providers'];
 	export let movieTitle: string;
 
 	const googleWatchLink = `https://www.google.com/search?q=where+to+watch+${encodeURIComponent(movieTitle)}+UK`;
@@ -9,7 +11,7 @@
 	<div class="text-main-btn flex flex-col gap-3">
 		<p class="font-semibold md:text-lg">Available to stream or rent on:</p>
 		<ul class="flex flex-wrap gap-2">
-			{#each providers.GB.flatrate || [] as provider}
+			{#each providers.GB.flatrate || [] as provider (provider.provider_name)}
 				<a
 					href={providers.GB.link || '#'}
 					target="_blank"
@@ -19,7 +21,7 @@
 					{provider.provider_name}
 				</a>
 			{/each}
-			{#each providers.GB.rent || [] as provider}
+			{#each providers.GB.rent || [] as provider (`rent-${provider.provider_name}`)}
 				<a
 					href={providers.GB.link || '#'}
 					target="_blank"

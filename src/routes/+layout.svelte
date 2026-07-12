@@ -2,7 +2,7 @@
 	import Footer from '$lib/components/layout/Footer/Footer.svelte';
 	import Header from '$lib/components/layout/Header/Header.svelte';
 	import LoadingState from '$lib/components/ui/LoadingState/LoadingState.svelte';
-	import toast, { Toaster } from 'svelte-hot-french-toast';
+	import { Toaster } from 'svelte-hot-french-toast';
 	import { setGenres } from '$lib/utils/genres';
 	import { navigating, page } from '$app/stores';
 	import '../app.css';

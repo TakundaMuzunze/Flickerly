@@ -12,10 +12,6 @@ export type PaginatedMovies = {
 	total_results: number;
 };
 
-function emptyPage(): PaginatedMovies {
-	return { results: [], total_pages: 0, total_results: 0 };
-}
-
 async function fetchPaginated(url: string): Promise<PaginatedMovies> {
 	const response = await fetch(url);
 
@@ -46,7 +42,7 @@ export async function fetchPopularMovies(): Promise<Movie[]> {
 		const { results } = data;
 
 		const moviesWithDetails = await Promise.all(
-			results.map(async (movie: any) => {
+			results.map(async (movie: Movie) => {
 				const detailsResponse = await fetch(
 					`${TMDB_API_URL}/movie/${movie.id}?api_key=${TMDB_KEY}&language=en-US`
 				);

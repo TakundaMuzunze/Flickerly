@@ -21,16 +21,6 @@
 	$: movieDirector = getDirector(selectedMovie.credits?.crew);
 	$: productionCompanies = getProductionCompany(selectedMovie.production_companies);
 	$: certification = selectedMovie.certification;
-
-	function closeModal() {
-		isModalOpen = false;
-	}
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
-			closeModal();
-		}
-	}
 </script>
 
 <div class="flex w-full flex-col items-start justify-start gap-4">

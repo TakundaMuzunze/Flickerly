@@ -11,7 +11,7 @@
 </script>
 
 <section class="pt-[5rem] 2xl:pt-[8rem]">
-	{#each GENRE_SLUGS as slug}
+	{#each GENRE_SLUGS as slug (slug)}
 		<MovieSection
 			title={GENRE_PAGES[slug].title}
 			movies={data.genres[slug]}

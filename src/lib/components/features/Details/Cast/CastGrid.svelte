@@ -7,7 +7,7 @@
 <div
 	class="flex w-full gap-6 overflow-x-auto scroll-smooth whitespace-nowrap 2xl:grid 2xl:grid-cols-8 2xl:gap-0"
 >
-	{#each cast.slice(0, 8) as actor}
+	{#each cast.slice(0, 8) as actor (actor.id)}
 		<div class="shrink-0">
 			<CastCard {actor} />
 		</div>

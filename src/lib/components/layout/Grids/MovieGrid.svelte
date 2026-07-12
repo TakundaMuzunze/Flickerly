@@ -1,7 +1,8 @@
 <script lang="ts">
 	import MovieCard from '$lib/components/ui/Cards/MovieCard.svelte';
+	import type { Movie } from '$lib/types/movie';
 
-	export let movies: any[] = [];
+	export let movies: Movie[] = [];
 	export let releaseDate: boolean = false;
 	export let limit: number | undefined = undefined;
 
@@ -38,7 +39,7 @@
 		on:scroll={checkScroll}
 		class="flex w-full gap-3 overflow-x-auto scroll-smooth whitespace-nowrap lg:gap-3 2xl:grid 2xl:grid-cols-8 2xl:gap-2"
 	>
-		{#each limit === 6 ? movies.slice(0, 8) : limit ? movies.slice(0, limit) : movies as movie}
+		{#each limit === 6 ? movies.slice(0, 8) : limit ? movies.slice(0, limit) : movies as movie (movie.id)}
 			<div class="max-w-28 shrink-0 md:max-w-40 xl:max-w-52">
 				<MovieCard {movie} showGenre={true} {releaseDate} />
 			</div>

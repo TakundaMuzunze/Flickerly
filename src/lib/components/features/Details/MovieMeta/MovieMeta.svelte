@@ -22,7 +22,7 @@
 {#if selectedMovie}
 	<div class="flex w-full flex-col gap-2">
 		<div class="flex flex-row flex-wrap items-center gap-2">
-			{#each [voteRating, releaseYear, runtime, selectedMovie?.original_language?.toUpperCase() ?? 'N/A'] as item, i}
+			{#each [voteRating, releaseYear, runtime, selectedMovie?.original_language?.toUpperCase() ?? 'N/A'] as item, i (`meta-${i}`)}
 				<span class="flex items-center gap-2">
 					<span class="text-sm text-gray-300 md:text-lg">{item}</span>
 					{#if i < 3}
@@ -33,7 +33,7 @@
 		</div>
 
 		<div class="flex flex-row flex-wrap items-center gap-2">
-			{#each genreNames as genre, i}
+			{#each genreNames as genre, i (genre)}
 				<span class="flex items-center gap-2">
 					<span class="text-sm text-gray-300 md:text-lg">{genre}</span>
 					{#if i < genreNames.length - 1}

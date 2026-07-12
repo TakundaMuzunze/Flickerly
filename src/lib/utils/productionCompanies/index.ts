@@ -1,4 +1,8 @@
-export function getProductionCompany(companies: any[] | undefined) {
+type ProductionCompany = {
+	name: string;
+};
+
+export function getProductionCompany(companies: ProductionCompany[] | undefined) {
 	if (!companies || companies.length === 0) {
 		return 'N/A';
 	}
