@@ -105,12 +105,6 @@ Planned improvements for Flickerly 2.0:
 - Improve movie detail pages
 - Refine watchlist/favourites functionality
 - Add stronger search and filtering interactions
-- Improve loading, error and empty states
-- Add accessibility improvements
-- Add Playwright end-to-end tests
-- Add unit tests with Vitest
-- Add CI checks
-- Add screenshots and architecture diagrams to this README
 
 ## 📄 License
 
