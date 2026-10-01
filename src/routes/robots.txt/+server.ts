@@ -2,7 +2,10 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = () => {
 	return new Response(
-		`User-agent: *
+		`User-agent: SERankingBacklinksBot
+Disallow: /
+
+User-agent: *
 Allow: /
 Sitemap: https://flickerly.netlify.app/sitemap.xml
 
