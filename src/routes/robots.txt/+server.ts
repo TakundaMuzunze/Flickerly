@@ -5,6 +5,9 @@ export const GET: RequestHandler = () => {
 		`User-agent: SERankingBacklinksBot
 Disallow: /
 
+User-agent: meta-externalagent
+Disallow: /
+
 User-agent: *
 Allow: /
 Sitemap: https://flickerly.netlify.app/sitemap.xml
